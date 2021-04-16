@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col w-full pl-0 md:p-6 md:space-y-4">
-    <div class="overflow-auto flex flex-col justify-between h-screen pb-12 pt-20 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
+  <div class="flex flex-col w-full px-4 lg:p-4 lg:space-y-4">
+    <div class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
       <div class="w-full mb-8   max-h-full overflow-auto">
-        <div class="mb-4 mx-0 sm:ml-4 xl:mr-4">
+        <div class="mb-4 mx-0">
           <div class="shadow-lg rounded-2xl bg-white w-full">
             <p class="font-bold text-md p-4 text-black">
               My Tasks
@@ -23,19 +23,14 @@
       </div>
 
 
-      <div class="py-2 px-4">
+      <div class="lg:py-2 lg:px-4">
         <AddNewItemForm :isColumn="false" :parent="'tasks'">
-          <div class="flex items-center justify-center">
-            <div class="relative inline-block w-10 mr-2 align-middle select-none">
-              <input type="checkbox" name="toggle" id="Urgent" class="checked:bg-blue-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-                <label for="Urgent" class="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer">
-                </label>
-              </div>
-              <!-- color if  -->
-              <span class="text-gray-400 font-medium">
-                Срочное
-              </span>
-          </div>
+          <label class="flex items-center space-x-3 my-2.5 md:m-2">
+            <input type="checkbox" name="Urgent" class="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-500 checked:border-transparent focus:outline-none"/>
+            <span class="text-gray-700 dark:text-white font-normal">
+              Срочное
+            </span>
+          </label>
         </AddNewItemForm>
       </div>
         
