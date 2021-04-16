@@ -1,7 +1,8 @@
 <template>
 <!-- hidden -->
+<!-- mb ? -->
   <div class="h-screen lg:block m-0 lg:my-4 lg:ml-4 shadow-lg absolute lg:relative w-full lg:w-80" :class="[isOpen ? 'block' : 'hidden']">
-    <div class="bg-white h-full rounded-2xl">
+    <div class="bg-white h-full rounded-2xl flex flex-col justify-between pb-10">
 
       <button class="lg:hidden absolute z-10 m-4 h-6 w-6" @click="$emit('close')">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -14,18 +15,22 @@
           <TodoItem :item="item" />
         </div>
       </nav>
+
+      <AddNewItemForm :isColumn="true" :parent="'todo'" />
     </div>
   </div>
 </template>
 
 <script>
 import TodoItem from './TodoItem'
+import AddNewItemForm from './AddNewItemForm'
 
 export default {
   name: 'todolist',
   props: ['isOpen'],
   components: {
-    TodoItem
+    TodoItem,
+    AddNewItemForm
   },
   data: function() {
     return {

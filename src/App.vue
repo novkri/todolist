@@ -14,7 +14,6 @@
 
         <TasksList />
 
-        <!-- кнопки тут -->
       </div>
     </main>
   </div>
@@ -28,7 +27,7 @@ export default {
   name: 'App',
   components: {
     TodoList,
-    TasksList
+    TasksList,
   },
   data: function() {
     return {
