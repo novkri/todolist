@@ -5,6 +5,7 @@
     <div class="bg-white h-full lg:rounded-2xl flex flex-col justify-between pb-10 ">
 
       <nav class="pt-2 md:pt-12 lg:pt-6">
+        <p v-if="fetched && todoItems.length === 0" class="rounded-2xl text-center p-6">Список пуст...</p>
         <div v-for="(item, idx) in todoItems" :key="item.title">
           <TodoItem :item="item" :index="idx" />
         </div>
@@ -28,7 +29,10 @@ export default {
   },
   data: function() {
     return {
-      todoItems: []
+      todoItems: [],
+      loading: false,
+      fetched: false,
+      error: null
     }
   },
   created () {
@@ -38,13 +42,21 @@ export default {
   },
   methods: {
     async fetchTodos() {
+      this.error = null
+      this.tasksItems = []
+      this.loading = true
+
       try {
         // http://localhost:3000/todos to const ?
         let response = await fetch('http://localhost:3000/todos');
 
         if (!response.ok) {
+          this.error = response.status
           throw new Error(`HTTP error! status: ${response.status}`);
         } else {
+          this.loading = false
+          this.fetched = true
+
           let data = await response.json();
           // this.todoItems.push(data) //???
           data.map(todo => this.todoItems.push(todo))

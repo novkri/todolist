@@ -15,8 +15,15 @@
         
         <TodoList :isOpen="isSidebarOpen" @close="toggleSidebar()" />
 
-        <!-- <TasksList /> -->
+
         <router-view></router-view>
+
+        <!-- чет не получаиццо :( -->
+        <!-- <router-view v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view> -->
         
       </div>
     </main>
@@ -25,13 +32,11 @@
 
 <script>
 import TodoList from './components/TodoList'
-// import TasksList from './components/TasksList'
 
 export default {
   name: 'App',
   components: {
     TodoList,
-    // TasksList,
   },
   data: function() {
     return {
@@ -47,5 +52,14 @@ export default {
 </script>
 
 <style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 5s ease;
+}
 
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

@@ -5,70 +5,74 @@
       "title": "Список 1"
     },
     {
-      "id": 2,
+      "id": 1,
       "title": "Список 2"
+    },
+    {
+      "id": 2,
+      "title": "Список 3"
     }
   ],
   "tasks": [
     {
       "id": 0,
-      "todoId": 1,
+      "todoId": 0,
       "title": "Create wireframe",
       "done": false,
       "urgent": false
     },
     {
       "id": 1,
-      "todoId": 1,
+      "todoId": 0,
       "title": "Google Logo Design",
       "done": false,
       "urgent": true
     },
     {
       "id": 2,
-      "todoId": 1,
+      "todoId": 0,
       "title": "Header navigation",
       "done": false,
       "urgent": true
     },
     {
       "id": 3,
-      "todoId": 1,
+      "todoId": 0,
       "title": "International",
       "done": true,
       "urgent": false
     },
     {
       "id": 4,
-      "todoId": 1,
+      "todoId": 0,
       "title": "Create wireframe",
       "done": true,
       "urgent": false
     },
     {
       "id": 5,
-      "todoId": 1,
+      "todoId": 0,
       "title": "Components card",
       "done": false,
       "urgent": true
     },
     {
       "id": 6,
-      "todoId": 1,
+      "todoId": 0,
       "title": "Dashboard design",
       "done": false,
       "urgent": false
     },
     {
       "id": 7,
-      "todoId": 1,
+      "todoId": 0,
       "title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure maxime rem unde temporibus magnam nam fuga labore sit atque, dolores ab assumenda illum alias repudiandae dignissimos. Amet, placeat. Modi eum asperiores aspernatur reprehenderit porro! Nesciunt odit repellat soluta libero officiis.",
       "done": false,
       "urgent": true
     },
     {
       "id": 8,
-      "todoId": 1,
+      "todoId": 0,
       "title": "Google Logo Design",
       "done": false,
       "urgent": false

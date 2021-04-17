@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col w-full px-4 lg:p-4 lg:space-y-4">
+  <div class="flex flex-col w-full px-4 lg:p-4 lg:space-y-4" key="tasks">
+    <!-- <div v-if="!fetched && loading">loading...</div>v-else -->
+
     <div class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
       <div class="w-full mb-8 max-h-full overflow-auto">
         <div class="mb-4 mx-0">
@@ -11,13 +13,16 @@
               </span>
             </p>
 
-
-            <ul class="">
+<!-- <transition-group name="fade"> -->
+  <!-- не тут: -->
+            <p v-if="fetched && tasksItems.length === 0" class="rounded-2xl text-center p-6">Список пуст...</p>
+            <ul v-else class="pb-4">
               <li v-for="(task, idx) in tasksItems" :key="task.id" class="py-3 border-b-2 border-gray-100 cursor-pointer">
                 <TaskItem :task="task" :index="idx + 1" />
               </li>
-              
             </ul>
+<!-- </transition-group> -->
+
           </div>
         </div>
       </div>
@@ -65,6 +70,7 @@ export default {
 
       tasksItems: [],
       loading: false,
+      fetched: false,
       error: null
     }
   },
@@ -84,6 +90,7 @@ export default {
     async fetchTasks(currentTaskId) {
       this.error = null
       this.tasksItems = []
+      this.loading = true
 
       try {
         // http://localhost:3000/todos to const ?
@@ -94,20 +101,40 @@ export default {
           this.error = response.status
           throw new Error(`HTTP error! status: ${response.status}`);
         } else {
+          this.loading = false
+          this.fetched = true
+
           let data = await response.json();
           // this.todoItems.push(data) //???
-          let currentTodoTasks = data.filter(task => task.todoId !== currentTaskId)
+
+          let currentTodoTasks = data.filter(task => task.todoId === currentTaskId)
+      console.log(currentTodoTasks);
           currentTodoTasks.map(task => this.tasksItems.push(task))
         }
       } catch(e) {
         console.log(e);
       }
-    }
+    },
+
+    // beforeLeave(el) {
+    //   const { marginLeft, marginTop, width, height } = window.getComputedStyle(
+    //     el
+    //   );
+    //   el.style.left = `${el.offsetLeft - parseFloat(marginLeft, 10)}px`;
+    //   el.style.top = `${el.offsetTop - parseFloat(marginTop, 10)}px`;
+    //   el.style.width = width;
+    //   el.style.height = height;
+    // }
   }
 
 }
 </script>
 
 <style>
-
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+    opacity: 0
+}
 </style>
