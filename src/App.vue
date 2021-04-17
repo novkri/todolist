@@ -73,7 +73,7 @@ export default {
 
       try {
         // http://localhost:3000/todos to const ?
-        let response = await fetch('http://localhost:3000/todoss');
+        let response = await fetch('http://localhost:3000/todos');
 
         if (!response.ok) {
           this.error = `HTTP error! status: ${response.status}`
