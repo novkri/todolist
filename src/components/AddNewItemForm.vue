@@ -3,7 +3,7 @@
   <!-- align-self -->
 
   <form class="flex flex-col w-full items-center justify-center py-2 px-4 lg:p-4" :class="[isColumn ? 'md:flex-col' : 'md:flex-row']">
-    <input type="text" id="&quot;form-subscribe-Subscribe" class="my-2.5 md:m-2 w-full max-w-md rounded-lg border-transparent flex-1 appearance-none border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" :placeholder="inputPlaceholder" /> 
+    <input type="text" class="my-2.5 md:m-2 w-full max-w-md rounded-lg border-transparent flex-1 appearance-none border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" :placeholder="inputPlaceholder" /> 
       
       <!-- create class isColumn -->
       <!-- :class="[isColumn ? 'w-full' : '']"  -->

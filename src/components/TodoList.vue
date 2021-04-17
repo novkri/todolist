@@ -28,18 +28,29 @@ export default {
   },
   data: function() {
     return {
-      todoItems: [
-        {
-          id: 0,
-          title: "Список 1"
-        },
-        {
-          id: 2,
-          title: "Список 2"
-        }
-      ]
+      todoItems: []
     }
-  }
+  },
+
+  // в этом хуке?
+  mounted: function () {
+  this.$nextTick(async function () {
+    try {
+      // http://localhost:3000/todos to const ?
+      let response = await fetch('http://localhost:3000/todos');
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } else {
+        let data = await response.json();
+        // this.todoItems.push(data) //???
+        data.map(todo => this.todoItems.push(todo))
+      }
+    } catch(e) {
+      console.log(e);
+    }
+  })
+}
   
 }
 </script>
