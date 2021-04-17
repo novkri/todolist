@@ -27,11 +27,11 @@
         <AddNewItemForm :isColumn="false" :parent="'tasks'">
           <div class="flex justify-center items-center mx-4">
             <div class="relative inline-block w-10 mr-2 items-center select-none">
-            <input type="checkbox" name="toggle" id="Urgent" class="checked:bg-blue-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-                <label for="Urgent" class="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer">
-                </label>
+            <input @click="isUrgent = !isUrgent" type="checkbox" name="toggle" id="Urgent" class="checked:bg-purple-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+              <label for="Urgent" class="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer">
+              </label>
             </div>
-            <span class="text-gray-500 font-medium">
+            <span :class="{'text-purple-500': isUrgent}" class="text-gray-500 font-medium">
               Срочное
             </span>
           </div>
@@ -61,6 +61,8 @@ export default {
   // computed: тут считать не готовые и выводить
   data: function() {
     return {
+      isUrgent: false,
+
       tasks: [
         {
           id: 0,

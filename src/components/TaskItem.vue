@@ -1,6 +1,6 @@
 <template>
   <label class="flex items-center mx-2.5">
-    <input type="checkbox" name="Urgent" class="form-tick  mx-3 appearance-none bg-white bg-check h-5 w-5 border border-gray-300 rounded-md checked:bg-blue-500 checked:border-transparent focus:outline-none"/>
+    <input type="checkbox" name="Urgent" class="form-tick mx-3 appearance-none bg-white bg-check h-5 w-5 border border-gray-300 rounded-md checked:bg-purple-500 checked:border-transparent focus:outline-none"/>
 
 <!-- flex-col md:flex-row justify-center md:-->
     <div class="flex items-center justify-between w-full">
