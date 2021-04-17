@@ -1,7 +1,5 @@
 <template>
-<!-- hidden -->
-<!-- mb ? -->
-  <div class="relative lg:static top-0 right-0 pb-14 lg:pb-0 h-screen lg:block lg:my-4 lg:ml-4 shadow-lg  w-full lg:w-80" :class="[isOpen ? 'block' : 'hidden']">
+  <div class="relative lg:static top-0 right-0 pb-14 lg:pb-0 h-screen lg:block lg:my-4 lg:ml-4 shadow-lg w-full lg:w-72" :class="[isOpen ? 'block' : 'hidden']">
     <div class="bg-white h-full lg:rounded-2xl flex flex-col justify-between pb-10 ">
 
       <nav class="pt-2 md:pt-12 lg:pt-6">

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full px-4 lg:p-4 lg:space-y-4" key="tasks">
+  <div class="flex flex-col w-full px-4 lg:p-4" key="tasks">
     <!-- <div v-if="!fetched && loading">loading...</div>v-else -->
 
     <div class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">

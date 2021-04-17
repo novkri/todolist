@@ -1,6 +1,18 @@
 <template>
   <div id="app">
     <main class="bg-gray-100 relative h-screen overflow-hidden relative">
+      <!-- just warning: -->
+      <!-- <div class="bg-red-200 border-red-600 text-red-600 border-l-4 p-3 flex justify-center" role="alert">
+        <p class="font-bold mr-3">
+          Be Warned:
+        </p>
+        <p> -->
+          <!-- TODO: add from where the error come -->
+          <!-- Something not ideal might be happening.
+        </p>
+      </div> -->
+
+      <!-- nav for burger -->
       <div class="flex flex-col lg:flex-row items-start justify-between z-50">
         <nav class="relative fixed block lg:hidden w-full h-14">
           <button class="absolute z-10 m-4 h-6 w-6 focus:outline-none" @click="toggleSidebar()">
@@ -14,7 +26,6 @@
         </nav>
         
         <TodoList :isOpen="isSidebarOpen" @close="toggleSidebar()" />
-
 
         <router-view></router-view>
 
@@ -43,6 +54,7 @@ export default {
       isSidebarOpen: false
     }
   },
+  // TODO: fetch all the data in THIS component 
   methods: {
     toggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen
