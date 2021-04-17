@@ -1,9 +1,10 @@
 module.exports = {
   important: true,
-  purge: {
-    content: ["./pages/**/*.tsx", "./components/**/*.tsx"],
+  purge: [],
+  // {
+    // content: ["./pages/**/*.tsx", "./components/**/*.tsx"],
     // These options are passed through directly to PurgeCSS
-  },
+  // },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -12,9 +13,9 @@ module.exports = {
         landscape: "url('/images/landscape/2.jpg')",
       }),
       maxWidth: {
-        '1/4': '25%',
+
         'button': '150px',
-        '95': '95%',
+        '90': '90%',
        }
     },
     
@@ -28,9 +29,9 @@ module.exports = {
     },
   },
   plugins: [],
-  future: {
-    purgeLayersByDefault: true,
-  },
+  // future: {
+  //   purgeLayersByDefault: true,
+  // },
 }
 
 

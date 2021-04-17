@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col w-full px-4 lg:p-4 lg:space-y-4">
     <div class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
-      <div class="w-full mb-8   max-h-full overflow-auto">
+      <div class="w-full mb-8 max-h-full overflow-auto">
         <div class="mb-4 mx-0">
           <div class="shadow-lg rounded-2xl bg-white w-full">
             <p class="font-bold text-md p-4 text-black">
@@ -25,12 +25,22 @@
 
       <div class="lg:py-2 lg:px-4">
         <AddNewItemForm :isColumn="false" :parent="'tasks'">
-          <label class="flex items-center space-x-3 my-2.5 md:m-2">
+          <div class="flex justify-center items-center mx-4">
+            <div class="relative inline-block w-10 mr-2 items-center select-none">
+            <input type="checkbox" name="toggle" id="Urgent" class="checked:bg-blue-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                <label for="Urgent" class="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer">
+                </label>
+            </div>
+            <span class="text-gray-500 font-medium">
+              Срочное
+            </span>
+          </div>
+          <!-- <label class="flex items-center space-x-3 my-2.5 md:m-2">
             <input type="checkbox" name="Urgent" class="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-500 checked:border-transparent focus:outline-none"/>
             <span class="text-gray-700 dark:text-white font-normal">
               Срочное
             </span>
-          </label>
+          </label> -->
         </AddNewItemForm>
       </div>
         
@@ -55,72 +65,86 @@ export default {
         {
           id: 0,
           title: "Create wireframe",
-          done: false
+          done: false,
+          urgent: false
         },
         {
           id: 1,
           title: "Google Logo Design",
-          done: false
+          done: false,
+          urgent: true
         },
         {
           id: 2,
           title: "Header navigation",
-          done: false
+          done: false,
+          urgent: true
         },
         {
           id: 3,
           title: "International",
-          done: true
+          done: true,
+          urgent: false
         },
         {
           id: 4,
           title: "Create wireframe",
-          done: true
+          done: true,
+          urgent: false
         },
         {
           id: 5,
           title: "Components card",
-          done: false
+          done: false,
+          urgent: true
         },
         {
           id: 6,
           title: "Dashboard design",
-          done: false
+          done: false,
+          urgent: false
         },
         {
           id: 7,
-          title: "Create wireframe",
-          done: false
+          title: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure maxime rem unde temporibus magnam nam fuga labore sit atque, dolores ab assumenda illum alias repudiandae dignissimos. Amet, placeat. Modi eum asperiores aspernatur reprehenderit porro! Nesciunt odit repellat soluta libero officiis.",
+          done: false,
+          urgent: true
         },
         {
           id: 8,
           title: "Google Logo Design",
-          done: false
+          done: false,
+          urgent: false
         },
         {
           id: 9,
           title: "Header navigation",
-          done: false
+          done: false,
+          urgent: false
         },
         {
           id: 10,
           title: "International",
-          done: true
+          done: true,
+          urgent: true
         },
         {
           id: 11,
           title: "Create wireframe",
-          done: true
+          done: true,
+          urgent: false
         },
         {
           id: 12,
           title: "Components card",
-          done: false
+          done: false,
+          urgent: false
         },
         {
           id: 13,
           title: "Dashboard design",
-          done: false
+          done: false,
+          urgent: false
         },
       ]
     }
