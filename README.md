@@ -4,6 +4,10 @@
 ```
 npm install
 ```
+## Запустить с json-serverом
+```
+npm run start
+```
 
 ### Compiles and hot-reloads for development
 ```
