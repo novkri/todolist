@@ -10,7 +10,10 @@
 <script>
 export default {
   name: "todoitem",
-  props: ["item", "index"]
+  props: {
+    item: Object,
+    index: Number
+  }
 }
 </script>
 

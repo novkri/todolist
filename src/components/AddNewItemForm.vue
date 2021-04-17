@@ -18,8 +18,11 @@
 
 <script>
 export default {
-
-  props: ['isColumn', 'parent'],
+  // name
+  props: {
+    isColumn: Boolean,
+    parent: String
+  },
 
   // ????
   computed: {

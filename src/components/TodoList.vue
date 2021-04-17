@@ -3,7 +3,7 @@
     <div class="bg-white h-full lg:rounded-2xl flex flex-col justify-between pb-10 ">
 
       <nav class="pt-2 md:pt-12 lg:pt-6">
-        <p v-if="fetched && todoItems.length === 0" class="rounded-2xl text-center p-6">Список пуст...</p>
+        <p v-if="todoItems.length === 0" class="rounded-2xl text-center p-6">Список пуст...</p>
         <div v-for="(item, idx) in todoItems" :key="item.title">
           <TodoItem :item="item" :index="idx" />
         </div>
@@ -20,70 +20,20 @@ import AddNewItemForm from './AddNewItemForm'
 
 export default {
   name: 'todolist',
-  props: ['isOpen'],
+  props: {
+    isOpen: Boolean,
+    todoItems: Array
+  },
   components: {
     TodoItem,
     AddNewItemForm
   },
   data: function() {
     return {
-      todoItems: [],
-      loading: false,
-      fetched: false,
-      error: null
     }
-  },
-  created () {
-    // fetch the data when the view is created and the data is
-    // already being observed
-    this.fetchTodos()
   },
   methods: {
-    async fetchTodos() {
-      this.error = null
-      this.tasksItems = []
-      this.loading = true
-
-      try {
-        // http://localhost:3000/todos to const ?
-        let response = await fetch('http://localhost:3000/todos');
-
-        if (!response.ok) {
-          this.error = response.status
-          throw new Error(`HTTP error! status: ${response.status}`);
-        } else {
-          this.loading = false
-          this.fetched = true
-
-          let data = await response.json();
-          // this.todoItems.push(data) //???
-          data.map(todo => this.todoItems.push(todo))
-        }
-      } catch(e) {
-        console.log(e);
-      }
-    }
   }
-  // в этом хуке?
-  // mounted: function () {
-  //   this.$nextTick(async function () {
-  //     try {
-  //       // http://localhost:3000/todos to const ?
-  //       let response = await fetch('http://localhost:3000/todos');
-
-  //       if (!response.ok) {
-  //         throw new Error(`HTTP error! status: ${response.status}`);
-  //       } else {
-  //         let data = await response.json();
-  //         // this.todoItems.push(data) //???
-  //         data.map(todo => this.todoItems.push(todo))
-  //       }
-  //     } catch(e) {
-  //       console.log(e);
-  //     }
-  //   })
-  // }
-  
 }
 </script>
 

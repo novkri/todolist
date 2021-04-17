@@ -2,15 +2,16 @@
   <div id="app">
     <main class="bg-gray-100 relative h-screen overflow-hidden relative">
       <!-- just warning: -->
-      <!-- <div class="bg-red-200 border-red-600 text-red-600 border-l-4 p-3 flex justify-center" role="alert">
+      <div v-if="error" class="bg-red-200 border-red-600 text-red-600 border-l-4 p-3 flex justify-center" role="alert">
         <p class="font-bold mr-3">
           Be Warned:
         </p>
-        <p> -->
+        <p>
           <!-- TODO: add from where the error come -->
-          <!-- Something not ideal might be happening.
+          Something not ideal might be happening.
+          {{error}}
         </p>
-      </div> -->
+      </div>
 
       <!-- nav for burger -->
       <div class="flex flex-col lg:flex-row items-start justify-between z-50">
@@ -25,7 +26,7 @@
           </button>
         </nav>
         
-        <TodoList :isOpen="isSidebarOpen" @close="toggleSidebar()" />
+        <TodoList :todoItems="todoItems" :isOpen="isSidebarOpen" @close="toggleSidebar()" />
 
         <router-view></router-view>
 
@@ -51,11 +52,44 @@ export default {
   },
   data: function() {
     return {
-      isSidebarOpen: false
+      isSidebarOpen: false,
+
+      todoItems: [],
+      loading: false,
+      fetched: false,
+      error: null
     }
   },
-  // TODO: fetch all the data in THIS component 
+  created () {
+    // fetch the data when the view is created and the data is
+    // already being observed
+    this.fetchTodos()
+  },
   methods: {
+    async fetchTodos() {
+      this.error = null
+      this.todoItems = []
+      this.loading = true
+
+      try {
+        // http://localhost:3000/todos to const ?
+        let response = await fetch('http://localhost:3000/todoss');
+
+        if (!response.ok) {
+          this.error = `HTTP error! status: ${response.status}`
+          throw new Error(`HTTP error! status: ${response.status}`);
+        } else {
+          this.loading = false
+          this.fetched = true
+
+          let data = await response.json();
+          
+          data.map(todo => this.todoItems.push(todo))
+        }
+      } catch(e) {
+        console.log(e);
+      }
+    },
     toggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen
     }

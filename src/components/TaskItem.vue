@@ -32,7 +32,10 @@
 <script>
 export default {
   name: 'taskitem',
-  props: ['task', 'index']
+  props: {
+    task: Object,
+    index: Number
+  }
 }
 </script>
 
