@@ -1,6 +1,8 @@
 <template>
-  <router-link :to="{ name: 'TaskList', params: { id: index }}"
-    class="w-full font-thin uppercase text-gray-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-purple-500">
+  <router-link
+    :to="{ name: 'TaskList', params: { id: index }}"
+    class="w-full font-thin uppercase text-gray-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-purple-500"
+  >
    <span class="mx-4 text-sm font-normal">
       {{item.title}}
     </span>

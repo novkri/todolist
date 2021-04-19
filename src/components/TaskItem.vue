@@ -1,6 +1,11 @@
 <template>
   <label class="flex items-center mx-2.5">
-    <input type="checkbox" name="Urgent" class="form-tick mx-3 appearance-none bg-white bg-check h-5 w-5 border border-gray-300 rounded-md checked:bg-purple-500 checked:border-transparent focus:outline-none"/>
+    <input
+      type="checkbox"
+      name="Urgent"
+      v-model="task.done"
+      class="form-tick mx-3 appearance-none bg-white bg-check h-5 w-5 border border-gray-300 rounded-md checked:bg-purple-500 checked:border-transparent focus:outline-none"
+    />
 
 <!-- flex-col md:flex-row justify-center md:-->
     <div class="flex items-center justify-between w-full">
@@ -14,7 +19,6 @@
 
 <!-- md:ml-6 -->
     <div class="flex flex-col md:flex-row items-center text-center ml-4">
-      <!-- color -->
       <!-- w-min ?? -->
       <p class="text-sm text-gray-500 mb-2 md:mb-0 md:mx-1 w-min">12.12.2012</p>
       <p class="text-sm text-gray-500 mb-2 md:mb-0 md:mx-1 w-min">12:00</p>

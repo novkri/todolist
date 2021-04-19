@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full px-4 lg:p-4" key="tasks">
+  <div class="flex flex-col w-full px-4 lg:py-4 lg:px-8 lg:w-4/5" key="tasks">
     <!-- <div v-if="!fetched && loading">loading...</div>v-else -->
 
     <div class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
@@ -9,15 +9,26 @@
             <p class="font-bold text-md p-4 text-black">
               My Tasks
               <span class="text-sm text-gray-500 ml-2">
-                ( 5 / {{tasksItems.length}} )
+                <!-- ( {{doneTasksLength}} / {{tasksItems.length}} ) -->
+                ( {{doneTasksLength}} / {{allTasksLength}} )
               </span>
             </p>
 
 <!-- <transition-group name="fade"> -->
-  <!-- не тут: -->
-            <p v-if="fetched && tasksItems.length === 0" class="rounded-2xl text-center p-6">Список пуст...</p>
-            <ul v-else class="pb-4">
-              <li v-for="(task, idx) in tasksItems" :key="task.id" class="py-3 border-b-2 border-gray-100 cursor-pointer">
+  <!-- не тут? мигает-->
+            <p
+              v-if="fetched && tasksItems.length === 0"
+              class="rounded-2xl text-center p-6"
+            >
+              Список пуст...
+            </p>
+            <!-- v-else -->
+            <ul  class="pb-4">
+              <li
+                v-for="(task, idx) in tasksItems"
+                :key="task.id"
+                class="py-3 border-b-2 border-gray-100 cursor-pointer"
+              >
                 <TaskItem :task="task" :index="idx + 1" />
               </li>
             </ul>
@@ -32,14 +43,23 @@
         <AddNewItemForm :isColumn="false" :parent="'tasks'">
           <div class="flex justify-center items-center mx-4">
             <div class="relative inline-block w-10 mr-2 items-center select-none">
-            <input @click="isUrgent = !isUrgent" type="checkbox" name="toggle" id="Urgent" class="checked:bg-purple-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-              <label for="Urgent" class="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer">
-              </label>
+            <input
+              @click="isUrgent = !isUrgent"
+              type="checkbox"
+              name="toggle"
+              id="Urgent"
+              class="checked:bg-purple-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+            />
+            <label for="Urgent" class="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
             </div>
-            <span :class="{'text-purple-500': isUrgent}" class="text-gray-500 font-medium">
+            <span
+              :class="{'text-purple-500': isUrgent}"
+              class="text-gray-500 font-medium"
+            >
               Срочное
             </span>
           </div>
+
           <!-- <label class="flex items-center space-x-3 my-2.5 md:m-2">
             <input type="checkbox" name="Urgent" class="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-500 checked:border-transparent focus:outline-none"/>
             <span class="text-gray-700 dark:text-white font-normal">
@@ -64,6 +84,15 @@ export default {
     AddNewItemForm
   },
   // computed: тут считать не готовые и выводить
+  computed: {
+    doneTasksLength() {
+      let doneTasks = this.tasksItems.filter(task => task.done)
+      return doneTasks.length
+    },
+    allTasksLength() {
+      return this.tasksItems.length
+    }
+  },
   data: function() {
     return {
       isUrgent: false,
@@ -80,7 +109,6 @@ export default {
   },
 
   // when route changes and this component is already rendered,
-  // the logic will be slightly different.
   beforeRouteUpdate (to, from, next) {
     this.fetchTasks(to.params.id)
     next()
