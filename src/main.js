@@ -5,9 +5,7 @@ import "tailwindcss/tailwind.css"
 
 import router from './router'
 import store from './store'
-import Vuex from 'vuex'
 
-Vue.use(Vuex)
 Vue.config.productionTip = false
 
 

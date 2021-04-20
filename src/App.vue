@@ -37,14 +37,6 @@
         <TodoList :todoItems="allTodos" :isOpen="isSidebarOpen" @close="toggleSidebar()" />
 
         <router-view></router-view>
-  
-
-        <!-- чет не получаиццо :( -->
-        <!-- <router-view v-slot="{ Component }">
-          <transition name="fade" mode="out-in">
-            <component :is="Component" />
-          </transition>
-        </router-view> -->
         
       </div>
     </main>
@@ -60,7 +52,7 @@ export default {
   components: {
     TodoList,
   },
-  data: function() {
+  data() {
     return {
       isSidebarOpen: false,
 
@@ -84,37 +76,8 @@ export default {
   methods: {
     ...mapActions(['fetchTodos']),
 
-
-  toggleSidebar() {
-    this.isSidebarOpen = !this.isSidebarOpen
-  },
-
-
-    async addTask(data) {
-      console.log('addTodoList', data);
-
-       
-    // let newTaskObj = {
-    //     id: Date.now(),
-    //     todoId: this.$route.params.id,
-    //     title: name,
-    //     done: false,
-    //     urgent: this.isUrgent
-    //   }
-    //   try {
-    //     // http://localhost:3000/todos to const ?
-    //     await axios.post('http://localhost:3000/tasks', newTaskObj).then(resp => {
-    //         console.log(resp.data);
-
-    //         this.tasksItems.push(resp.data)
-            
-    //     }).catch(error => {
-    //         console.log(error);
-    //     }); 
-    //   } catch (error) {
-    //     // оповестить об ошибке
-    //     console.log(error);
-    //   }
+    toggleSidebar() {
+      this.isSidebarOpen = !this.isSidebarOpen
     },
   }
 }
@@ -126,9 +89,42 @@ export default {
   transition: opacity 5s ease;
 }
 
-
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
+
+/* scroll */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #dccdf5;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .2) inset;
+  border-radius: 8px; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d07ee4;
+  border-radius: 8px;
+  border: 2px solid #cecdf5;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8B5CF6;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #c471f5 0%, #7f71fa 100%);
+  background-size: contain;
+  border-radius: 8px;
+  border: 2px solid #d9cdf5;
+}
+
+/* ::-webkit-scrollbar-button {
+  background: #f5cdcd url(arrow_top.png) no-repeat;
+  background-size: contain;
+} */
 </style>

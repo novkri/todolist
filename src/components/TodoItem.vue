@@ -14,7 +14,6 @@ export default {
   name: "todoitem",
   props: {
     item: Object,
-    // index: Number
   }
 }
 </script>
@@ -23,6 +22,6 @@ export default {
 .router-link-exact-active.router-link-active {
   color: rgba(59, 130, 246, 1);
   background-image: linear-gradient(to right, #fff, #EDE9FE);
-  border-right: 4px solid #8B5CF6;
+  border-left: 4px solid #8B5CF6;
 }
 </style>

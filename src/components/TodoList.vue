@@ -5,7 +5,7 @@
   >
     <div class="bg-white h-full lg:rounded-2xl flex flex-col justify-between pb-10 ">
 
-      <nav class="pt-2 md:pt-12 lg:pt-6">
+      <nav class="pt-2 md:pt-12 lg:pt-6 max-h-4/5 overflow-x-auto">
         <!-- при загрузке появляется -->
         <p
           v-if="todoItems.length === 0"
@@ -14,12 +14,12 @@
           Список пуст...
         </p>
 
-        <div v-for="item in todoItems" :key="item.title">
+        <div v-for="item in todoItems" :key="item.id">
           <TodoItem :item="item" />
         </div>
       </nav>
 
-      <AddNewItemForm :isColumn="true" :parent="'todo'" @addNewItem="addTodoList" />
+      <AddNewItemForm :isColumn="true" placeholderText="Название списка" @addNewItem="addTodoList" />
     </div>
   </div>
 </template>
@@ -39,7 +39,7 @@ export default {
     TodoItem,
     AddNewItemForm
   },
-  data: function() {
+  data() {
     return {
     }
   },

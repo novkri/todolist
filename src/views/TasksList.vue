@@ -26,7 +26,7 @@
               <li
                 v-for="(task, idx) in allCurrentTodoTasks"
                 :key="task.id"
-                class="py-3 border-b-2 border-gray-100 cursor-pointer"
+                class="py-3 border-b-2 border-gray-100"
               >
                 <TaskItem :task="task" :index="idx + 1" />
               </li>
@@ -41,7 +41,7 @@
         <!-- parent - not sure -->
         <AddNewItemForm
           :isColumn="false"
-          :parent="'tasks'"
+          placeholderText="Название задачи"
           @addNewItem="addTaskItem"
         >
           <div class="flex justify-center items-center mx-4">
@@ -51,6 +51,7 @@
               type="checkbox"
               name="toggle"
               v-model="isUrgent"
+              value=""
               id="Urgent"
               class="checked:bg-purple-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
             />
@@ -92,7 +93,7 @@ export default {
     ])
 
   ,
-  data: function() {
+  data() {
     return {
       isUrgent: false,
 
@@ -118,9 +119,7 @@ export default {
 
     addTaskItem(name) {
 
-      // HERE ?
       let newTaskObj = {
-        id: Date.now(),
         todoId: Number(this.$route.params.id),
         title: name,
         done: false,

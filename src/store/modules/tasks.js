@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+const api = process.env.VUE_APP_BASE_API
+
 const state = () => ({
   tasks: [],
   currentTodoId: '',
@@ -22,8 +24,7 @@ const actions = {
     try {
       commit('setError', '')
 
-      // http://localhost:3000/todos to const ?
-      const response = await axios.get('http://localhost:3000/tasks')
+      const response = await axios.get(`${api}/tasks`)
 
       commit('setTasks', response.data)
     } catch(e) {
@@ -34,7 +35,7 @@ const actions = {
   },
 
   async addTask({ commit }, newTask) {
-    const response = await axios.post('http://localhost:3000/tasks', newTask)
+    const response = await axios.post(`${api}/tasks`, newTask)
 
     commit('addNewTask', response.data)
   }

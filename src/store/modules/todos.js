@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+const api = process.env.VUE_APP_BASE_API
+
 const state = () => ({
   todos: [],
   error: ''
@@ -12,10 +14,11 @@ const getters = {
 
 const actions = {
   async fetchTodos({ commit }) {
+    console.log(process.env);
     try {
       commit('setError', '')
-      // http://localhost:3000/todos to const ?
-      const response = await axios.get('http://localhost:3000/todos')
+      
+      const response = await axios.get(`${api}/todos`)
 
       commit('setTodos', response.data)
     } catch(e) {
@@ -25,7 +28,7 @@ const actions = {
   },
 
   async addTodo({ commit }, title) {
-    const response = await axios.post('http://localhost:3000/todos', {id: Date.now(), title})
+    const response = await axios.post(`${api}/todos`, { title })
 
     commit('addNewTodo', response.data)
   }
