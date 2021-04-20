@@ -18,6 +18,7 @@ const getters = {
 const actions = {
   async fetchTasks({ commit }, payload) {
     commit('setCurrentTodoId', payload)
+
     try {
       commit('setError', '')
 
@@ -30,12 +31,19 @@ const actions = {
       console.log(e);
       commit('setCurrentTodoId', '')
     }
+  },
+
+  async addTask({ commit }, newTask) {
+    const response = await axios.post('http://localhost:3000/tasks', newTask)
+
+    commit('addNewTask', response.data)
   }
 }
 
 const mutations = {
   setCurrentTodoId: (state, id) => (state.currentTodoId = id),
-  setTasks: (state, tasks) => (state.tasks = tasks)
+  setTasks: (state, tasks) => (state.tasks = tasks),
+  addNewTask: (state, task) => state.tasks.push(task)
 }
 
 export default {

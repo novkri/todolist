@@ -40,11 +40,10 @@
 
       <div class="lg:py-2 lg:px-4">
         <!-- parent - not sure -->
-        <!-- @addNewItem="addTask" -->
         <AddNewItemForm
           :isColumn="false"
           :parent="'tasks'"
-          
+          @addNewItem="addTaskItem"
         >
           <div class="flex justify-center items-center mx-4">
             <div class="relative inline-block w-10 mr-2 items-center select-none">
@@ -104,10 +103,10 @@ export default {
     return {
       isUrgent: false,
 
-      tasksItems: [],
+// ???
       loading: false,
       fetched: false,
-      error: null
+
     }
   },
 
@@ -121,36 +120,21 @@ export default {
   },
 
   methods: {
-    ...mapActions(['fetchTasks']),
+    ...mapActions(['fetchTasks', 'addTask']),
 
-    // async addTask(name) {
-      // ???? не могу передать наверх ?
-      // this.$emit('addTask', {name, isUrgent})
+    addTaskItem(name) {
 
+      // HERE ?
+      let newTaskObj = {
+        id: Date.now(),
+        todoId: Number(this.$route.params.id),
+        title: name,
+        done: false,
+        urgent: this.isUrgent
+      }
 
-      // let newTaskObj = {
-      //   id: Date.now(),
-      //   todoId: this.$route.params.id,
-      //   title: name,
-      //   done: false,
-      //   urgent: this.isUrgent
-      // }
-      // try {
-      //   // http://localhost:3000/todos to const ?
-      //   await axios.post('http://localhost:3000/tasks', newTaskObj).then(resp => {
-      //       console.log(resp.data);
-
-      //       this.tasksItems.push(resp.data)
-            
-      //   }).catch(error => {
-      //       console.log(error);
-      //   }); 
-      // } catch (error) {
-      //   // оповестить об ошибке
-      //   console.log(error);
-      // }
-    
-    // }
+      this.addTask(newTaskObj)
+    }
   }
 
 }
@@ -160,7 +144,7 @@ export default {
 .fade-enter-active, .fade-leave-active {
     transition: opacity .5s
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+.fade-enter, .fade-leave-to {
     opacity: 0
 }
 </style>

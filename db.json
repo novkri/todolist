@@ -19,6 +19,14 @@
     {
       "id": 1618877673699,
       "title": "Захватить мир"
+    },
+    {
+      "id": 1618906714523,
+      "title": "new todolist from vuex"
+    },
+    {
+      "id": 1618906822692,
+      "title": "new todolist from vuex 2"
     }
   ],
   "tasks": [
@@ -157,6 +165,27 @@
       "title": "Задача срояная",
       "done": false,
       "urgent": true
+    },
+    {
+      "id": 1618907266353,
+      "todoId": 1,
+      "title": "addNewTask from vuex",
+      "done": false,
+      "urgent": false
+    },
+    {
+      "id": 1618907302873,
+      "todoId": 1,
+      "title": "addNewTask from vuex 2",
+      "done": false,
+      "urgent": false
+    },
+    {
+      "id": 1618907509881,
+      "todoId": 1,
+      "title": "add 3",
+      "done": false,
+      "urgent": false
     }
   ]
 }

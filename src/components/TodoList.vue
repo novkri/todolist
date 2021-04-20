@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import TodoItem from './TodoItem'
 import AddNewItemForm from './AddNewItemForm'
 
@@ -42,10 +43,10 @@ export default {
     }
   },
   methods: {
-    // ???
+    ...mapActions(['addTodo']),
+
     addTodoList(name) {
-      console.log('addTodoList', name);
-      this.$emit('addTodoList', name)
+      this.addTodo(name)
     }
   }
 }

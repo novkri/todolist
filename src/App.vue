@@ -3,7 +3,7 @@
     <main class="bg-gray-100 relative h-screen overflow-hidden relative">
       <!-- just warning: -->
       <div
-        v-if="error"
+        v-if="todosError"
         class="bg-red-200 border-red-600 text-red-600 border-l-4 p-3 flex justify-center"
         role="alert"
       >
@@ -13,7 +13,8 @@
         <p>
           <!-- TODO: add from where the error come -->
           Something not ideal might be happening.
-          {{error}}
+          <!-- ?? -->
+          {{todosError}}
         </p>
       </div>
 
@@ -33,7 +34,7 @@
           </button>
         </nav>
         
-        <TodoList :todoItems="allTodos" :isOpen="isSidebarOpen" @close="toggleSidebar()" @addTodoList="addTodoList" />
+        <TodoList :todoItems="allTodos" :isOpen="isSidebarOpen" @close="toggleSidebar()" />
 
         <router-view></router-view>
   
@@ -51,7 +52,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapGetters, mapActions } from 'vuex'
 import TodoList from './components/TodoList'
 
@@ -64,10 +64,10 @@ export default {
     return {
       isSidebarOpen: false,
 
-      todoItems: [],
+      // ???
       loading: false,
       fetched: false,
-      error: null
+
     }
   },
   computed: 
@@ -85,32 +85,10 @@ export default {
     ...mapActions(['fetchTodos']),
 
 
-    toggleSidebar() {
-      this.isSidebarOpen = !this.isSidebarOpen
-    },
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen
+  },
 
-    async addTodoList(name) {
-      console.log('addTodoList', name);
-
-       
-      try {
-        // http://localhost:3000/todos to const ?
-        await axios.post('http://localhost:3000/todos', {
-            id: Date.now(),
-            title: name
-        }).then(resp => {
-            console.log(resp.data);
-
-            this.todoItems.push(resp.data)
-
-        }).catch(error => {
-            console.log(error);
-        }); 
-      } catch (error) {
-        // оповестить об ошибке
-        console.log(error);
-      }
-    },
 
     async addTask(data) {
       console.log('addTodoList', data);
