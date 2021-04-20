@@ -12,13 +12,13 @@
         >
           Список пуст...
         </p>
-        
+
         <div v-for="(item, idx) in todoItems" :key="item.title">
           <TodoItem :item="item" :index="idx" />
         </div>
       </nav>
 
-      <AddNewItemForm :isColumn="true" :parent="'todo'" />
+      <AddNewItemForm :isColumn="true" :parent="'todo'" @addTodoList="addTodoList" />
     </div>
   </div>
 </template>
@@ -42,6 +42,11 @@ export default {
     }
   },
   methods: {
+    // ???
+    addTodoList(name) {
+      console.log('addTodoList', name);
+      this.$emit('addTodoList', name)
+    }
   }
 }
 </script>

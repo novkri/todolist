@@ -33,7 +33,7 @@
           </button>
         </nav>
         
-        <TodoList :todoItems="todoItems" :isOpen="isSidebarOpen" @close="toggleSidebar()" />
+        <TodoList :todoItems="todoItems" :isOpen="isSidebarOpen" @close="toggleSidebar()" @addTodoList="addTodoList" />
 
         <router-view></router-view>
 
@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import TodoList from './components/TodoList'
 
 export default {
@@ -97,8 +98,32 @@ export default {
         console.log(e);
       }
     },
+
     toggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen
+    },
+
+    async addTodoList(name) {
+      console.log('addTodoList', name);
+
+       
+      try {
+        // http://localhost:3000/todos to const ?
+        await axios.post('http://localhost:3000/todos', {
+            id: Date.now(),
+            title: name
+        }).then(resp => {
+            console.log(resp.data);
+
+            this.todoItems.push(resp.data)
+            
+        }).catch(error => {
+            console.log(error);
+        }); 
+      } catch (error) {
+        // оповестить об ошибке
+        console.log(error);
+      }
     }
   }
 }
