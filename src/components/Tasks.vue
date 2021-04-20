@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full px-4 lg:py-4 lg:px-8 lg:w-4/5" key="tasks">
+  <div class="flex flex-col w-full px-4 lg:py-6 lg:px-8 lg:w-4/5" key="tasks">
 
     <div class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
       <div class="w-full mb-8 max-h-full overflow-auto">
@@ -90,7 +90,7 @@ import AddNewItemForm from '../components/AddNewItemForm'
 // import Popup from './Popup'
 
 export default {
-  name: "taskslist",
+  name: "Tasks",
   components: {
     TaskItem,
     AddNewItemForm,
@@ -103,6 +103,7 @@ export default {
       'allCurrentTasksLength',
       'doneTasks',
       'doneTasksLength',
+      'currentTodo',
     ])
 
   ,
@@ -120,58 +121,48 @@ export default {
   },
 
   beforeRouteEnter (to, from, next) {
+    console.log(to, from);
     let currentTodoId = Number(to.params.id)
     next(vm => {
-      vm.fetchTasks(currentTodoId)
+      vm.fetchCurrentTodo(currentTodoId)
+      vm.fetchTasks()
     })
   },
 
   beforeRouteUpdate (to, from, next) {
     let currentTodoId = Number(to.params.id)
-    this.fetchTasks(currentTodoId)
+    this.fetchCurrentTodo(currentTodoId)
+    this.fetchTasks()
     next()
   },
-
+  
   methods: {
-    ...mapActions(['fetchTasks', 'addTask']),
+    ...mapActions(['fetchTasks', 'fetchCurrentTodo', 'addTask']),
 
     addTaskItem(name) {
 
       let newTaskObj = {
         id: Date.now(),
-        // todoId: this.currentTodo.id,
-        todoId: Number(this.$route.params.id),
+        todoId: Number(this.currentTodo.id),
         title: name,
         done: false,
         urgent: this.isUrgent,
         createdAt: Date.now()
       }
-
+console.log(newTaskObj);
       this.addTask(newTaskObj)
 
       let popupObject = {
         popupHeader: 'Дело добавлено',
-        popupBody: `'${name}' добавлено в ${this.$route.params.title}`,
+        popupBody: `'${name}' добавлено в ${this.currentTodo.title}`,
         popupFooterBtn1: 'ОК',
         popupFooterBtn2: 'Не ок'
       }
       
-      // this.showPopup(popupObject)
+      console.log(this.$route, popupObject);
       this.$emit('addTaskItem', popupObject)
     },
 
-    // повторяющийся код !
-    // closePopup() {
-    //   this.isPopupOpen = false
-    //   this.popup = {}
-    // },
-
-    // showPopup(popupObject) {
-    //   console.log('show me2');
-    //   this.isPopupOpen = !this.isPopupOpen
-
-    //   this.popup = popupObject
-    // }
   }
 
 }

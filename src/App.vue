@@ -15,13 +15,57 @@
           {{todosError}}
         </p>
       </div> -->
-    <router-view></router-view>
+    <router-view @addedItem="showPopup"></router-view>
+
+
+          <Popup v-show="isPopupOpen" @close="closePopup">
+        <p slot="header">{{ popup.popupHeader }}</p>
+        <p slot="body">{{ popup.popupBody }}</p>
+
+        <div slot="footer" class="inline-flex rounded-md shadow">
+          <button  type="button" class="py-4 px-6  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+            {{ popup.popupFooterBtn1 }}
+          </button>
+        </div>
+        <div v-if="popup.popupFooterBtn2" slot="footer" class="inline-flex rounded-md shadow">
+          <button type="button" class="py-4 px-6  bg-green-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+            {{ popup.popupFooterBtn2 }}
+          </button>
+        </div>
+      </Popup>
   </div>
 </template>
 
 <script>
+import Popup from './components/Popup'
+
 export default {
   name: 'App',
+  components: {
+    Popup,
+  },
+  data() { 
+    return {
+
+      isPopupOpen: false,
+
+      popup: {},
+ 
+    }
+  },
+  methods: {
+    closePopup() {
+      this.isPopupOpen = false
+      this.popup = {}
+    },
+
+    showPopup(popupObject) {
+      console.log('show me');
+      this.isPopupOpen = !this.isPopupOpen
+
+      this.popup = popupObject
+    }
+  }
 }
 </script>
 

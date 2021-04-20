@@ -1,7 +1,8 @@
 <template>
-    <main class="bg-gray-100 overflow-hidden relative">
+    <main class="bg-gray-100 overflow-hidden relative h-screen">
      
       <div class="flex flex-col lg:flex-row items-start justify-between z-50">
+        <!-- вынести в компонент -->
         <!-- nav for burger -->
         <nav class="relative fixed block lg:hidden w-full h-14">
           <button
@@ -17,12 +18,12 @@
           </button>
         </nav>
 
-        
+        <!-- сайдбар для больших экранов -->
          <div
-          class="relative lg:static top-0 right-0 pb-14 lg:pb-0 h-screen lg:block lg:my-4 lg:ml-4 shadow-lg w-full lg:w-1/5"
+          class="relative lg:static top-0 right-0 pb-14 lg:pb-0 h-screen lg:block lg:ml-4 lg:mt-6 shadow-lg w-full lg:w-1/5"
           :class="[isOpen ? 'block' : 'hidden']"
         >
-          <div class="bg-white h-full lg:rounded-2xl flex flex-col justify-between pb-10 ">
+          <div class="bg-white h-full lg:rounded-2xl flex flex-col justify-between pb-12 ">
 
             <nav class="pt-2 md:pt-12 lg:pt-6 max-h-4/5 overflow-x-auto">
               <!-- при загрузке появляется -->
@@ -44,12 +45,12 @@
 
 
 
-        <router-view name="tasks" :key='$route.fullPath' @addTaskItem="showPopup"></router-view>
+        <router-view name="tasks" :key='$route.fullPath' @addTaskItem="e => $emit('addedItem', e)"></router-view>
         
       </div>
 
 
-      <Popup v-show="isPopupOpen" @close="closePopup">
+      <!-- <Popup v-show="isPopupOpen" @close="closePopup">
         <p slot="header">{{ popup.popupHeader }}</p>
         <p slot="body">{{ popup.popupBody }}</p>
 
@@ -63,7 +64,7 @@
             {{ popup.popupFooterBtn2 }}
           </button>
         </div>
-      </Popup>
+      </Popup> -->
 
     </main>
 </template>
@@ -72,15 +73,15 @@
 import { mapActions, mapGetters } from 'vuex'
 import TodoItem from './TodoItem'
 import AddNewItemForm from './AddNewItemForm'
-import Popup from './Popup'
+// import Popup from './Popup'
 
 export default {
-  name: 'todolist',
+  name: 'Todo',
 
   components: {
     TodoItem,
     AddNewItemForm,
-    Popup,
+    // Popup,
   },
   computed: 
     mapGetters([
@@ -99,9 +100,9 @@ export default {
   data() {
     return {
       isSidebarOpen: false,
-      isPopupOpen: false,
+      // isPopupOpen: false,
 
-      popup: {},
+      // popup: {},
       isOpen: false,
 
       // ???
@@ -122,7 +123,8 @@ export default {
         // popupFooterBtn2: 'Не ок'
       }
 
-      this.showPopup(popupObject)
+this.$emit('addedItem', popupObject)
+      // this.showPopup(popupObject)
     },
 
 
@@ -130,18 +132,17 @@ export default {
       this.isSidebarOpen = !this.isSidebarOpen
     },
 
-      // повторяющийся код !
-    closePopup() {
-      this.isPopupOpen = false
-      this.popup = {}
-    },
+    // closePopup() {
+    //   this.isPopupOpen = false
+    //   this.popup = {}
+    // },
 
-    showPopup(popupObject) {
-      console.log('show me');
-      this.isPopupOpen = !this.isPopupOpen
+    // showPopup(popupObject) {
+    //   console.log('show me');
+    //   this.isPopupOpen = !this.isPopupOpen
 
-      this.popup = popupObject
-    }
+    //   this.popup = popupObject
+    // }
   }
 }
 </script>

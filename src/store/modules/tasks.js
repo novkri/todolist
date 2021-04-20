@@ -4,22 +4,24 @@ const api = process.env.VUE_APP_BASE_API
 
 const state = () => ({
   tasks: [],
-  currentTodoId: '',
+  // currentTodoId: '',
+  currentTodo: {},
   error: ''
 })
 
 const getters = {
   allTasks: state => state.tasks,
-  allCurrentTodoTasks: state => state.tasks.filter(task => task.todoId === state.currentTodoId),
+  allCurrentTodoTasks: state => state.tasks.filter(task => task.todoId === state.currentTodo.id),
   allCurrentTasksLength: (state, getters) => getters.allCurrentTodoTasks.length,
   doneTasks: (state, getters) => getters.allCurrentTodoTasks.filter(task => task.done),
   doneTasksLength: (state, getters) => getters.doneTasks.length,
   tasksError: state => state.error,
+  currentTodo: state => state.currentTodo
 }
 
 const actions = {
-  async fetchTasks({ commit }, payload) {
-    commit('setCurrentTodoId', payload)
+  async fetchTasks({ commit }) {
+    // commit('setCurrentTodoId', payload)
 
     try {
       commit('setError', '')
@@ -30,19 +32,34 @@ const actions = {
     } catch(e) {
       commit('setError', e)
       console.log(e);
-      commit('setCurrentTodoId', '')
+      // commit('setCurrentTodoId', '')
+    }
+  },
+
+  async fetchCurrentTodo({ commit }, id) {
+    try {
+      commit('setError', '')
+      const response = await axios.get(`${api}/todos/${id}`)
+console.log(response.data);
+      commit('setCurrentTodo', response.data)
+    } catch (e) {
+      commit('setError', e)
+      console.log(e);
+      commit('setCurrentTodo', '')
     }
   },
 
   async addTask({ commit }, newTask) {
+    console.log(newTask);
     const response = await axios.post(`${api}/tasks`, newTask)
-
+console.log(response);
     commit('addNewTask', response.data)
   }
 }
 
 const mutations = {
-  setCurrentTodoId: (state, id) => (state.currentTodoId = id),
+  // setCurrentTodoId: (state, id) => (state.currentTodoId = id),
+  setCurrentTodo: (state, todo) => (state.currentTodo = todo),
   setTasks: (state, tasks) => (state.tasks = tasks),
   addNewTask: (state, task) => state.tasks.push(task)
 }
