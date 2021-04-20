@@ -120,6 +120,7 @@ export default {
     addTaskItem(name) {
 
       let newTaskObj = {
+        id: Date.now(),
         todoId: Number(this.$route.params.id),
         title: name,
         done: false,

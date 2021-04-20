@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <main class="bg-gray-100 relative h-screen overflow-hidden relative">
+    <!-- h-screen -->
+    <main class="bg-gray-100 overflow-hidden relative">
       <!-- just warning: -->
       <div
         v-if="todosError"
@@ -18,8 +19,10 @@
         </p>
       </div>
 
-      <!-- nav for burger -->
+      <!-- <button @click="togglePopup">test popup</button> -->
+
       <div class="flex flex-col lg:flex-row items-start justify-between z-50">
+        <!-- nav for burger -->
         <nav class="relative fixed block lg:hidden w-full h-14">
           <button
             class="absolute z-10 m-4 h-6 w-6 focus:outline-none"
@@ -33,28 +36,47 @@
             </svg>
           </button>
         </nav>
+
         
-        <TodoList :todoItems="allTodos" :isOpen="isSidebarOpen" @close="toggleSidebar()" />
+        <TodoList :todoItems="allTodos" :isOpen="isSidebarOpen" @close="toggleSidebar()" @showPopup="showPopup" />
 
         <router-view></router-view>
         
+        
       </div>
+
+<Popup v-show="isPopupOpen" @close="closePopup">
+  <p slot="header">{{ popup.popupHeader }}</p>
+  <p slot="body">{{ popup.popupBody }}</p>
+  <p slot="footer">{{ popup.popupFooter }}</p>
+</Popup>
     </main>
+
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TodoList from './components/TodoList'
+import Popup from './components/Popup'
 
 export default {
   name: 'App',
   components: {
     TodoList,
+    Popup,
   },
   data() {
     return {
       isSidebarOpen: false,
+      isPopupOpen: false,
+
+      popup: {
+        popupHeader: '',
+        popupBody: '',
+        popupFooter: ''
+      },
+      
 
       // ???
       loading: false,
@@ -79,6 +101,18 @@ export default {
     toggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen
     },
+    closePopup() {
+      this.isPopupOpen = false
+      this.popup = {}
+    },
+
+    showPopup() {
+      console.log('show me');
+      this.isPopupOpen = !this.isPopupOpen
+      this.popup.popupHeader = 'Добавлено'
+      this.popup.popupBody = 'Добавлено body'
+      this.popup.popupFooter = 'Добавлено footer'
+    }
   }
 }
 </script>

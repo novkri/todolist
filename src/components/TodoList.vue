@@ -48,6 +48,7 @@ export default {
 
     addTodoList(name) {
       this.addTodo(name)
+      this.$emit('showPopup')
     }
   }
 }
