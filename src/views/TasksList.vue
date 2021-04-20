@@ -10,14 +10,14 @@
               My Tasks
               <span class="text-sm text-gray-500 ml-2">
                 <!-- ( {{doneTasksLength}} / {{tasksItems.length}} ) -->
-                ( {{doneTasksLength}} / {{allTasksLength}} )
+                ( {{doneTasksLength}} / {{allCurrentTasksLength}} )
               </span>
             </p>
 
 <!-- <transition-group name="fade"> -->
   <!-- не тут? мигает-->
             <p
-              v-if="fetched && tasksItems.length === 0"
+              v-if="fetched && allCurrentTodoTasks.length === 0"
               class="rounded-2xl text-center p-6"
             >
               Список пуст...
@@ -25,7 +25,7 @@
             <!-- v-else -->
             <ul  class="pb-4">
               <li
-                v-for="(task, idx) in tasksItems"
+                v-for="(task, idx) in allCurrentTodoTasks"
                 :key="task.id"
                 class="py-3 border-b-2 border-gray-100 cursor-pointer"
               >
@@ -38,13 +38,13 @@
         </div>
       </div>
 
-
       <div class="lg:py-2 lg:px-4">
         <!-- parent - not sure -->
+        <!-- @addNewItem="addTask" -->
         <AddNewItemForm
           :isColumn="false"
           :parent="'tasks'"
-          @addNewItem="addTask"
+          
         >
           <div class="flex justify-center items-center mx-4">
             <div class="relative inline-block w-10 mr-2 items-center select-none">
@@ -80,8 +80,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-
+import { mapGetters, mapActions } from 'vuex'
 import TaskItem from '../components/TaskItem'
 import AddNewItemForm from '../components/AddNewItemForm'
 
@@ -91,16 +90,16 @@ export default {
     TaskItem,
     AddNewItemForm
   },
-  // computed: тут считать не готовые и выводить
-  computed: {
-    doneTasksLength() {
-      let doneTasks = this.tasksItems.filter(task => task.done)
-      return doneTasks.length
-    },
-    allTasksLength() {
-      return this.tasksItems.length
-    }
-  },
+
+  computed: 
+    mapGetters([
+      'allCurrentTodoTasks',
+      'allCurrentTasksLength',
+      'doneTasks',
+      'doneTasksLength'
+    ])
+
+  ,
   data: function() {
     return {
       isUrgent: false,
@@ -116,69 +115,42 @@ export default {
     next(vm => vm.fetchTasks(to.params.id))
   },
 
-  // when route changes and this component is already rendered,
   beforeRouteUpdate (to, from, next) {
     this.fetchTasks(to.params.id)
     next()
   },
 
   methods: {
-    async fetchTasks(currentTaskId) {
-      this.error = null
-      this.tasksItems = []
-      this.loading = true
+    ...mapActions(['fetchTasks']),
 
-      try {
-        // http://localhost:3000/todos to const ?
-        let response = await fetch(`http://localhost:3000/tasks`);
-        // let response = await fetch(`http://localhost:3000/todos/${currentTask}`);
-
-        if (!response.ok) {
-          this.error = response.status
-          throw new Error(`HTTP error! status: ${response.status}`);
-        } else {
-          this.loading = false
-          this.fetched = true
-
-          let data = await response.json();
-          // this.todoItems.push(data) //???
-
-          let currentTodoTasks = data.filter(task => task.todoId === currentTaskId)
-     
-          currentTodoTasks.map(task => this.tasksItems.push(task))
-        }
-      } catch(e) {
-        console.log(e);
-      }
-    },
-
-    async addTask(name) {
+    // async addTask(name) {
       // ???? не могу передать наверх ?
       // this.$emit('addTask', {name, isUrgent})
 
-      let newTaskObj = {
-        id: Date.now(),
-        todoId: this.$route.params.id,
-        title: name,
-        done: false,
-        urgent: this.isUrgent
-      }
-      try {
-        // http://localhost:3000/todos to const ?
-        await axios.post('http://localhost:3000/tasks', newTaskObj).then(resp => {
-            console.log(resp.data);
 
-            this.tasksItems.push(resp.data)
+      // let newTaskObj = {
+      //   id: Date.now(),
+      //   todoId: this.$route.params.id,
+      //   title: name,
+      //   done: false,
+      //   urgent: this.isUrgent
+      // }
+      // try {
+      //   // http://localhost:3000/todos to const ?
+      //   await axios.post('http://localhost:3000/tasks', newTaskObj).then(resp => {
+      //       console.log(resp.data);
+
+      //       this.tasksItems.push(resp.data)
             
-        }).catch(error => {
-            console.log(error);
-        }); 
-      } catch (error) {
-        // оповестить об ошибке
-        console.log(error);
-      }
+      //   }).catch(error => {
+      //       console.log(error);
+      //   }); 
+      // } catch (error) {
+      //   // оповестить об ошибке
+      //   console.log(error);
+      // }
     
-    }
+    // }
   }
 
 }

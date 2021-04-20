@@ -33,9 +33,10 @@
           </button>
         </nav>
         
-        <TodoList :todoItems="todoItems" :isOpen="isSidebarOpen" @close="toggleSidebar()" @addTodoList="addTodoList" />
+        <TodoList :todoItems="allTodos" :isOpen="isSidebarOpen" @close="toggleSidebar()" @addTodoList="addTodoList" />
 
         <router-view></router-view>
+  
 
         <!-- чет не получаиццо :( -->
         <!-- <router-view v-slot="{ Component }">
@@ -51,6 +52,7 @@
 
 <script>
 import axios from 'axios'
+import { mapGetters, mapActions } from 'vuex'
 import TodoList from './components/TodoList'
 
 export default {
@@ -68,36 +70,20 @@ export default {
       error: null
     }
   },
+  computed: 
+    mapGetters([
+      'allTodos',
+      'todosError'
+    ])
+  ,
+
   created () {
-    // fetch the data when the view is created and the data is
-    // already being observed
     this.fetchTodos()
   },
+
   methods: {
-    async fetchTodos() {
-      this.error = null
-      this.todoItems = []
-      this.loading = true
+    ...mapActions(['fetchTodos']),
 
-      try {
-        // http://localhost:3000/todos to const ?
-        let response = await fetch('http://localhost:3000/todos');
-
-        if (!response.ok) {
-          this.error = `HTTP error! status: ${response.status}`
-          throw new Error(`HTTP error! status: ${response.status}`);
-        } else {
-          this.loading = false
-          this.fetched = true
-
-          let data = await response.json();
-          
-          data.map(todo => this.todoItems.push(todo))
-        }
-      } catch(e) {
-        console.log(e);
-      }
-    },
 
     toggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen
@@ -124,6 +110,33 @@ export default {
         // оповестить об ошибке
         console.log(error);
       }
+    },
+
+    async addTask(data) {
+      console.log('addTodoList', data);
+
+       
+    // let newTaskObj = {
+    //     id: Date.now(),
+    //     todoId: this.$route.params.id,
+    //     title: name,
+    //     done: false,
+    //     urgent: this.isUrgent
+    //   }
+    //   try {
+    //     // http://localhost:3000/todos to const ?
+    //     await axios.post('http://localhost:3000/tasks', newTaskObj).then(resp => {
+    //         console.log(resp.data);
+
+    //         this.tasksItems.push(resp.data)
+            
+    //     }).catch(error => {
+    //         console.log(error);
+    //     }); 
+    //   } catch (error) {
+    //     // оповестить об ошибке
+    //     console.log(error);
+    //   }
     },
   }
 }
