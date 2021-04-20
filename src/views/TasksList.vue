@@ -15,7 +15,6 @@
             </p>
 
 <!-- <transition-group name="fade"> -->
-  <!-- не тут? мигает-->
             <p
               v-if="fetched && allCurrentTodoTasks.length === 0"
               class="rounded-2xl text-center p-6"
@@ -65,12 +64,6 @@
             </span>
           </div>
 
-          <!-- <label class="flex items-center space-x-3 my-2.5 md:m-2">
-            <input type="checkbox" name="Urgent" class="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-500 checked:border-transparent focus:outline-none"/>
-            <span class="text-gray-700 dark:text-white font-normal">
-              Срочное
-            </span>
-          </label> -->
         </AddNewItemForm>
       </div>
         
@@ -103,7 +96,7 @@ export default {
     return {
       isUrgent: false,
 
-// ???
+      // ???
       loading: false,
       fetched: false,
 
@@ -111,7 +104,8 @@ export default {
   },
 
   beforeRouteEnter (to, from, next) {
-    next(vm => vm.fetchTasks(to.params.id))
+    let currentTodoId = Number(to.params.id)
+    next(vm => vm.fetchTasks(currentTodoId))
   },
 
   beforeRouteUpdate (to, from, next) {
@@ -130,7 +124,8 @@ export default {
         todoId: Number(this.$route.params.id),
         title: name,
         done: false,
-        urgent: this.isUrgent
+        urgent: this.isUrgent,
+        createdAt: Date.now()
       }
 
       this.addTask(newTaskObj)

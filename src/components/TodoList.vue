@@ -6,6 +6,7 @@
     <div class="bg-white h-full lg:rounded-2xl flex flex-col justify-between pb-10 ">
 
       <nav class="pt-2 md:pt-12 lg:pt-6">
+        <!-- при загрузке появляется -->
         <p
           v-if="todoItems.length === 0"
           class="rounded-2xl text-center p-6"
