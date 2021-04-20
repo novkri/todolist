@@ -29,7 +29,6 @@
         </div>
       </transition> -->
 
-  <!-- <div class="absolute top-0 left-0 w-full"> -->
     <div class="h-auto w-full z-10 inset-0 overflow-y-auto absolute top-0 left-0 w-full">
       <!-- bg -->
       <div class="absolute w-full h-full inset-0 bg-gray-500 opacity-30">
@@ -40,11 +39,9 @@
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
         </span>
 
-        <div class="inline-block relative overflow-hidden transform transition-all sm:align-middle sm:max-w-lg" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-          <div class="rounded-lg p-1 bg-white shadow text-center">
-            <!-- <div class="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20"> -->
-
-              <header class="p-2 flex justify-between">
+        <div class="inline-block relative overflow-hidden transform transition-all  min-w-sm w-96  sm:align-middle sm:max-w-lg" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+          <div class="rounded-lg bg-white shadow text-center">
+              <header class="p-3 flex justify-between border-b-2 border-gray-200">
                 <slot name="header">
                   default header
                 </slot>
@@ -75,19 +72,16 @@
                 </div> -->
               </div>
 
-              <footer class="p-4">
+              <footer class="p-4 flex item-center justify-between">
                 <slot name="footer">
                   default footer
-                  buttons...
                 </slot>
               </footer>
 
-            <!-- </div> -->
           </div>
         </div>
       </div>
     </div>
-  <!-- </div> -->
 </template>
 
 <script>

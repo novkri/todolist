@@ -129,6 +129,15 @@ export default {
       }
 
       this.addTask(newTaskObj)
+
+
+      let popupObject = {
+        popupHeader: 'ыыыыСписок добавлен',
+        popupBody: `Список дел '${name}' добавлен`,
+        popupFooterBtn1: 'ОК',
+        // popupFooterBtn2: 'Не ок'
+      }
+      this.$emit('showPopup', popupObject)
     }
   }
 

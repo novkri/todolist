@@ -40,16 +40,30 @@
         
         <TodoList :todoItems="allTodos" :isOpen="isSidebarOpen" @close="toggleSidebar()" @showPopup="showPopup" />
 
-        <router-view></router-view>
+        <!-- <TaskList> -->
+          <router-view></router-view>
+        <!-- </TaskList> -->
+        
         
         
       </div>
 
-<Popup v-show="isPopupOpen" @close="closePopup">
-  <p slot="header">{{ popup.popupHeader }}</p>
-  <p slot="body">{{ popup.popupBody }}</p>
-  <p slot="footer">{{ popup.popupFooter }}</p>
-</Popup>
+      <Popup v-show="isPopupOpen" @close="closePopup">
+        <p slot="header">{{ popup.popupHeader }}</p>
+        <p slot="body">{{ popup.popupBody }}</p>
+
+        <div slot="footer" class="inline-flex rounded-md shadow">
+          <button  type="button" class="py-4 px-6  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+            {{ popup.popupFooterBtn1 }}
+          </button>
+        </div>
+        <div slot="footer" class="inline-flex rounded-md shadow">
+          <button type="button" class="py-4 px-6  bg-green-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+            {{ popup.popupFooterBtn2 }}
+          </button>
+        </div>
+      </Popup>
+
     </main>
 
   </div>
@@ -58,6 +72,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TodoList from './components/TodoList'
+// import TaskList from './views/TasksList'
 import Popup from './components/Popup'
 
 export default {
@@ -65,17 +80,14 @@ export default {
   components: {
     TodoList,
     Popup,
+    // TaskList
   },
   data() {
     return {
       isSidebarOpen: false,
       isPopupOpen: false,
 
-      popup: {
-        popupHeader: '',
-        popupBody: '',
-        popupFooter: ''
-      },
+      popup: {},
       
 
       // ???
@@ -106,12 +118,11 @@ export default {
       this.popup = {}
     },
 
-    showPopup() {
+    showPopup(popupObject) {
       console.log('show me');
       this.isPopupOpen = !this.isPopupOpen
-      this.popup.popupHeader = 'Добавлено'
-      this.popup.popupBody = 'Добавлено body'
-      this.popup.popupFooter = 'Добавлено footer'
+
+      this.popup = popupObject
     }
   }
 }

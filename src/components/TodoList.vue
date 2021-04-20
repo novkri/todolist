@@ -48,7 +48,14 @@ export default {
 
     addTodoList(name) {
       this.addTodo(name)
-      this.$emit('showPopup')
+
+      let popupObject = {
+        popupHeader: 'Список добавлен',
+        popupBody: `Список дел '${name}' добавлен`,
+        popupFooterBtn1: 'ОК',
+        // popupFooterBtn2: 'Не ок'
+      }
+      this.$emit('showPopup', popupObject)
     }
   }
 }
