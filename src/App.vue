@@ -116,7 +116,7 @@ export default {
             console.log(resp.data);
 
             this.todoItems.push(resp.data)
-            
+
         }).catch(error => {
             console.log(error);
         }); 
@@ -124,7 +124,7 @@ export default {
         // оповестить об ошибке
         console.log(error);
       }
-    }
+    },
   }
 }
 </script>

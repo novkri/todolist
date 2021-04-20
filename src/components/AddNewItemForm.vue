@@ -49,7 +49,7 @@ export default {
   methods: {
     submitForm(e) {
       e.preventDefault()
-      this.$emit('addTodoList', this.name)
+      this.$emit('addNewItem', this.name)
       
       this.name = ''
     }

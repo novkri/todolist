@@ -40,13 +40,19 @@
 
 
       <div class="lg:py-2 lg:px-4">
-        <AddNewItemForm :isColumn="false" :parent="'tasks'">
+        <!-- parent - not sure -->
+        <AddNewItemForm
+          :isColumn="false"
+          :parent="'tasks'"
+          @addNewItem="addTask"
+        >
           <div class="flex justify-center items-center mx-4">
             <div class="relative inline-block w-10 mr-2 items-center select-none">
             <input
               @click="isUrgent = !isUrgent"
               type="checkbox"
               name="toggle"
+              v-model="isUrgent"
               id="Urgent"
               class="checked:bg-purple-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
             />
@@ -74,6 +80,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 import TaskItem from '../components/TaskItem'
 import AddNewItemForm from '../components/AddNewItemForm'
 
@@ -123,7 +131,7 @@ export default {
       try {
         // http://localhost:3000/todos to const ?
         let response = await fetch(`http://localhost:3000/tasks`);
-        // let response = await fetch(`http://localhost:3000/tasks/${currentTask}`);
+        // let response = await fetch(`http://localhost:3000/todos/${currentTask}`);
 
         if (!response.ok) {
           this.error = response.status
@@ -136,7 +144,7 @@ export default {
           // this.todoItems.push(data) //???
 
           let currentTodoTasks = data.filter(task => task.todoId === currentTaskId)
-      console.log(currentTodoTasks);
+     
           currentTodoTasks.map(task => this.tasksItems.push(task))
         }
       } catch(e) {
@@ -144,15 +152,33 @@ export default {
       }
     },
 
-    // beforeLeave(el) {
-    //   const { marginLeft, marginTop, width, height } = window.getComputedStyle(
-    //     el
-    //   );
-    //   el.style.left = `${el.offsetLeft - parseFloat(marginLeft, 10)}px`;
-    //   el.style.top = `${el.offsetTop - parseFloat(marginTop, 10)}px`;
-    //   el.style.width = width;
-    //   el.style.height = height;
-    // }
+    async addTask(name) {
+      // ???? не могу передать наверх ?
+      // this.$emit('addTask', {name, isUrgent})
+
+      let newTaskObj = {
+        id: Date.now(),
+        todoId: this.$route.params.id,
+        title: name,
+        done: false,
+        urgent: this.isUrgent
+      }
+      try {
+        // http://localhost:3000/todos to const ?
+        await axios.post('http://localhost:3000/tasks', newTaskObj).then(resp => {
+            console.log(resp.data);
+
+            this.tasksItems.push(resp.data)
+            
+        }).catch(error => {
+            console.log(error);
+        }); 
+      } catch (error) {
+        // оповестить об ошибке
+        console.log(error);
+      }
+    
+    }
   }
 
 }

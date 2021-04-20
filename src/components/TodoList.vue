@@ -13,12 +13,12 @@
           Список пуст...
         </p>
 
-        <div v-for="(item, idx) in todoItems" :key="item.title">
-          <TodoItem :item="item" :index="idx" />
+        <div v-for="item in todoItems" :key="item.title">
+          <TodoItem :item="item" />
         </div>
       </nav>
 
-      <AddNewItemForm :isColumn="true" :parent="'todo'" @addTodoList="addTodoList" />
+      <AddNewItemForm :isColumn="true" :parent="'todo'" @addNewItem="addTodoList" />
     </div>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="{ name: 'TaskList', params: { id: index }}"
+    :to="{ name: 'TaskList', params: { id: item.id }}"
     class="w-full font-thin uppercase text-gray-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-purple-500"
   >
    <span class="mx-4 text-sm font-normal">
@@ -14,7 +14,7 @@ export default {
   name: "todoitem",
   props: {
     item: Object,
-    index: Number
+    // index: Number
   }
 }
 </script>
