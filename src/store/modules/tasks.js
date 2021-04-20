@@ -14,7 +14,7 @@ const getters = {
   allCurrentTasksLength: (state, getters) => getters.allCurrentTodoTasks.length,
   doneTasks: (state, getters) => getters.allCurrentTodoTasks.filter(task => task.done),
   doneTasksLength: (state, getters) => getters.doneTasks.length,
-  tasksError: state => state.error
+  tasksError: state => state.error,
 }
 
 const actions = {

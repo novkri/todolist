@@ -1,6 +1,5 @@
 <template>
   <div class="flex flex-col w-full px-4 lg:py-4 lg:px-8 lg:w-4/5" key="tasks">
-    <!-- <div v-if="!fetched && loading">loading...</div>v-else -->
 
     <div class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
       <div class="w-full mb-8 max-h-full overflow-auto">
@@ -9,20 +8,17 @@
             <p class="font-bold text-md p-4 text-black">
               My Tasks
               <span class="text-sm text-gray-500 ml-2">
-                <!-- ( {{doneTasksLength}} / {{tasksItems.length}} ) -->
                 ( {{doneTasksLength}} / {{allCurrentTasksLength}} )
               </span>
             </p>
 
-<!-- <transition-group name="fade"> -->
             <p
               v-if="fetched && allCurrentTodoTasks.length === 0"
               class="rounded-2xl text-center p-6"
             >
               Список пуст...
             </p>
-            <!-- v-else -->
-            <ul  class="pb-4">
+            <ul class="pb-4">
               <li
                 v-for="(task, idx) in allCurrentTodoTasks"
                 :key="task.id"
@@ -31,14 +27,12 @@
                 <TaskItem :task="task" :index="idx + 1" />
               </li>
             </ul>
-<!-- </transition-group> -->
 
           </div>
         </div>
       </div>
 
       <div class="lg:py-2 lg:px-4">
-        <!-- parent - not sure -->
         <AddNewItemForm
           :isColumn="false"
           placeholderText="Название задачи"
@@ -69,6 +63,23 @@
       </div>
         
     </div>
+
+      <!-- <Popup v-show="isPopupOpen" @close="closePopup">
+        <p slot="header">{{ popup.popupHeader }}</p>
+        <p slot="body">{{ popup.popupBody }}</p>
+
+        <div slot="footer" class="inline-flex rounded-md shadow">
+          <button  type="button" class="py-4 px-6  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+            {{ popup.popupFooterBtn1 }}
+          </button>
+        </div>
+        <div v-if="popup.popupFooterBtn2" slot="footer" class="inline-flex rounded-md shadow">
+          <button type="button" class="py-4 px-6  bg-green-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+            {{ popup.popupFooterBtn2 }}
+          </button>
+        </div>
+      </Popup> -->
+
   </div>
 </template>
 
@@ -76,12 +87,14 @@
 import { mapGetters, mapActions } from 'vuex'
 import TaskItem from '../components/TaskItem'
 import AddNewItemForm from '../components/AddNewItemForm'
+// import Popup from './Popup'
 
 export default {
   name: "taskslist",
   components: {
     TaskItem,
-    AddNewItemForm
+    AddNewItemForm,
+    // Popup,
   },
 
   computed: 
@@ -89,7 +102,7 @@ export default {
       'allCurrentTodoTasks',
       'allCurrentTasksLength',
       'doneTasks',
-      'doneTasksLength'
+      'doneTasksLength',
     ])
 
   ,
@@ -97,6 +110,8 @@ export default {
     return {
       isUrgent: false,
 
+      // popup: {},
+      // isPopupOpen: false,
       // ???
       loading: false,
       fetched: false,
@@ -106,11 +121,14 @@ export default {
 
   beforeRouteEnter (to, from, next) {
     let currentTodoId = Number(to.params.id)
-    next(vm => vm.fetchTasks(currentTodoId))
+    next(vm => {
+      vm.fetchTasks(currentTodoId)
+    })
   },
 
   beforeRouteUpdate (to, from, next) {
-    this.fetchTasks(to.params.id)
+    let currentTodoId = Number(to.params.id)
+    this.fetchTasks(currentTodoId)
     next()
   },
 
@@ -121,6 +139,7 @@ export default {
 
       let newTaskObj = {
         id: Date.now(),
+        // todoId: this.currentTodo.id,
         todoId: Number(this.$route.params.id),
         title: name,
         done: false,
@@ -130,15 +149,29 @@ export default {
 
       this.addTask(newTaskObj)
 
-
       let popupObject = {
-        popupHeader: 'ыыыыСписок добавлен',
-        popupBody: `Список дел '${name}' добавлен`,
+        popupHeader: 'Дело добавлено',
+        popupBody: `'${name}' добавлено в ${this.$route.params.title}`,
         popupFooterBtn1: 'ОК',
-        // popupFooterBtn2: 'Не ок'
+        popupFooterBtn2: 'Не ок'
       }
-      this.$emit('showPopup', popupObject)
-    }
+      
+      // this.showPopup(popupObject)
+      this.$emit('addTaskItem', popupObject)
+    },
+
+    // повторяющийся код !
+    // closePopup() {
+    //   this.isPopupOpen = false
+    //   this.popup = {}
+    // },
+
+    // showPopup(popupObject) {
+    //   console.log('show me2');
+    //   this.isPopupOpen = !this.isPopupOpen
+
+    //   this.popup = popupObject
+    // }
   }
 
 }

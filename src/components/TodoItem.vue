@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="{ name: 'TaskList', params: { id: item.id }}"
+    :to="{ name: 'tasks', params: { id: item.id, title: item.title }}"
     class="w-full font-thin uppercase text-gray-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-purple-500"
   >
    <span class="mx-4 text-sm font-normal">

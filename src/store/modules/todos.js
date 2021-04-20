@@ -14,7 +14,7 @@ const getters = {
 
 const actions = {
   async fetchTodos({ commit }) {
-
+console.log('fetchTodos');
     try {
       commit('setError', '')
       
