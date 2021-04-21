@@ -1,6 +1,5 @@
 <template>
     <main class="bg-gray-100 overflow-hidden relative h-screen">
-     
       <div class="flex flex-col lg:flex-row items-start justify-between z-50">
  
         <!-- burger -->
@@ -43,7 +42,7 @@
         </div>
 
         <!-- tasks -->
-        <router-view name="tasks" :key='$route.fullPath' @addTaskItem="e => $emit('addedItem', e)"></router-view>
+        <router-view name="tasks" :key='$route.fullPath' @addTaskItem="e => $emit('addedItem', e)" @close="$emit('close')"></router-view>
         
       </div>
 
@@ -94,13 +93,18 @@ export default {
         body: `Список дел '${name}' добавлен`,
         footerButtons: [{
           title: 'ОК',
-          type: 'OK'
-        }]
+          type: 'OK',
+          method: () => this.confirmAction(name)
+        }],
       }
 
       this.$emit('addedItem', popupObject)
     },
 
+    confirmAction(name) {
+      this.addTodo(name)
+      this.$emit('close')
+    },
 
     toggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen

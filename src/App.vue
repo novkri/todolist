@@ -1,31 +1,26 @@
 <template>
   <div id="app">
-    <router-view @addedItem="showPopup"></router-view>
+    <router-view @addedItem="showPopup" @close="closePopup"></router-view>
 
 
+<!-- перенести попап в todo.vue ? -->
     <Popup v-show="isPopupOpen" @close="closePopup">
       <p slot="header">{{ popup.header }}</p>
       <p slot="body">{{ popup.body }}</p>
 
-      <!-- key? -->
-      <!-- <div slot="footer" v-for="button in popup.footerButtons" :key="button.title" class="inline-flex rounded-md shadow"> -->
         <button
           slot="footer"
           type="button"
           v-for="button in popup.footerButtons"
           :key="button.title"
-          :class="[button.type === 'OK' ? 'btn_ok' : 'btn_cancel']"
+          @click="button.method"
+         
+          :class="[button.type === 'OK' ? 'btn_ok' : 'btn_action']"
           class="text-white py-2 px-4 focus:ring-indigo-500 focus:ring-offset-indigo-200 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
         >
-          <!-- {{ popup.popupFooterSubmit }} -->
           {{ button.title }}
         </button>
-      <!-- </div> -->
-      <!-- <div v-if="popup.popupFooterBtn2" slot="footer" class="inline-flex rounded-md shadow">
-        <button type="button" class="py-4 px-6  bg-green-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-          {{ popup.popupFooterCancel }}
-        </button>
-      </div> -->
+
     </Popup>
   </div>
 </template>
@@ -114,10 +109,10 @@ export default {
   background-color: #6D28D9;
 }
 
-.btn_cancel {
+.btn_action {
   background-color: #EF4444;
 }
-.btn_cancel:hover {
+.btn_action:hover {
   background-color: #DC2626;
 }
 </style>

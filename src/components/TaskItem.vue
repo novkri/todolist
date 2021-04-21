@@ -9,7 +9,7 @@
 
     <div class="flex items-center justify-between w-full">
       <div class="flex items-center justify-start max-w-90 cursor-pointer">
-        <span :class="[task.done ? 'line-through' : '' ]">
+        <span :class="[task.done ? 'line-through text-gray-500' : '' ]">
           {{task.title}}
         </span>
       </div>

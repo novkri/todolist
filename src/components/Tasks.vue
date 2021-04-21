@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full px-4 lg:py-6 lg:px-8 lg:w-4/5" key="tasks">
+  <div class="flex flex-col w-full px-4 lg:py-6 lg:px-8 lg:w-4/5">
 
     <div class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
       <div class="w-full mb-8 max-h-full overflow-auto">
@@ -112,7 +112,26 @@ export default {
     ...mapActions(['fetchTasks', 'fetchCurrentTodo', 'addTask']),
 
     addTaskItem(name) {
+      let popupObject = {
+        header: 'Дело добавлено',
+        body: `'${name}' добавлено в '${this.currentTodo.title}'`,
+        footerButtons: [
+          // {
+          //   title: 'Отмена',
+          //   type: 'action'
+          // },
+          {
+            title: 'OK',
+            type: 'OK',
+            method: () => this.confirmAction(name)
+          }
+        ]
+      }
 
+      this.$emit('addTaskItem', popupObject)
+    },
+
+    confirmAction(name) {
       let newTaskObj = {
         id: Date.now(),
         todoId: Number(this.currentTodo.id),
@@ -123,24 +142,9 @@ export default {
       }
 
       this.addTask(newTaskObj)
-
-      let popupObject = {
-        header: 'Дело добавлено',
-        body: `'${name}' добавлено в '${this.currentTodo.title}'`,
-        footerButtons: [
-          // {
-          //   title: 'Отмена',
-          //   type: 'Cancel'
-          // },
-          {
-            title: 'OK',
-            type: 'OK'
-          }
-        ]
-      }
-
-      this.$emit('addTaskItem', popupObject)
-    },
+ 
+      this.$emit('close')
+    }
 
   }
 }
