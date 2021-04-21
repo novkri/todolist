@@ -1,16 +1,15 @@
 <template>
-  <div class="flex flex-col w-full px-4 lg:py-6 lg:px-8 lg:w-4/5">
-
-    <div class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
-      <div class="w-full mb-8 max-h-full overflow-auto">
-        <div class="mb-4 mx-0">
-          <div class="shadow-lg rounded-2xl bg-white w-full">
-            <p class="font-bold text-md p-4 text-black">
+  <article class="flex flex-col w-full px-4 lg:py-6 lg:px-8 lg:w-4/5">
+    <section class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
+      <main class="w-full mb-8 max-h-full overflow-auto">
+        <!-- <div class="mb-4 mx-0"> -->
+          <div class="shadow-lg rounded-2xl bg-white w-full  mb-4 mx-0">
+            <header class="font-bold text-md p-4 text-black">
               My Tasks
               <span class="text-sm text-gray-500 ml-2">
                 ( {{doneTasksLength}} / {{allCurrentTasksLength}} )
               </span>
-            </p>
+            </header>
 
             <p
               v-if="allCurrentTodoTasks && allCurrentTodoTasks.length === 0"
@@ -30,11 +29,11 @@
             </ul>
 
           </div>
-        </div>
-      </div>
+        <!-- </div> -->
+      </main>
 
 
-      <div class="lg:py-2 lg:px-4">
+      <section class="lg:py-2 lg:px-4">
         <AddNewItemForm
           :isColumn="false"
           placeholderText="Название задачи"
@@ -42,17 +41,18 @@
         >
           <div class="flex justify-center items-center mx-4">
             <div class="relative inline-block w-10 mr-2 items-center select-none">
-            <input
-              @click="isUrgent = !isUrgent"
-              type="checkbox"
-              name="toggle"
-              v-model="isUrgent"
-              value=""
-              id="Urgent"
-              class="checked:bg-purple-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
-            />
-            <label for="Urgent" class="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+              <input
+                @click="isUrgent = !isUrgent"
+                type="checkbox"
+                name="toggle"
+                v-model="isUrgent"
+                value=""
+                id="Urgent"
+                class="checked:bg-purple-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+              />
+              <label for="Urgent" class="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
             </div>
+
             <span
               :class="{'text-purple-500': isUrgent}"
               class="text-gray-500 font-medium"
@@ -62,10 +62,10 @@
           </div>
 
         </AddNewItemForm>
-      </div>
+      </section>
         
-    </div>
-  </div>
+    </section>
+  </article>
 </template>
 
 <script>

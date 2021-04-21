@@ -8,19 +8,18 @@
       <p slot="header">{{ popup.header }}</p>
       <p slot="body">{{ popup.body }}</p>
 
-        <button
-          slot="footer"
-          type="button"
-          v-for="button in popup.footerButtons"
-          :key="button.title"
-          @click="button.method"
-         
-          :class="[button.type === 'OK' ? 'btn_ok' : 'btn_action']"
-          class="text-white py-2 px-4 focus:ring-indigo-500 focus:ring-offset-indigo-200 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
-        >
-          {{ button.title }}
-        </button>
-
+      <button
+        slot="footer"
+        type="button"
+        v-for="button in popup.footerButtons"
+        :key="button.title"
+        @click="button.method"
+        
+        :class="[button.type === 'OK' ? 'btn_ok' : 'btn_action']"
+        class="text-white py-2 px-4 focus:ring-indigo-500 focus:ring-offset-indigo-200 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+      >
+        {{ button.title }}
+      </button>
     </Popup>
   </div>
 </template>
