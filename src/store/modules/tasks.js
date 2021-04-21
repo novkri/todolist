@@ -4,7 +4,6 @@ const api = process.env.VUE_APP_BASE_API
 
 const state = () => ({
   tasks: [],
-  // currentTodoId: '',
   currentTodo: {},
   error: ''
 })
@@ -25,9 +24,7 @@ const actions = {
 
     try {
       commit('setError', '')
-
       const response = await axios.get(`${api}/tasks`)
-
       commit('setTasks', response.data)
     } catch(e) {
       commit('setError', e)
@@ -40,7 +37,6 @@ const actions = {
     try {
       commit('setError', '')
       const response = await axios.get(`${api}/todos/${id}`)
-console.log(response.data);
       commit('setCurrentTodo', response.data)
     } catch (e) {
       commit('setError', e)
@@ -50,15 +46,12 @@ console.log(response.data);
   },
 
   async addTask({ commit }, newTask) {
-    console.log(newTask);
     const response = await axios.post(`${api}/tasks`, newTask)
-console.log(response);
     commit('addNewTask', response.data)
   }
 }
 
 const mutations = {
-  // setCurrentTodoId: (state, id) => (state.currentTodoId = id),
   setCurrentTodo: (state, todo) => (state.currentTodo = todo),
   setTasks: (state, tasks) => (state.tasks = tasks),
   addNewTask: (state, task) => state.tasks.push(task)

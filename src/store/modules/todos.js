@@ -14,12 +14,9 @@ const getters = {
 
 const actions = {
   async fetchTodos({ commit }) {
-console.log('fetchTodos');
     try {
       commit('setError', '')
-      
       const response = await axios.get(`${api}/todos`)
-
       commit('setTodos', response.data)
     } catch(e) {
       commit('setError', e)
@@ -29,7 +26,6 @@ console.log('fetchTodos');
 
   async addTodo({ commit }, title) {
     const response = await axios.post(`${api}/todos`, { title })
-
     commit('addNewTodo', response.data)
   }
 }

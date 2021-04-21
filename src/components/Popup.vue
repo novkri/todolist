@@ -41,38 +41,28 @@
 
         <div class="inline-block relative overflow-hidden transform transition-all  min-w-sm w-96  sm:align-middle sm:max-w-lg" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
           <div class="rounded-lg bg-white shadow text-center">
-              <header class="p-3 flex justify-between border-b-2 border-gray-200">
-                <slot name="header">
+              <header class="p-4 flex justify-between border-b-2 border-gray-200 text-gray-800 text-lg font-medium mb-4">
+                <!-- class here? -->
+                <slot name="header" class="">
                   default header
                 </slot>
-                <button class="modal-default-button" @click="$emit('close')">
-                  X
+
+                <button class="bg-transparent border border-transparent" @click="$emit('close')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="h-6 w-6 text-gray-700" viewBox="0 0 1792 1792">
+                      <path d="M1490 1322q0 40-28 68l-136 136q-28 28-68 28t-68-28l-294-294-294 294q-28 28-68 28t-68-28l-136-136q-28-28-28-68t28-68l294-294-294-294q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 294 294-294q28-28 68-28t68 28l136 136q28 28 28 68t-28 68l-294 294 294 294q28 28 28 68z">
+                      </path>
+                  </svg>
                 </button>
               </header>
-              <!-- <h2 class="text-3xl font-extrabold text-black dark:text-white sm:text-4xl"> -->
-                <!-- <span class="block">
-                  Become millionaire ?
-                </span>
-                <span class="block text-indigo-500">
-                  It&#x27;s today or never.
-                </span> -->
-                 <!-- <slot name="header">
-                  default header
-                </slot> -->
-              <!-- </h2> -->
 
-              <div class="lg:mt-0 lg:flex-shrink-0 p-4">
+              <div class="p-4 text-center text-xl text-gray-800 font-medium ">
+                <!-- class? -->
                 <slot name="body">
                   default body
                 </slot>
-                <!-- <div class="mt-12 inline-flex rounded-md shadow">
-                  <button type="button" class="py-4 px-6  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-                    Get started
-                  </button>
-                </div> -->
               </div>
 
-              <footer class="p-4 flex item-center justify-between">
+              <footer class="p-4 flex item-center justify-between flex items-center justify-between gap-4 w-full mt-4">
                 <slot name="footer">
                   default footer
                 </slot>

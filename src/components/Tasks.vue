@@ -13,11 +13,12 @@
             </p>
 
             <p
-              v-if="fetched && allCurrentTodoTasks.length === 0"
+              v-if="allCurrentTodoTasks && allCurrentTodoTasks.length === 0"
               class="rounded-2xl text-center p-6"
             >
               Список пуст...
             </p>
+
             <ul class="pb-4">
               <li
                 v-for="(task, idx) in allCurrentTodoTasks"
@@ -31,6 +32,7 @@
           </div>
         </div>
       </div>
+
 
       <div class="lg:py-2 lg:px-4">
         <AddNewItemForm
@@ -63,23 +65,6 @@
       </div>
         
     </div>
-
-      <!-- <Popup v-show="isPopupOpen" @close="closePopup">
-        <p slot="header">{{ popup.popupHeader }}</p>
-        <p slot="body">{{ popup.popupBody }}</p>
-
-        <div slot="footer" class="inline-flex rounded-md shadow">
-          <button  type="button" class="py-4 px-6  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-            {{ popup.popupFooterBtn1 }}
-          </button>
-        </div>
-        <div v-if="popup.popupFooterBtn2" slot="footer" class="inline-flex rounded-md shadow">
-          <button type="button" class="py-4 px-6  bg-green-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-            {{ popup.popupFooterBtn2 }}
-          </button>
-        </div>
-      </Popup> -->
-
   </div>
 </template>
 
@@ -87,14 +72,12 @@
 import { mapGetters, mapActions } from 'vuex'
 import TaskItem from '../components/TaskItem'
 import AddNewItemForm from '../components/AddNewItemForm'
-// import Popup from './Popup'
 
 export default {
   name: "Tasks",
   components: {
     TaskItem,
     AddNewItemForm,
-    // Popup,
   },
 
   computed: 
@@ -104,34 +87,23 @@ export default {
       'doneTasks',
       'doneTasksLength',
       'currentTodo',
-    ])
+    ]),
 
-  ,
   data() {
     return {
       isUrgent: false,
-
-      // popup: {},
-      // isPopupOpen: false,
-      // ???
-      loading: false,
-      fetched: false,
-
     }
   },
 
   beforeRouteEnter (to, from, next) {
-    console.log(to, from);
-    let currentTodoId = Number(to.params.id)
     next(vm => {
-      vm.fetchCurrentTodo(currentTodoId)
+      vm.fetchCurrentTodo(Number(to.params.id))
       vm.fetchTasks()
     })
   },
 
   beforeRouteUpdate (to, from, next) {
-    let currentTodoId = Number(to.params.id)
-    this.fetchCurrentTodo(currentTodoId)
+    this.fetchCurrentTodo(Number(to.params.id))
     this.fetchTasks()
     next()
   },
@@ -149,30 +121,36 @@ export default {
         urgent: this.isUrgent,
         createdAt: Date.now()
       }
-console.log(newTaskObj);
+
       this.addTask(newTaskObj)
 
       let popupObject = {
-        popupHeader: 'Дело добавлено',
-        popupBody: `'${name}' добавлено в ${this.currentTodo.title}`,
-        popupFooterBtn1: 'ОК',
-        popupFooterBtn2: 'Не ок'
+        header: 'Дело добавлено',
+        body: `'${name}' добавлено в '${this.currentTodo.title}'`,
+        footerButtons: [
+          // {
+          //   title: 'Отмена',
+          //   type: 'Cancel'
+          // },
+          {
+            title: 'OK',
+            type: 'OK'
+          }
+        ]
       }
-      
-      console.log(this.$route, popupObject);
+
       this.$emit('addTaskItem', popupObject)
     },
 
   }
-
 }
 </script>
 
 <style>
-.fade-enter-active, .fade-leave-active {
+/* .fade-enter-active, .fade-leave-active {
     transition: opacity .5s
 }
 .fade-enter, .fade-leave-to {
     opacity: 0
-}
+} */
 </style>

@@ -3,7 +3,7 @@
     class="flex flex-col w-full items-center justify-center self-center py-2 px-4 lg:p-4"
     :class="[isColumn ? 'md:flex-col md:max-w-md' : 'md:flex-row']"
   >
-    <!--  v-model="name"  -->
+
     <input
       type="text"
       v-model="name"
