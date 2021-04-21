@@ -109,29 +109,11 @@ export default {
   },
   
   methods: {
-    ...mapActions(['fetchTasks', 'fetchCurrentTodo', 'addTask']),
+    ...mapActions(['fetchTasks', 'fetchCurrentTodo', 'addTask', 'popupContent', 'openPopup', 'closePopup', 'confirmAction']),
 
     addTaskItem(name) {
-      let popupObject = {
-        header: 'Дело добавлено',
-        body: `'${name}' добавлено в '${this.currentTodo.title}'`,
-        footerButtons: [
-          // {
-          //   title: 'Отмена',
-          //   type: 'action'
-          // },
-          {
-            title: 'OK',
-            type: 'OK',
-            method: () => this.confirmAction(name)
-          }
-        ]
-      }
+      this.openPopup()
 
-      this.$emit('addTaskItem', popupObject)
-    },
-
-    confirmAction(name) {
       let newTaskObj = {
         id: Date.now(),
         todoId: Number(this.currentTodo.id),
@@ -141,11 +123,24 @@ export default {
         createdAt: Date.now()
       }
 
-      this.addTask(newTaskObj)
- 
-      this.$emit('close')
-    }
+      let popupObject = {
+        header: 'Дело добавлено',
+        body: `Дело '${name}' добавлено в '${this.currentTodo.title}'`,
+        footerButtons: [
+          // {
+          //   title: 'Отмена',
+          //   type: 'action'
+          // },
+          {
+            title: 'OK',
+            type: 'OK',
+            method: () => this.confirmAction({actionToDispatch: 'addTask', data: newTaskObj})
+          }
+        ]
+      }
 
+      this.popupContent(popupObject)
+    },
   }
 }
 </script>

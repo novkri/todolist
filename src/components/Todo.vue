@@ -41,7 +41,8 @@
       </article>
 
       <!-- tasks -->
-      <router-view name="tasks" :key='$route.fullPath' @addTaskItem="e => $emit('addedItem', e)" @close="$emit('close')"></router-view>
+      <!-- @addTaskItem="e => $emit('addedItem', e)" @close="$emit('close')" -->
+      <router-view name="tasks" :key='$route.fullPath'></router-view>
       
     </section>
   </main>
@@ -70,7 +71,6 @@ export default {
   },
 
   beforeRouteEnter (to, from, next) {
-    console.log('beforeRouteEnter');
     next(vm => vm.fetchTodos())
   },
 
@@ -81,10 +81,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['addTodo', 'fetchTodos']),
+    ...mapActions(['addTodo', 'fetchTodos', 'popupContent', 'openPopup', 'closePopup', 'confirmAction']),
 
     addTodoList(name) {
-      this.addTodo(name)
+      this.openPopup()
 
       let popupObject = {
         header: 'Список добавлен',
@@ -92,16 +92,11 @@ export default {
         footerButtons: [{
           title: 'ОК',
           type: 'OK',
-          method: () => this.confirmAction(name)
+          method: () => this.confirmAction({actionToDispatch: 'addTodo', data: name})
         }],
       }
 
-      this.$emit('addedItem', popupObject)
-    },
-
-    confirmAction(name) {
-      this.addTodo(name)
-      this.$emit('close')
+      this.popupContent(popupObject)
     },
 
     toggleSidebar() {

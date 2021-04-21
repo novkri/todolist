@@ -1,17 +1,15 @@
 <template>
   <div id="app">
-    <router-view @addedItem="showPopup" @close="closePopup"></router-view>
+    <router-view></router-view>
 
-
-<!-- перенести попап в todo.vue ? -->
-    <Popup v-show="isPopupOpen" @close="closePopup">
-      <p slot="header">{{ popup.header }}</p>
-      <p slot="body">{{ popup.body }}</p>
+    <Popup v-show="isPopupOpen" >
+      <p slot="header">{{ popupContent.header }}</p>
+      <p slot="body">{{ popupContent.body }}</p>
 
       <button
         slot="footer"
         type="button"
-        v-for="button in popup.footerButtons"
+        v-for="button in popupContent.footerButtons"
         :key="button.title"
         @click="button.method"
         
@@ -25,6 +23,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import Popup from './components/Popup'
 
 export default {
@@ -33,23 +32,14 @@ export default {
     Popup,
   },
   data() { 
-    return {
-      isPopupOpen: false,
-      popup: {
-        footerButtons: []
-      },
-    }
+    return {}
   },
+  computed: 
+    mapGetters([
+      'isPopupOpen', 'popupContent'
+    ]),
   methods: {
-    closePopup() {
-      this.isPopupOpen = false
-      this.popup = {}
-    },
-
-    showPopup(popupObject) {
-      this.isPopupOpen = true
-      this.popup = popupObject
-    }
+    ...mapActions(['openPopup', 'closePopup']),
   }
 }
 </script>
