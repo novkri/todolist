@@ -20,7 +20,7 @@
       <!-- sidebar -->
         <article
           class="relative lg:static top-0 right-0 pb-14 lg:pb-0 h-screen lg:block lg:ml-4 lg:mt-6 shadow-lg w-full lg:w-1/5"
-          :class="[isBurgerOpen ? 'block' : 'hidden']"
+          :class="[isSidebarOpen ? 'block' : 'hidden']"
         >
         <div class="bg-white h-full lg:rounded-2xl flex flex-col justify-between pb-12 ">
           <nav class="pt-2 md:pt-12 lg:pt-6 max-h-4/5 overflow-x-auto">
@@ -31,7 +31,7 @@
               Список пуст...
             </p>
 
-            <div v-for="item in allTodos" :key="item.id">
+            <div v-for="item in allTodos" :key="item.id" @click="onRouterClick">
               <TodoItem :item="item" />
             </div>
           </nav>
@@ -41,7 +41,6 @@
       </article>
 
       <!-- tasks -->
-      <!-- @addTaskItem="e => $emit('addedItem', e)" @close="$emit('close')" -->
       <router-view name="tasks" :key='$route.fullPath'></router-view>
       
     </section>
@@ -77,7 +76,6 @@ export default {
   data() {
     return {
       isSidebarOpen: false,
-      isBurgerOpen: false,
     }
   },
   methods: {
@@ -102,6 +100,12 @@ export default {
     toggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen
     },
+
+    onRouterClick() {
+      if (this.isSidebarOpen) {
+        this.isSidebarOpen = false
+      }
+    }
   }
 }
 </script>
