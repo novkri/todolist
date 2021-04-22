@@ -4,18 +4,15 @@
       type="checkbox"
       name="Urgent"
       v-model="task.is_completed"
-      class="form-tick mx-3 cursor-pointer appearance-none bg-white bg-check h-5 w-5 border border-gray-300 rounded-md checked:bg-purple-500 checked:border-transparent focus:outline-none"
+      class="form-tick mx-3 cursor-pointer appearance-none bg-white bg-check h-5 w-5 min-w-5 border border-gray-300 rounded-md checked:bg-purple-500 checked:border-transparent focus:outline-none"
     />
 
-    <div class="flex items-center justify-between w-full">
-      <section class="flex items-center justify-start max-w-90 cursor-pointer">
-        <span :class="[task.is_completed ? 'line-through text-gray-500' : '' ]">
-          {{task.name}}
-        </span>
-      </section>
+      <p :class="[task.is_completed ? 'line-through text-gray-500' : '' ]" class="break-words w-full max-w-60 lg:max-w-90 cursor-pointer text-gray-800">
+        {{task.name}}
+      </p>
 
 
-      <section class="flex flex-col md:flex-row items-center justify-center text-center ml-4">
+      <div class="flex flex-col md:flex-row items-center justify-center text-center ml-4">
         <p class="text-sm text-gray-500 mb-2 md:mb-0 md:mx-1 w-min">
           {{ getTaskDate(task) }}
         </p>
@@ -23,11 +20,11 @@
           {{ getTaskTime(task) }}
         </p>
 
-        <svg :class="{'hidden': !task.urgency}" class="text-red-500 mx-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<!-- hidden md: -->
+        <svg :class="{'invisible': !task.urgency}" class="text-red-500 mx-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
         </svg>
-      </section>
-    </div>
+      </div>
   </label>
 </template>
 

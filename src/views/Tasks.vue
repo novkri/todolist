@@ -2,7 +2,7 @@
   <article class="flex flex-col w-full px-4 lg:py-6 lg:px-8 lg:w-4/5">
     <section class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
       <main class="w-full mb-8 max-h-full overflow-auto">
-        <div class="shadow-lg rounded-2xl bg-white w-full  mb-4 mx-0">
+        <div class="shadow-md rounded-2xl bg-white w-full  mb-4 mx-0">
           <header class="font-bold text-md p-4 text-black">
             My Tasks
             <span class="text-sm text-gray-500 ml-2">

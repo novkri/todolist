@@ -10,10 +10,14 @@ module.exports = {
       }),
       maxWidth: {
         'button': '150px',
+        '60': '60%',
         '90': '90%',
       },
       minHeight: {
         '12': '3rem',
+      },
+      minWidth: {
+        '5': '1.25rem',
        }
     },
     

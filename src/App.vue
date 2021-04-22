@@ -3,8 +3,8 @@
     <router-view @populateModal="populateModal"></router-view>
 
     <Modal v-if="isModalOpen" @close="closeModal">
-      <p slot="header">{{ modalContent.header }}</p>
-      <p slot="body">{{ modalContent.body }}</p>
+      <p slot="header" class="break-words">{{ modalContent.header }}</p>
+      <p slot="body" class="break-words">{{ modalContent.body }}</p>
 
       <button
         slot="footer"
