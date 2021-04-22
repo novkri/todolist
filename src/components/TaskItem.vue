@@ -7,7 +7,10 @@
       class="form-tick mx-3 cursor-pointer appearance-none bg-white bg-check h-5 w-5 min-w-5 border border-gray-300 rounded-md checked:bg-purple-500 checked:border-transparent focus:outline-none"
     />
 
-      <p :class="[task.is_completed ? 'line-through text-gray-500' : '' ]" class="break-words w-full max-w-60 lg:max-w-90 cursor-pointer text-gray-800">
+      <p
+        class="break-words w-full max-w-60 lg:max-w-90 cursor-pointer"
+        :class="[task.is_completed ? 'line-through text-gray-500' : 'text-gray-800' ]" 
+      >
         {{task.name}}
       </p>
 

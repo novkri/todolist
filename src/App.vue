@@ -38,7 +38,6 @@ export default {
 
   methods: {
     populateModal(data) {
-      console.log(data);
       this.modalContent = data
       this.isModalOpen = true
     },

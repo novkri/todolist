@@ -4,6 +4,10 @@ module.exports = {
   darkMode: false,
   theme: {
     extend: {
+      backgroundColor: theme => ({
+        ...theme('colors'),
+        'lightGreen': '#b5ffa3',
+       }),
       backgroundImage: (theme) => ({
         check: "url('/icons/check.svg')",
         landscape: "url('/images/landscape/2.jpg')",

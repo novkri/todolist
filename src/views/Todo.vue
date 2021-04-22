@@ -22,8 +22,14 @@
           class="relative lg:static top-0 right-0 pb-14 lg:pb-0 h-screen lg:block lg:ml-4 lg:mt-6 shadow-2xl w-full lg:w-1/5"
           :class="[isSidebarOpen ? 'block' : 'hidden']"
         >
+
         <div class="bg-white h-full lg:rounded-2xl flex flex-col justify-between pb-12 ">
           <nav class="pt-2 md:pt-12 lg:pt-6 max-h-4/5 overflow-y-scroll">
+
+<!-- TODO -->
+            <p class="px-6">Компонент для фильтра</p>
+<!-- TODO -->
+
             <p
               v-if="allTodos.length === 0"
               class="rounded-2xl text-center p-6"
