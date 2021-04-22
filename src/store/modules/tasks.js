@@ -10,7 +10,7 @@ const state = () => ({
 
 const getters = {
   allTasks: state => state.tasks,
-  allCurrentTodoTasks: state => state.tasks.filter(task => task.todoId === state.currentTodo.id),
+  allCurrentTodoTasks: state => state.tasks.filter(task => task.list_id === state.currentTodo.id),
   allCurrentTasksLength: (state, getters) => getters.allCurrentTodoTasks.length,
   doneTasks: (state, getters) => getters.allCurrentTodoTasks.filter(task => task.done),
   doneTasksLength: (state, getters) => getters.doneTasks.length,

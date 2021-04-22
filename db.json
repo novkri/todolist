@@ -2,56 +2,76 @@
   "todos": [
     {
       "id": 0,
-      "title": "Список 1"
+      "name": "Список 1",
+      "count_tasks": 1,
+      "is_completed": true,
+      "is_closed": true,
+      "created_at": 1618931261377,
+      "updated_at": 1618931261377
     },
     {
-      "title": "список 2",
-      "id": 1
+      "name": "ЗАХВАТИТЬ МИИИР",
+      "id": 1,
+      "count_tasks": 1,
+      "is_completed": false,
+      "is_closed": false,
+      "created_at": 1618931261377,
+      "updated_at": 1618931261377
     },
     {
-      "title": "ada",
-      "id": 2
-    },
-    {
-      "title": "ЗАХВАТИТЬ МИИИР",
-      "id": 3
-    },
-    {
-      "title": "захватить мир снова",
-      "id": 4
+      "name": "захватить мир снова",
+      "id": 2,
+      "count_tasks": 2,
+      "is_completed": false,
+      "is_closed": false,
+      "created_at": 1618931261377,
+      "updated_at": 1618931261377
     }
   ],
   "tasks": [
     {
       "id": 0,
-      "todoId": 0,
-      "title": "Create wireframe",
-      "done": false,
-      "urgent": false
+      "list_id": 0,
+      "executor_user_id": 0,
+      "is_completed": true,
+      "description": "description",
+      "urgency": 0,
+      "created_at": 1618931261377,
+      "updated_at": 1618931261377,
+      "name": "Create wireframe"
     },
     {
       "id": 1618931261377,
-      "todoId": 1,
-      "title": "ваавп",
-      "done": false,
-      "urgent": false,
-      "createdAt": 1618931261377
+      "list_id": 1,
+      "executor_user_id": 0,
+      "is_completed": false,
+      "description": "description",
+      "urgency": 1,
+      "created_at": 1618931261377,
+      "updated_at": 1618931261377,
+      "name": "ваавп"
     },
     {
       "id": 1618931264878,
-      "todoId": 1,
-      "title": "вапвыап",
-      "done": false,
-      "urgent": true,
-      "createdAt": 1618931264878
+      "list_id": 2,
+      "executor_user_id": 0,
+      "is_completed": false,
+      "description": "description",
+      "urgency": 0,
+      "created_at": 1618931264878,
+      "updated_at": 1618931264878,
+      "name": "вапвыап"
     },
     {
       "id": 1618964452337,
-      "todoId": 0,
-      "title": "jbjhb",
-      "done": false,
-      "urgent": false,
-      "createdAt": 1618964452338
+      "list_id": 2,
+      "executor_user_id": 0,
+      "is_completed": false,
+      "description": "description",
+      "urgency": 1,
+      "created_at": 1618964452337,
+      "updated_at": 1618964452337,
+      "name": "jbjhb"
     }
   ]
 }

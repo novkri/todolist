@@ -95,13 +95,13 @@ export default {
 
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      // vm.fetchCurrentTodo(Number(to.params.id))
+      vm.fetchCurrentTodo(Number(to.params.id))
       vm.fetchTasks()
     })
   },
 
   beforeRouteUpdate (to, from, next) {
-    // this.fetchCurrentTodo(Number(to.params.id))
+    this.fetchCurrentTodo(Number(to.params.id))
     this.fetchTasks()
     next()
   },

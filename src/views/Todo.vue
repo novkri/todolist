@@ -62,7 +62,6 @@ export default {
   computed: 
     mapGetters([
       'allTodos',
-      'allTasks',
       'todosError'
     ]),
 

@@ -1,11 +1,11 @@
 <template>
 <!-- uppercase -->
   <router-link
-    :to="{ name: 'tasks', params: { id: item.id, title: item.title }}"
+    :to="{ name: 'tasks', params: { id: item.id, title: item.name }}"
     class="w-full uppercase font-thin text-gray-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-purple-500"
   >
    <span class="mx-4 text-sm font-normal">
-      {{item.title}}
+      {{item.name}}
     </span>
   </router-link>
 </template>
