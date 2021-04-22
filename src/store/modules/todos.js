@@ -4,14 +4,24 @@ const api = process.env.VUE_APP_BASE_API
 
 const state = () => ({
   todos: [],
-  error: ''
+  error: '',
+  filterName: 'all'
 })
 
-const getters = {
-  // allTodos: state => state.todos,
+const getters = {  
   allTodos: state => state.todos.sort((a, b) => {
     return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
   }),
+  allFilteredTodos: (state, getters) => {    
+    switch (state.filterName) {
+      case 'not_completed':
+        return getters.allTodos.filter(todo => !todo.is_completed)
+      case 'completed':
+        return getters.allTodos.filter(todo => todo.is_completed)
+      default:
+        return getters.allTodos
+    }
+  },
   todosError: state => state.error
 }
 
@@ -30,11 +40,16 @@ const actions = {
   async addTodo({ commit }, newTodoObj) {
     const response = await axios.post(`${api}/todos`, { ...newTodoObj })
     commit('addNewTodo', response.data)
+  },
+
+  filterTodos({ commit }, optionName) {
+    commit('setFilteredTodos', optionName)
   }
 }
 
 const mutations = {
   setTodos: (state, todos) => (state.todos = todos),
+  setFilteredTodos: (state, optionName) => state.filterName = optionName,
   setError: (state, error) => (state.error = error),
   addNewTodo: (state, todo) => state.todos.push(todo),
 }

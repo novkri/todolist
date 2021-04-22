@@ -27,7 +27,9 @@
           <nav class="pt-2 md:pt-12 lg:pt-6 max-h-4/5 overflow-y-scroll">
 
 <!-- TODO -->
-            <p class="px-6">Компонент для фильтра</p>
+            <div class="px-6 mb-6">
+              <FilterSelect />
+            </div>
 <!-- TODO -->
 
             <p
@@ -37,7 +39,7 @@
               Список пуст...
             </p>
 
-            <div v-for="item in allTodos" :key="item.id" @click="onRouterClick">
+            <div v-for="item in allFilteredTodos" :key="item.id" @click="onRouterClick">
               <TodoItem :item="item" />
             </div>
           </nav>
@@ -57,6 +59,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import TodoItem from '../components/TodoItem'
 import AddNewItemForm from '../components/AddNewItemForm'
+import FilterSelect from '../components/FilterSelect'
 
 export default {
   name: 'Todo',
@@ -64,12 +67,14 @@ export default {
   components: {
     TodoItem,
     AddNewItemForm,
+    FilterSelect
   },
-  computed: 
-    mapGetters([
+  computed: {
+    ...mapGetters([
       'allTodos',
-      'todosError'
+      'allFilteredTodos'
     ]),
+  },
 
   created () {
     this.fetchTodos()
@@ -83,6 +88,7 @@ export default {
   data() {
     return {
       isSidebarOpen: false,
+      filterValue: ''
     }
   },
   methods: {
@@ -121,7 +127,7 @@ export default {
       if (this.isSidebarOpen) {
         this.isSidebarOpen = false
       }
-    }
+    },
   }
 }
 </script>

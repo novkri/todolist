@@ -12,6 +12,9 @@ module.exports = {
         check: "url('/icons/check.svg')",
         landscape: "url('/images/landscape/2.jpg')",
       }),
+      boxShadow: {        
+        'dropdown': '0px 9px 17px 2px rgba(48, 69, 84, 0.2);',
+      },
       maxWidth: {
         'button': '150px',
         '60': '60%',
