@@ -41,7 +41,7 @@
       </article>
 
       <!-- tasks -->
-      <router-view name="tasks" :key='$route.fullPath'></router-view>
+      <router-view name="tasks" :key='$route.fullPath' @populateModal="$emit('populateModal')"></router-view>
       
     </section>
   </main>
@@ -49,8 +49,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import TodoItem from './TodoItem'
-import AddNewItemForm from './AddNewItemForm'
+import TodoItem from '../components/TodoItem'
+import AddNewItemForm from '../components/AddNewItemForm'
 
 export default {
   name: 'Todo',
@@ -62,6 +62,7 @@ export default {
   computed: 
     mapGetters([
       'allTodos',
+      'allTasks',
       'todosError'
     ]),
 
@@ -73,28 +74,29 @@ export default {
     next(vm => vm.fetchTodos())
   },
 
+
   data() {
     return {
       isSidebarOpen: false,
     }
   },
   methods: {
-    ...mapActions(['addTodo', 'fetchTodos', 'popupContent', 'openPopup', 'closePopup', 'confirmAction']),
+    ...mapActions(['addTodo', 'fetchTodos', 'fetchTasks']),
 
     addTodoList(name) {
-      this.openPopup()
+      if (name) {
+        let modalObject = {
+          header: 'Список добавлен',
+          body: `Список дел '${name}' добавлен`,
+          footerButtons: [{
+            title: 'ОК',
+            type: 'OK',
+            method: () => this.addTodo(name)
+          }],
+        }
 
-      let popupObject = {
-        header: 'Список добавлен',
-        body: `Список дел '${name}' добавлен`,
-        footerButtons: [{
-          title: 'ОК',
-          type: 'OK',
-          method: () => this.confirmAction({actionToDispatch: 'addTodo', data: name})
-        }],
+        this.$emit('populateModal', modalObject)
       }
-
-      this.popupContent(popupObject)
     },
 
     toggleSidebar() {

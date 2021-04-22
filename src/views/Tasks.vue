@@ -95,49 +95,49 @@ export default {
 
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      vm.fetchCurrentTodo(Number(to.params.id))
+      // vm.fetchCurrentTodo(Number(to.params.id))
       vm.fetchTasks()
     })
   },
 
   beforeRouteUpdate (to, from, next) {
-    this.fetchCurrentTodo(Number(to.params.id))
+    // this.fetchCurrentTodo(Number(to.params.id))
     this.fetchTasks()
     next()
   },
   
   methods: {
-    ...mapActions(['fetchTasks', 'fetchCurrentTodo', 'addTask', 'popupContent', 'openPopup', 'closePopup', 'confirmAction']),
+    ...mapActions(['fetchTasks', 'fetchCurrentTodo', 'addTask']),
 
     addTaskItem(name) {
-      this.openPopup()
+      if (name) {
+        let newTaskObj = {
+          id: Date.now(),
+          todoId: Number(this.currentTodo.id),
+          title: name,
+          done: false,
+          urgent: this.isUrgent,
+          createdAt: Date.now()
+        }
 
-      let newTaskObj = {
-        id: Date.now(),
-        todoId: Number(this.currentTodo.id),
-        title: name,
-        done: false,
-        urgent: this.isUrgent,
-        createdAt: Date.now()
+        let modalObject = {
+          header: 'Дело добавлено',
+          body: `Дело '${name}' добавлено в '${this.currentTodo.title}'`,
+          footerButtons: [
+            // {
+            //   title: 'Отмена',
+            //   type: 'action'
+            // },
+            {
+              title: 'OK',
+              type: 'OK',
+              method: () => this.addTask(newTaskObj)
+            }
+          ]
+        }
+
+        this.$emit('populateModal', modalObject)
       }
-
-      let popupObject = {
-        header: 'Дело добавлено',
-        body: `Дело '${name}' добавлено в '${this.currentTodo.title}'`,
-        footerButtons: [
-          // {
-          //   title: 'Отмена',
-          //   type: 'action'
-          // },
-          {
-            title: 'OK',
-            type: 'OK',
-            method: () => this.confirmAction({actionToDispatch: 'addTask', data: newTaskObj})
-          }
-        ]
-      }
-
-      this.popupContent(popupObject)
     },
   }
 }

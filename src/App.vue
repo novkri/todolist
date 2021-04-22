@@ -1,45 +1,56 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view @populateModal="populateModal"></router-view>
 
-    <Popup v-show="isPopupOpen" >
-      <p slot="header">{{ popupContent.header }}</p>
-      <p slot="body">{{ popupContent.body }}</p>
+    <Modal v-if="isModalOpen" @close="closeModal">
+      <p slot="header">{{ modalContent.header }}</p>
+      <p slot="body">{{ modalContent.body }}</p>
 
       <button
         slot="footer"
         type="button"
-        v-for="button in popupContent.footerButtons"
+        v-for="button in modalContent.footerButtons"
         :key="button.title"
-        @click="button.method"
-        
+        @click="handleBtnClick(button.method)"
         :class="[button.type === 'OK' ? 'btn_ok' : 'btn_action']"
         class="text-white py-2 px-4 focus:ring-indigo-500 focus:ring-offset-indigo-200 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
       >
         {{ button.title }}
       </button>
-    </Popup>
+    </Modal>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import Popup from './components/Popup'
+import Modal from './components/Modal'
 
 export default {
   name: 'App',
   components: {
-    Popup,
+    Modal,
   },
   data() { 
-    return {}
+    return {
+      isModalOpen: false,
+      modalContent: {}
+    }
   },
-  computed: 
-    mapGetters([
-      'isPopupOpen', 'popupContent'
-    ]),
+
   methods: {
-    ...mapActions(['openPopup', 'closePopup']),
+    populateModal(data) {
+      this.modalContent = data
+      this.isModalOpen = true
+    },
+
+    closeModal() {
+      this.isModalOpen = false
+      this.modalContent = {}
+    },
+
+    handleBtnClick(actionFromBtn) {
+      actionFromBtn()
+      this.closeModal()
+    }
   }
 }
 </script>

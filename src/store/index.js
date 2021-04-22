@@ -2,51 +2,48 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import todos from './modules/todos'
 import tasks from './modules/tasks'
-// import popup from './modules/popup'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    isPopupOpen: false,
-    popup: {}
-  },
+  // state: {
+  //   isModalOpen: false,
+  //   modal: {}
+  // },
 
-  getters: {
-    popupContent: state => state.popup,
-    isPopupOpen: state => state.isPopupOpen
-  },
+  // getters: {
+  //   modalContent: state => state.Modal,
+  //   isModalOpen: state => state.isModalOpen
+  // },
 
-  actions: {
-    popupContent({ commit }, content) {
-      commit('setPopupContent', content)
-    },
-    openPopup({ commit }) {
-      commit('setPopupOpen')
-    },
-    closePopup({ commit }) {
-      commit('setPopupClose')
-      commit('clearPopupContent')
-    },
-    confirmAction({ commit, dispatch }, {actionToDispatch, data}) {
-      console.log('here');
-      dispatch(actionToDispatch, data)
-      commit('setPopupClose')
-      commit('clearPopupContent')
-    },
-    // cancelAction({ commit }) {}
-  },
+  // actions: {
+  //   modalContent({ commit }, content) {
+  //     commit('setModalContent', content)
+  //   },
+  //   openModal({ commit }) {
+  //     commit('setModalOpen')
+  //   },
+  //   closeModal({ commit }) {
+  //     commit('setModalClose')
+  //     commit('clearModalContent')
+  //   },
+  //   confirmAction({ commit, dispatch }, {actionToDispatch, data}) {
+  //     dispatch(actionToDispatch, data)
+  //     commit('setModalClose')
+  //     commit('clearModalContent')
+  //   },
+  //   // cancelAction({ commit }) {}
+  // },
 
-  mutations: {
-    setPopupClose: state => state.isPopupOpen = false,
-    setPopupOpen: state => state.isPopupOpen = true,
-    setPopupContent: (state, content) => state.popup = content,
-    clearPopupContent: state => state.popup = {}
-  },
+  // mutations: {
+  //   setModalClose: state => state.isModalOpen = false,
+  //   setModalOpen: state => state.isModalOpen = true,
+  //   setModalContent: (state, content) => state.Modal = content,
+  //   clearModalContent: state => state.Modal = {}
+  // },
 
   modules: {
     todos,
     tasks,
-    // popup
   },
 })
