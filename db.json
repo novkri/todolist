@@ -26,6 +26,14 @@
       "is_closed": false,
       "created_at": 1618931261377,
       "updated_at": 1618931261377
+    },
+    {
+      "name": "Пустой список",
+      "count_tasks": 0,
+      "is_completed": false,
+      "is_closed": false,
+      "created_at": 1619095601308,
+      "id": 3
     }
   ],
   "tasks": [
@@ -35,7 +43,7 @@
       "executor_user_id": 0,
       "is_completed": true,
       "description": "description",
-      "urgency": 0,
+      "urgency": true,
       "created_at": 1618931261377,
       "updated_at": 1618931261377,
       "name": "Create wireframe"
@@ -46,7 +54,7 @@
       "executor_user_id": 0,
       "is_completed": false,
       "description": "description",
-      "urgency": 1,
+      "urgency": false,
       "created_at": 1618931261377,
       "updated_at": 1618931261377,
       "name": "ваавп"
@@ -57,7 +65,7 @@
       "executor_user_id": 0,
       "is_completed": false,
       "description": "description",
-      "urgency": 0,
+      "urgency": true,
       "created_at": 1618931264878,
       "updated_at": 1618931264878,
       "name": "вапвыап"
@@ -68,10 +76,26 @@
       "executor_user_id": 0,
       "is_completed": false,
       "description": "description",
-      "urgency": 1,
+      "urgency": false,
       "created_at": 1618964452337,
       "updated_at": 1618964452337,
       "name": "jbjhb"
+    },
+    {
+      "id": 1619095859650,
+      "list_id": 2,
+      "name": "sfsf",
+      "is_completed": false,
+      "urgency": false,
+      "created_at": 1619095859650
+    },
+    {
+      "id": 1619095883360,
+      "list_id": 2,
+      "name": "ghjdbn",
+      "is_completed": false,
+      "urgency": true,
+      "created_at": 1619095883360
     }
   ]
 }

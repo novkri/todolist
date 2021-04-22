@@ -113,16 +113,18 @@ export default {
       if (name) {
         let newTaskObj = {
           id: Date.now(),
-          todoId: Number(this.currentTodo.id),
-          title: name,
-          done: false,
-          urgent: this.isUrgent,
-          createdAt: Date.now()
+          list_id: Number(this.currentTodo.id),
+          name: name,
+          // description: , executor_user_id: ,
+          is_completed: false,
+          urgency: this.isUrgent,
+          // updated_at
+          created_at: Date.now()
         }
 
         let modalObject = {
           header: 'Дело добавлено',
-          body: `Дело '${name}' добавлено в '${this.currentTodo.title}'`,
+          body: `Дело '${name}' добавлено в '${this.currentTodo.name}'`,
           footerButtons: [
             // {
             //   title: 'Отмена',

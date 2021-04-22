@@ -41,7 +41,7 @@
       </article>
 
       <!-- tasks -->
-      <router-view name="tasks" :key='$route.fullPath' @populateModal="$emit('populateModal')"></router-view>
+      <router-view name="tasks" :key='$route.fullPath' @populateModal="e => $emit('populateModal', e)"></router-view>
       
     </section>
   </main>
@@ -83,6 +83,15 @@ export default {
     ...mapActions(['addTodo', 'fetchTodos', 'fetchTasks']),
 
     addTodoList(name) {
+      let newTodoObj = {
+        name: name,
+        count_tasks: 0,
+        is_completed: false,
+        is_closed: false,
+        created_at: Date.now(),
+        // updated_at:
+      }
+
       if (name) {
         let modalObject = {
           header: 'Список добавлен',
@@ -90,7 +99,7 @@ export default {
           footerButtons: [{
             title: 'ОК',
             type: 'OK',
-            method: () => this.addTodo(name)
+            method: () => this.addTodo(newTodoObj)
           }],
         }
 

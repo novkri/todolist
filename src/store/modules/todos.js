@@ -24,8 +24,8 @@ const actions = {
     }
   },
 
-  async addTodo({ commit }, name) {
-    const response = await axios.post(`${api}/todos`, { name })
+  async addTodo({ commit }, newTodoObj) {
+    const response = await axios.post(`${api}/todos`, { ...newTodoObj })
     commit('addNewTodo', response.data)
   }
 }
