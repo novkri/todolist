@@ -42,6 +42,38 @@
       "is_closed": false,
       "created_at": 1619098636256,
       "id": 4
+    },
+    {
+      "name": "абвгде",
+      "count_tasks": 0,
+      "is_completed": false,
+      "is_closed": false,
+      "created_at": 1619100792514,
+      "id": 5
+    },
+    {
+      "name": "ааабвгд",
+      "count_tasks": 0,
+      "is_completed": false,
+      "is_closed": false,
+      "created_at": 1619100902336,
+      "id": 6
+    },
+    {
+      "name": "ввгда",
+      "count_tasks": 0,
+      "is_completed": false,
+      "is_closed": false,
+      "created_at": 1619100910280,
+      "id": 7
+    },
+    {
+      "name": "яяяяя список",
+      "count_tasks": 0,
+      "is_completed": false,
+      "is_closed": false,
+      "created_at": 1619100918212,
+      "id": 8
     }
   ],
   "tasks": [

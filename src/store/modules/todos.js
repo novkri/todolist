@@ -8,7 +8,10 @@ const state = () => ({
 })
 
 const getters = {
-  allTodos: state => state.todos,
+  // allTodos: state => state.todos,
+  allTodos: state => state.todos.sort((a, b) => {
+    return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
+  }),
   todosError: state => state.error
 }
 
