@@ -20,13 +20,13 @@
 3. Все -->
     <div class="absolute mt-1 w-full z-10 rounded-md bg-white shadow-dropdown" v-show="isFilterSelectOpen">
       <ul tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3" class="max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-        <li v-for="option in filterOptions" :key="option.name" @click="selectOption(option.name)" id="listbox-item-0" role="option" class="text-gray-900 cursor-pointer hover:bg-purple-500 hover:text-white select-none relative py-2 pl-3 pr-9">
+        <li v-for="option in filterOptions" :key="option.name" @click="selectOption(option)" id="listbox-item-0" role="option" class="text-gray-900 cursor-pointer hover:bg-purple-500 hover:text-white select-none relative py-2 pl-3 pr-9">
           <div class="flex items-center">
             <span class="ml-3 block font-normal truncate">
               {{option.value}}
             </span>
           </div>
-          <span v-if="option.name === currentOption" class="absolute inset-y-0 right-0 flex items-center pr-4">
+          <span v-if="option.value === currentOption" class="absolute inset-y-0 right-0 flex items-center pr-4">
             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd">
               </path>
@@ -54,7 +54,8 @@ export default {
         {
           name: "completed",
           value: 'Исполненные'
-        }, {
+        }, 
+        {
           name: "all",
           value: 'Все'
         }
@@ -63,6 +64,7 @@ export default {
         // 'Все'
       ],
       currentOption: 'Неисполненные'
+      // currentOption
     }
   },
 
@@ -75,10 +77,10 @@ export default {
       this.isFilterSelectOpen = !this.isFilterSelectOpen
     },
 
-    selectOption(optionName) {
-      if (this.currentOption !== optionName) {
-        this.currentOption = optionName
-        this.filterTodos(optionName)
+    selectOption(option) {
+      if (this.currentOption !== option) {
+        this.currentOption = option.value
+        this.filterTodos(option.name)
       }
     }
   }

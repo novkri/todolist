@@ -20,6 +20,9 @@ module.exports = {
         '60': '60%',
         '90': '90%',
       },
+      maxHeight: {
+        '4/5': '80%'
+      },
       minHeight: {
         '12': '3rem',
       },
