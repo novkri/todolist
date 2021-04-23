@@ -9,8 +9,10 @@ const state = () => ({
 })
 
 const getters = {
-  allTasks: state => state.tasks,
-  allCurrentTodoTasks: state => state.tasks.filter(task => task.list_id === state.currentTodo.id),
+  allTasks: state => state.tasks.sort((a, b) => {
+    return a.created_at > b.created_at ? -1 : 1
+  }),
+  allCurrentTodoTasks: (state, getters) => getters.allTasks.filter(task => task.list_id === state.currentTodo.id),
   allCurrentTasksLength: (state, getters) => getters.allCurrentTodoTasks.length,
   doneTasks: (state, getters) => getters.allCurrentTodoTasks.filter(task => task.done),
   doneTasksLength: (state, getters) => getters.doneTasks.length,
@@ -48,13 +50,19 @@ const actions = {
   async addTask({ commit }, newTask) {
     const response = await axios.post(`${api}/tasks`, newTask)
     commit('addNewTask', response.data)
+  },
+
+  async deleteTask({ commit }, taskId) {
+    await axios.delete(`${api}/tasks/${taskId}`)
+    commit('deleteOneTask', taskId)
   }
 }
 
 const mutations = {
   setCurrentTodo: (state, todo) => (state.currentTodo = todo),
   setTasks: (state, tasks) => (state.tasks = tasks),
-  addNewTask: (state, task) => state.tasks.push(task)
+  addNewTask: (state, task) => state.tasks.push(task),
+  deleteOneTask: (state, taskId) => state.tasks = state.tasks.filter(task => task.id !== taskId)
 }
 
 export default {

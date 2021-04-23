@@ -32,7 +32,7 @@
 
             <p
               v-if="allTodos.length === 0"
-              class="rounded-2xl text-center p-6"
+              class="text-center p-6 font-light text-xl"
             >
               Список пуст...
             </p>

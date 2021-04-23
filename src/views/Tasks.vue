@@ -12,7 +12,7 @@
 
           <p
             v-if="allCurrentTodoTasks && allCurrentTodoTasks.length === 0"
-            class="rounded-2xl text-center p-6"
+            class="text-center p-6 px-3 py-2 font-light text-xl"
           >
             Список пуст...
           </p>
@@ -23,7 +23,7 @@
               :key="task.id"
               class="py-3 border-t-2 border-gray-100 first:border-0"
             >
-              <TaskItem :task="task" :index="idx + 1" />
+              <TaskItem :task="task" :index="idx + 1" @deleteTaskItem="onDeleteTask" />
             </li>
           </ul>
 
@@ -34,7 +34,7 @@
       <section class="lg:py-2 lg:px-4">
         <AddNewItemForm
           :isColumn="false"
-          placeholderText="Название задачи"
+          placeholderText="Краткое описание задачи"
           @addNewItem="addTaskItem"
         >
           <div class="flex justify-center items-center mx-4">
@@ -78,14 +78,16 @@ export default {
     AddNewItemForm,
   },
 
-  computed: 
-    mapGetters([
+  computed: {
+    ...mapGetters([
       'allCurrentTodoTasks',
       'allCurrentTasksLength',
       'doneTasks',
       'doneTasksLength',
       'currentTodo',
     ]),
+  },
+    
 
   data() {
     return {
@@ -107,7 +109,7 @@ export default {
   },
   
   methods: {
-    ...mapActions(['fetchTasks', 'fetchCurrentTodo', 'addTask']),
+    ...mapActions(['fetchTasks', 'fetchCurrentTodo', 'addTask', 'deleteTask']),
 
     addTaskItem(name) {
       if (name) {
@@ -126,10 +128,6 @@ export default {
           header: 'Дело добавлено',
           body: `Дело '${name}' добавлено в '${this.currentTodo.name}'`,
           footerButtons: [
-            // {
-            //   title: 'Отмена',
-            //   type: 'action'
-            // },
             {
               title: 'OK',
               type: 'OK',
@@ -141,6 +139,26 @@ export default {
         this.$emit('populateModal', modalObject)
       }
     },
+
+    onDeleteTask(taskItem) {
+      let modalObject = {
+        header: 'Удалить дело',
+        body: `Удалить дело '${taskItem.name}' из списка '${this.currentTodo.name}'?`,
+        footerButtons: [
+          {
+            title: 'Отмена',
+            type: 'Cancel'
+          },
+          {
+            title: 'OK',
+            type: 'OK',
+            method: () => this.deleteTask(taskItem.id)
+          }
+        ]
+      }
+
+      this.$emit('populateModal', modalObject)
+    }
   }
 }
 </script>

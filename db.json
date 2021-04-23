@@ -127,25 +127,6 @@
       "name": "вапвыап"
     },
     {
-      "id": 1618964452337,
-      "list_id": 2,
-      "executor_user_id": 0,
-      "is_completed": false,
-      "description": "description",
-      "urgency": false,
-      "created_at": 1618964452337,
-      "updated_at": 1618964452337,
-      "name": "jbjhb"
-    },
-    {
-      "id": 1619095859650,
-      "list_id": 2,
-      "name": "sfsf",
-      "is_completed": false,
-      "urgency": false,
-      "created_at": 1619095859650
-    },
-    {
       "id": 1619095883360,
       "list_id": 2,
       "name": "ghjdbn",
@@ -160,6 +141,14 @@
       "is_completed": false,
       "urgency": false,
       "created_at": 1619099180822
+    },
+    {
+      "id": 1619190413758,
+      "list_id": 2,
+      "name": "апр",
+      "is_completed": false,
+      "urgency": false,
+      "created_at": 1619190413758
     }
   ]
 }
