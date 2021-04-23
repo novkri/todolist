@@ -7,15 +7,13 @@
     class="w-full text-md flex items-center p-4 justify-start hover:bg-purple-400   block"
   >
 
-  <!-- <div class="flex items-center w-full"> -->
     <p class="px-4 pr-8 w-full text-md font-medium break-words">
       {{item.name}}
     </p>
-  <!-- </div> -->
   </router-link>
   <span
-    @click="deleteTodo(item.id)"
-    class="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer text-gray-700 hover:text-purple-700"
+    @click="deleteTodo(item)"
+    class="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer hover:text-purple-700"
   >
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -35,10 +33,8 @@ export default {
   methods: {
     ...mapActions(['deleteTodo']),
 
-    deleteTodo(todoId) {
-      console.log(todoId);  
-      // this.deleteTodo(todoId)
-      this.$emit('deleteTodoItem', todoId)
+    deleteTodo(todoItem) {
+      this.$emit('deleteTodoItem', todoItem)
     }
   }
 }
@@ -55,5 +51,9 @@ a:hover, .router-link-exact-active.router-link-active:hover {
 
 .router-link-exact-active.router-link-active {
   border-left: 4px solid #8B5CF6;
+}
+
+.link-wrapper:hover span {
+  color: #fff;
 }
 </style>

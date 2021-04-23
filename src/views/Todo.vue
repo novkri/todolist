@@ -127,9 +127,26 @@ export default {
       }
     },
 
-    onDeleteTodo(todoId) {
-      console.log(todoId);  
-      this.deleteTodo(todoId)
+    onDeleteTodo(todoItem) {
+      let modalObject = {
+        header: 'Удалить список дел',
+        body: `Удалить список дел '${todoItem.name}'?`,
+        footerButtons: [
+          {
+            title: 'Отмена',
+            type: 'Cancel'
+          },
+          {
+            title: 'Удалить',
+            type: 'OK',
+            method: () => this.deleteTodo(todoItem.id)
+          }
+        ],
+      }
+
+      this.$emit('populateModal', modalObject)
+
+      // this.deleteTodo(todoId)
     }
   }
 }

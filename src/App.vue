@@ -48,7 +48,7 @@ export default {
     },
 
     handleBtnClick(actionFromBtn) {
-      actionFromBtn()
+      actionFromBtn ? actionFromBtn() : ""
       this.closeModal()
     }
   }

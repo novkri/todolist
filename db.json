@@ -76,28 +76,12 @@
       "id": 11
     },
     {
-      "name": "2222222",
-      "count_tasks": 0,
-      "is_completed": false,
-      "is_closed": false,
-      "created_at": 1619174616996,
-      "id": 13
-    },
-    {
       "name": "44444444",
       "count_tasks": 0,
       "is_completed": false,
       "is_closed": false,
       "created_at": 1619174621232,
       "id": 15
-    },
-    {
-      "name": "8888888888",
-      "count_tasks": 0,
-      "is_completed": false,
-      "is_closed": false,
-      "created_at": 1619174631008,
-      "id": 19
     },
     {
       "name": "9999999999",
