@@ -26,11 +26,9 @@
         <div class="bg-white h-full lg:rounded-2xl flex flex-col justify-between pb-12 ">
           <nav class="pt-2 md:pt-12 lg:pt-6 max-h-4/5 h-4/5 overflow-y-auto">
 
-<!-- TODO -->
             <div class="px-6 mb-6">
               <FilterSelect />
             </div>
-<!-- TODO -->
 
             <p
               v-if="allTodos.length === 0"
@@ -40,7 +38,7 @@
             </p>
 
             <div v-for="item in allFilteredTodos" :key="item.id" @click="onRouterClick">
-              <TodoItem :item="item" />
+              <TodoItem :item="item" @deleteTodoItem="onDeleteTodo" />
             </div>
           </nav>
 
@@ -92,7 +90,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['addTodo', 'fetchTodos', 'fetchTasks']),
+    ...mapActions(['addTodo', 'fetchTodos', 'fetchTasks', 'deleteTodo']),
 
     addTodoList(name) {
       let newTodoObj = {
@@ -128,6 +126,11 @@ export default {
         this.isSidebarOpen = false
       }
     },
+
+    onDeleteTodo(todoId) {
+      console.log(todoId);  
+      this.deleteTodo(todoId)
+    }
   }
 }
 </script>
