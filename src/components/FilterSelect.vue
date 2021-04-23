@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <button @click="toggleFilterSelect" type="button" class="relative w-full bg-white rounded-md pl-3 pr-10 py-3 text-left cursor-pointer border-2 border-gray-400 focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500 sm:text-sm">
+    <button @click="toggleFilterSelect" @blur="selectOption(currentOption)" type="button" class="relative w-full bg-white rounded-md pl-3 pr-10 py-3 text-left cursor-pointer border-2 border-gray-400 focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500 sm:text-sm">
         <span class="flex items-center">
           <span class="ml-3 block truncate">
             {{ currentOption }}
@@ -20,7 +20,7 @@
 3. Все -->
     <div class="absolute mt-1 w-full z-10 rounded-md bg-white shadow-dropdown" v-show="isFilterSelectOpen">
       <ul tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3" class="max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-        <li v-for="option in filterOptions" :key="option.name" @click="selectOption(option)" id="listbox-item-0" role="option" class="text-gray-900 cursor-pointer hover:bg-purple-500 hover:text-white select-none relative py-2 pl-3 pr-9">
+        <li v-for="option in filterOptions" :key="option.name" @mousedown="selectOption(option)" id="listbox-item-0" role="option" class="text-gray-900 cursor-pointer hover:bg-purple-500 hover:text-white select-none relative py-2 pl-3 pr-9">
           <div class="flex items-center">
             <span class="ml-3 block font-normal truncate">
               {{option.value}}
@@ -59,12 +59,8 @@ export default {
           name: "all",
           value: 'Все'
         }
-        // 'Неисполненные',
-        // 'Исполненные',
-        // 'Все'
       ],
       currentOption: 'Неисполненные'
-      // currentOption
     }
   },
 
@@ -82,7 +78,8 @@ export default {
         this.currentOption = option.value
         this.filterTodos(option.name)
       }
-    }
+      this.isFilterSelectOpen = false
+    },
   }
 }
 </script>

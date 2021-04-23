@@ -24,7 +24,7 @@
         >
 
         <div class="bg-white h-full lg:rounded-2xl flex flex-col justify-between pb-12 ">
-          <nav class="pt-2 md:pt-12 lg:pt-6 max-h-4/5 h-3/5 overflow-y-auto">
+          <nav class="pt-2 md:pt-12 lg:pt-6 max-h-4/5 h-4/5 overflow-y-auto">
 
 <!-- TODO -->
             <div class="px-6 mb-6">

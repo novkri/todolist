@@ -3,7 +3,7 @@
   <router-link
     :to="{ name: 'tasks', params: { id: item.id, title: item.name }}"
     :class="[ item.count_tasks === 0 ? 'bg-white' : item.is_completed ? 'bg-lightGreen' : ' bg-gray-200']"
-    class="w-full text-md text-gray-800 flex items-center p-4 justify-start hover:text-white hover:bg-purple-400 "
+    class="w-full text-md flex items-center p-4 justify-start hover:bg-purple-400 "
   >
 
    <p class="px-4 w-full text-md font-normal break-words">
@@ -21,14 +21,18 @@ export default {
 }
 </script>
 
-<style>
-.router-link-exact-active.router-link-active {
-  /* TODO smtng else with Active Route */
+<style scoped>
+a {
+  color: #1F2937;
+}
 
-  /* color: rgba(59, 130, 246, 1); */
-  /* background-image: linear-gradient(to right, transparent, #c4b9f5); */
+a:hover, .router-link-exact-active.router-link-active:hover {
+  color: #fff;
+}
+
+.router-link-exact-active.router-link-active {
   border-left: 4px solid #8B5CF6;
-  /* background-image: linear-gradient(to right, transparent, #ececec81); */
-  /* border-left: 4px solid #000; */
+  font-size: 1.1rem;
+  color: #6845b8;
 }
 </style>

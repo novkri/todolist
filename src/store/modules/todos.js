@@ -12,6 +12,7 @@ const getters = {
   allTodos: state => state.todos.sort((a, b) => {
     return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
   }),
+
   allFilteredTodos: (state, getters) => {    
     switch (state.filterName) {
       case 'not_completed':
@@ -22,6 +23,7 @@ const getters = {
         return getters.allTodos
     }
   },
+  
   todosError: state => state.error
 }
 
