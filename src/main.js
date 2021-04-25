@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
-
-import "tailwindcss/tailwind.css"
-
 import router from './router'
 import store from './store'
 
+import "tailwindcss/tailwind.css"
+import VueToastify from "vue-toastify"
+
+Vue.use(VueToastify);
 Vue.config.productionTip = false
 
 

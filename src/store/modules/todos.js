@@ -1,10 +1,11 @@
 import axios from 'axios'
+import Vue from "vue"
 
 const api = process.env.VUE_APP_BASE_API
 
 const state = () => ({
   todos: [],
-  error: '',
+  todoError: '',
   filterName: 'all'
 })
 
@@ -24,7 +25,7 @@ const getters = {
     }
   },
   
-  todosError: state => state.error
+  todosError: state => state.todoError
 }
 
 const actions = {
@@ -34,14 +35,20 @@ const actions = {
       const response = await axios.get(`${api}/todos`)
       commit('setTodos', response.data)
     } catch(e) {
-      commit('setError', e)
-      console.log(e);
+      commit('setError', e.message)
+      Vue.$vToastify.error(e.message);
     }
   },
 
   async addTodo({ commit }, newTodoObj) {
-    const response = await axios.post(`${api}/todos`, { ...newTodoObj })
-    commit('addNewTodo', response.data)
+    try {
+      commit('setError', '')
+      const response = await axios.post(`${api}/todos`, { ...newTodoObj })
+      commit('addNewTodo', response.data)
+    } catch(e) {
+      commit('setError', e.message)
+      Vue.$vToastify.error(e.message)
+    }
   },
 
   filterTodos({ commit }, optionName) {
@@ -49,8 +56,14 @@ const actions = {
   },
 
   async deleteTodo({ commit }, todoId) {
-    await axios.delete(`${api}/todos/${todoId}`)
-    commit('deleteOneTodo', todoId)
+    try {
+      commit('setError', '')
+      await axios.delete(`${api}/todos/${todoId}`)
+      commit('deleteOneTodo', todoId)
+    } catch (e) {
+      commit('setError', e.message)
+      Vue.$vToastify.error(e.message)
+    }
   },
 
   todoListCompleted({ commit }, { todo, setTo }) {
@@ -59,9 +72,9 @@ const actions = {
 }
 
 const mutations = {
-  setTodos: (state, todos) => (state.todos = todos),
+  setTodos: (state, todos) => state.todos = todos,
   setFilteredTodos: (state, optionName) => state.filterName = optionName,
-  setError: (state, error) => (state.error = error),
+  setError: (state, error) => state.todoError = error,
   addNewTodo: (state, todo) => state.todos.push(todo),
   deleteOneTodo: (state, todoId) => state.todos = state.todos.filter(todo => todo.id !== todoId),
   setTodoListCompleted: (state, { todoId, setTo }) => {

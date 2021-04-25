@@ -85,8 +85,6 @@ export default {
       'doneTasks',
       'doneTasksLength',
       'currentTodo',
-
-
       'checkIfTasksCompleted'
     ]),
   },

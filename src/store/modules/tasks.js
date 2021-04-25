@@ -1,11 +1,12 @@
 import axios from 'axios'
+import Vue from "vue"
 
 const api = process.env.VUE_APP_BASE_API
 
 const state = () => ({
   tasks: [],
   currentTodo: {},
-  error: ''
+  taskError: ''
 })
 
 const getters = {
@@ -16,7 +17,7 @@ const getters = {
   allCurrentTasksLength: (state, getters) => getters.allCurrentTodoTasks.length,
   doneTasks: (state, getters) => getters.allCurrentTodoTasks.filter(task => task.is_completed),
   doneTasksLength: (state, getters) => getters.doneTasks.length,
-  tasksError: state => state.error,
+  tasksError: state => state.taskError,
   currentTodo: state => state.currentTodo,
 
 
@@ -31,50 +32,67 @@ const getters = {
 
 const actions = {
   async fetchTasks({ commit }) {
-    // commit('setCurrentTodoId', payload)
-
     try {
-      commit('setError', '')
+      commit('setTaskError', '')
       const response = await axios.get(`${api}/tasks`)
       commit('setTasks', response.data)
     } catch(e) {
-      commit('setError', e)
-      console.log(e);
-      // commit('setCurrentTodoId', '')
+      commit('setTaskError', e.message)
+      Vue.$vToastify.error(e.message)
     }
   },
 
   async fetchCurrentTodo({ commit }, id) {
     try {
-      commit('setError', '')
+      commit('setTaskError', '')
       const response = await axios.get(`${api}/todos/${id}`)
       commit('setCurrentTodo', response.data)
     } catch (e) {
-      commit('setError', e)
-      console.log(e);
+      commit('setTaskError', e.message)
+      Vue.$vToastify.error(e.message)
       commit('setCurrentTodo', '')
     }
   },
 
   async addTask({ commit }, newTask) {
-    const response = await axios.post(`${api}/tasks`, newTask)
-    commit('addNewTask', response.data)
+    try {
+      commit('setTaskError', '')
+      const response = await axios.post(`${api}/tasks`, newTask)
+      commit('addNewTask', response.data)
+    } catch (e) {
+      commit('setTaskError', e.message)
+      Vue.$vToastify.error(e.message)
+    }
+    
   },
 
   async deleteTask({ commit }, taskId) {
-    await axios.delete(`${api}/tasks/${taskId}`)
-    commit('deleteOneTask', taskId)
+    try {
+      commit('setTaskError', '')
+      await axios.delete(`${api}/tasks/${taskId}`)
+      commit('deleteOneTask', taskId)
+    } catch (e) {
+      commit('setTaskError', e.message)
+      Vue.$vToastify.error(e.message)
+    }
   },
 
   async toggleTaskCompletion({ commit }, task) {
-    const response = await axios.put(`${api}/tasks/${task.id}`, task)
-    commit('setTaskComplete', response)
+    try {
+      commit('setTaskError', '')
+      const response = await axios.put(`${api}/tasks/${task.id}`, task)
+      commit('setTaskComplete', response)
+    } catch (e) {
+      commit('setTaskError', e.message)
+      Vue.$vToastify.error(e.message)
+    }
   },
 }
 
 const mutations = {
-  setCurrentTodo: (state, todo) => (state.currentTodo = todo),
-  setTasks: (state, tasks) => (state.tasks = tasks),
+  setTaskError: (state, error) => state.taskError = error,
+  setCurrentTodo: (state, todo) => state.currentTodo = todo,
+  setTasks: (state, tasks) => state.tasks = tasks,
   addNewTask: (state, task) => state.tasks.push(task),
   deleteOneTask: (state, taskId) => state.tasks = state.tasks.filter(task => task.id !== taskId),
   setTaskComplete: (state, task) => console.log(state, task),

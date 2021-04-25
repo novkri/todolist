@@ -70,16 +70,17 @@ export default {
   computed: {
     ...mapGetters([
       'allTodos',
-      'allFilteredTodos'
+      'allFilteredTodos',
+      'todosError'
     ]),
   },
 
-  created () {
-    this.fetchTodos()
-  },
+  // async created () {
+  //   await this.fetchTodos()
+  // },
 
   beforeRouteEnter (to, from, next) {
-    next(vm => vm.fetchTodos())
+    next(async vm => await vm.fetchTodos())
   },
 
 
@@ -145,8 +146,6 @@ export default {
       }
 
       this.$emit('populateModal', modalObject)
-
-      // this.deleteTodo(todoId)
     }
   }
 }
