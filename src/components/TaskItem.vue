@@ -5,6 +5,7 @@
         type="checkbox"
         name="Urgent"
         v-model="task.is_completed"
+        @change="toggleTaskComplete(task)"
         class="form-tick mx-3 cursor-pointer appearance-none bg-white bg-check h-5 w-5 min-w-5 border border-gray-300 rounded-md checked:bg-purple-500 checked:border-transparent focus:outline-none"
       />
 
@@ -72,9 +73,13 @@ export default {
     // updated_at
     // ????
 
-
     deleteTask(task) {
+      // here ?
       this.$emit('deleteTaskItem', task)
+    },
+
+    toggleTaskComplete(task) {
+      this.$emit('toggleTaskItem', task)
     }
   }
 }

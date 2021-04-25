@@ -51,6 +51,10 @@ const actions = {
   async deleteTodo({ commit }, todoId) {
     await axios.delete(`${api}/todos/${todoId}`)
     commit('deleteOneTodo', todoId)
+  },
+
+  todoListCompleted({ commit }, { todo, setTo }) {
+    commit('setTodoListCompleted', {todoId: todo.id, setTo})
   }
 }
 
@@ -59,7 +63,10 @@ const mutations = {
   setFilteredTodos: (state, optionName) => state.filterName = optionName,
   setError: (state, error) => (state.error = error),
   addNewTodo: (state, todo) => state.todos.push(todo),
-  deleteOneTodo: (state, todoId) => state.todos = state.todos.filter(todo => todo.id !== todoId)
+  deleteOneTodo: (state, todoId) => state.todos = state.todos.filter(todo => todo.id !== todoId),
+  setTodoListCompleted: (state, { todoId, setTo }) => {
+    state.todos.filter(todo => todo.id === todoId)[0].is_completed = setTo
+  },
 }
 
 export default {

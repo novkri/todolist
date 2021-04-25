@@ -108,7 +108,7 @@
       "id": 1618931261377,
       "list_id": 1,
       "executor_user_id": 0,
-      "is_completed": false,
+      "is_completed": true,
       "description": "description",
       "urgency": false,
       "created_at": 1618931261377,
@@ -146,9 +146,25 @@
       "id": 1619190413758,
       "list_id": 2,
       "name": "апр",
-      "is_completed": false,
+      "is_completed": true,
       "urgency": false,
       "created_at": 1619190413758
+    },
+    {
+      "id": 1619334220259,
+      "list_id": 0,
+      "name": "sdfsdf",
+      "is_completed": true,
+      "urgency": false,
+      "created_at": 1619334220259
+    },
+    {
+      "id": 1619335999108,
+      "list_id": 0,
+      "name": "sdfsdf",
+      "is_completed": true,
+      "urgency": false,
+      "created_at": 1619335999108
     }
   ]
 }

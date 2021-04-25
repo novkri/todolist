@@ -23,7 +23,7 @@
               :key="task.id"
               class="py-3 border-t-2 border-gray-100 first:border-0"
             >
-              <TaskItem :task="task" :index="idx + 1" @deleteTaskItem="onDeleteTask" />
+              <TaskItem :task="task" :index="idx + 1" @deleteTaskItem="onDeleteTask" @toggleTaskItem="toggleTaskItem" />
             </li>
           </ul>
 
@@ -85,6 +85,9 @@ export default {
       'doneTasks',
       'doneTasksLength',
       'currentTodo',
+
+
+      'checkIfTasksCompleted'
     ]),
   },
     
@@ -109,10 +112,12 @@ export default {
   },
   
   methods: {
-    ...mapActions(['fetchTasks', 'fetchCurrentTodo', 'addTask', 'deleteTask']),
+    ...mapActions(['fetchTasks', 'fetchCurrentTodo', 'addTask', 'deleteTask', 'toggleTaskCompletion', 'todoListCompleted']),
 
     addTaskItem(name) {
+
       if (name) {
+
         let newTaskObj = {
           id: Date.now(),
           list_id: Number(this.currentTodo.id),
@@ -131,7 +136,10 @@ export default {
             {
               title: 'OK',
               type: 'OK',
-              method: () => this.addTask(newTaskObj)
+              method: async () => {
+                await this.addTask(newTaskObj)
+                this.todoListCompleted({todo: this.currentTodo, setTo: this.checkIfTasksCompleted})
+              }
             }
           ]
         }
@@ -152,22 +160,25 @@ export default {
           {
             title: 'OK',
             type: 'OK',
-            method: () => this.deleteTask(taskItem.id)
+            method: async () => {
+              await this.deleteTask(taskItem.id)
+              this.todoListCompleted({todo: this.currentTodo, setTo: this.checkIfTasksCompleted})
+            }
           }
         ]
       }
 
       this.$emit('populateModal', modalObject)
-    }
+    },
+
+    toggleTaskItem(task) {
+      this.toggleTaskCompletion(task)
+
+      this.todoListCompleted({todo: this.currentTodo, setTo: this.checkIfTasksCompleted})
+    },
   }
 }
 </script>
 
 <style>
-/* .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s
-}
-.fade-enter, .fade-leave-to {
-    opacity: 0
-} */
 </style>
