@@ -42,10 +42,11 @@ export default {
 
   methods: {
     submitForm() {
-      // e.preventDefault()
-      
-      // !this.name ? 'Введите название' : emit...
-      this.$emit('addNewItem', this.name)
+      if (this.name) {
+        this.$emit('addNewItem', this.name)
+      } else {
+        this.$vToastify.error('', `Введите ${this.placeholderText.toLowerCase()}`)
+      }
       
       this.name = ''
     }

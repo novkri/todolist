@@ -66,8 +66,15 @@ const actions = {
     }
   },
 
-  todoListCompleted({ commit }, { todo, setTo }) {
-    commit('setTodoListCompleted', {todoId: todo.id, setTo})
+  async todoListCompleted({ commit }, { todo, setTo }) {
+    try {
+      commit('setError', '')
+      await axios.put(`${api}/todos/${todo.id}`, {...todo, is_completed: setTo})
+      commit('setTodoListCompleted', {todoId: todo.id, setTo})
+    } catch (e) {
+      commit('setError', e.message)
+      Vue.$vToastify.error(e.message)
+    }
   }
 }
 

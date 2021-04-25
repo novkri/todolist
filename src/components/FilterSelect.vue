@@ -19,10 +19,6 @@
         </span>
     </button>
 
-<!-- Неисполненные (по умолчанию)- (списки без Дел или с неисполненными
-Делами
-2. Исполненные - списки, где все Дела исполнены
-3. Все -->
     <div
       v-show="isFilterSelectOpen"
       class="absolute mt-1 w-full z-10 rounded-md bg-white shadow-dropdown"

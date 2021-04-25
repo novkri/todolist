@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Todo from "../components/Todo";
-// import Tasks from "../components/Tasks";
 import Todo from '../views/Todo'
 import Tasks from '../views/Tasks'
 
@@ -15,7 +13,7 @@ const routes = [
     children: [
       {
         path: "todo/:id",
-        components: { tasks: Tasks },
+        components: { tasks: Tasks },        
         name: "tasks"
       }
     ]

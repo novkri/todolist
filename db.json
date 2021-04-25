@@ -13,7 +13,7 @@
       "name": "ЗАХВАТИТЬ МИИИР",
       "id": 1,
       "count_tasks": 1,
-      "is_completed": false,
+      "is_completed": true,
       "is_closed": false,
       "created_at": 1618931261377,
       "updated_at": 1618931261377
@@ -44,14 +44,6 @@
       "id": 4
     },
     {
-      "name": "ввгда",
-      "count_tasks": 0,
-      "is_completed": false,
-      "is_closed": false,
-      "created_at": 1619100910280,
-      "id": 7
-    },
-    {
       "name": "яяяяя список",
       "count_tasks": 0,
       "is_completed": false,
@@ -66,30 +58,6 @@
       "is_closed": false,
       "created_at": 1619174583050,
       "id": 9
-    },
-    {
-      "name": "dgfdfgdfg",
-      "count_tasks": 0,
-      "is_completed": false,
-      "is_closed": false,
-      "created_at": 1619174588631,
-      "id": 11
-    },
-    {
-      "name": "44444444",
-      "count_tasks": 0,
-      "is_completed": false,
-      "is_closed": false,
-      "created_at": 1619174621232,
-      "id": 15
-    },
-    {
-      "name": "9999999999",
-      "count_tasks": 0,
-      "is_completed": false,
-      "is_closed": false,
-      "created_at": 1619174633188,
-      "id": 20
     }
   ],
   "tasks": [
@@ -138,7 +106,7 @@
       "id": 1619099180822,
       "list_id": 2,
       "name": "проверкапроверкапроверка проверкапроверкапроверкапроверка проверкапроверкапроверкапроверкапроверка проверкапроверкапроверкапроверкапроверкапроверка проверкапроверкапроверкапроверка",
-      "is_completed": false,
+      "is_completed": true,
       "urgency": false,
       "created_at": 1619099180822
     },
@@ -146,7 +114,7 @@
       "id": 1619190413758,
       "list_id": 2,
       "name": "апр",
-      "is_completed": true,
+      "is_completed": false,
       "urgency": false,
       "created_at": 1619190413758
     },

@@ -32,7 +32,7 @@
 
             <p
               v-if="allTodos.length === 0"
-              class="text-center p-6 font-light text-xl"
+              class="text-center p-6 font-light text-xl mb-3"
             >
               Список пуст...
             </p>
@@ -140,7 +140,13 @@ export default {
           {
             title: 'Удалить',
             type: 'OK',
-            method: () => this.deleteTodo(todoItem.id)
+            method: () => {
+              this.deleteTodo(todoItem.id)
+
+              if (this.$route.params.id === todoItem.id) {
+                this.$router.push('/')
+              }
+            }
           }
         ],
       }

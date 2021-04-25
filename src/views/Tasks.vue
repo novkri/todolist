@@ -12,7 +12,7 @@
 
           <p
             v-if="allCurrentTodoTasks && allCurrentTodoTasks.length === 0"
-            class="text-center p-6 px-3 py-2 font-light text-xl"
+            class="text-center p-6 px-3 py-2 mb-3 font-light text-xl"
           >
             Список пуст...
           </p>
@@ -173,6 +173,7 @@ export default {
       this.toggleTaskCompletion(task)
 
       this.todoListCompleted({todo: this.currentTodo, setTo: this.checkIfTasksCompleted})
+      console.log( this.checkIfTasksCompleted, this.currentTodo);
     },
   }
 }
