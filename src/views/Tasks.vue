@@ -32,7 +32,7 @@
 
 
       <section class="lg:py-2 lg:px-4">
-        <AddNewItemForm
+        <AddForm
           :isColumn="false"
           placeholderText="Краткое описание задачи"
           @addNewItem="addTaskItem"
@@ -59,7 +59,7 @@
             </span>
           </div>
 
-        </AddNewItemForm>
+        </AddForm>
       </section>
         
     </section>
@@ -69,13 +69,13 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TaskItem from '../components/TaskItem'
-import AddNewItemForm from '../components/AddNewItemForm'
+import AddForm from '../components/AddForm'
 
 export default {
   name: "Tasks",
   components: {
     TaskItem,
-    AddNewItemForm,
+    AddForm,
   },
 
   computed: {

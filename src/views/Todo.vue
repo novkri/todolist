@@ -2,27 +2,13 @@
   <main class="bg-gray-100 overflow-hidden relative h-screen">
     <section class="flex flex-col lg:flex-row items-start justify-between z-50">
 
-      <!-- burger -->
-      <nav class="relative fixed block lg:hidden w-full h-14">
-        <button
-          class="absolute z-10 m-4 h-6 w-6 focus:outline-none"
-          @click="toggleSidebar()"
-        >
-          <svg v-if="!isSidebarOpen" xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <svg v-else xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </nav>
+      <BurgerButton @toggleSidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" />
 
       <!-- sidebar -->
         <div
           class="relative lg:static top-0 right-0 pb-14 lg:pb-0 h-screen lg:block lg:ml-4 lg:mt-6 shadow-2xl w-full lg:w-1/5 lg:min-w-18"
           :class="[isSidebarOpen ? 'block' : 'hidden']"
         >
-
         <div class="bg-white h-full lg:rounded-2xl flex flex-col justify-between pb-12 ">
           <nav class="pt-2 md:pt-12 lg:pt-6 max-h-4/5 h-4/5 overflow-y-auto">
 
@@ -42,7 +28,7 @@
             </div>
           </nav>
 
-          <AddNewItemForm :isColumn="true" placeholderText="Название списка" @addNewItem="addTodoList" />
+          <AddForm :isColumn="true" placeholderText="Название списка" @addNewItem="addTodoList" />
         </div>
       </div>
 
@@ -56,16 +42,18 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import TodoItem from '../components/TodoItem'
-import AddNewItemForm from '../components/AddNewItemForm'
+import AddForm from '../components/AddForm'
 import FilterSelect from '../components/FilterSelect'
+import BurgerButton from '../components/BurgerButton'
 
 export default {
   name: 'Todo',
 
   components: {
     TodoItem,
-    AddNewItemForm,
-    FilterSelect
+    AddForm,
+    FilterSelect,
+    BurgerButton
   },
   computed: {
     ...mapGetters([
@@ -90,6 +78,7 @@ export default {
       filterValue: ''
     }
   },
+  
   methods: {
     ...mapActions(['addTodo', 'fetchTodos', 'fetchTasks', 'deleteTodo']),
 

@@ -49,10 +49,6 @@ export default {
     ]),
   methods: {
     ...mapActions(['openModal', 'closeModal']),
-    // close() {
-    //   // this.closeModal()
-    //   this.$emit('closeModal')
-    // }
   }
 }
 </script>

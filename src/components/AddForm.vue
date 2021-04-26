@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: 'addnewItemForm',
+  name: 'addForm',
   props: {
     isColumn: Boolean,
     placeholderText: String
@@ -42,13 +42,10 @@ export default {
 
   methods: {
     submitForm() {
-      this.name ? this.$emit('addNewItem', this.name) : this.$vToastify.error('', `Введите ${this.placeholderText.toLowerCase()}`)
-      // if (this.name) {
-      //   this.$emit('addNewItem', this.name)
-      // } else {
-      //   this.$vToastify.error('', `Введите ${this.placeholderText.toLowerCase()}`)
-      // }
-      
+      this.name ? 
+        this.$emit('addNewItem', this.name) : 
+        this.$vToastify.error('', `Введите ${this.placeholderText.toLowerCase()}`)
+        
       this.name = ''
     }
   }
