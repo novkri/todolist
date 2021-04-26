@@ -18,8 +18,8 @@
       </nav>
 
       <!-- sidebar -->
-        <article
-          class="relative lg:static top-0 right-0 pb-14 lg:pb-0 h-screen lg:block lg:ml-4 lg:mt-6 shadow-2xl w-full lg:w-1/5"
+        <div
+          class="relative lg:static top-0 right-0 pb-14 lg:pb-0 h-screen lg:block lg:ml-4 lg:mt-6 shadow-2xl w-full lg:w-1/5 lg:min-w-18"
           :class="[isSidebarOpen ? 'block' : 'hidden']"
         >
 
@@ -37,14 +37,14 @@
               Список пуст...
             </p>
 
-            <div v-for="item in allFilteredTodos" :key="item.id" @click="onRouterClick">
+            <div v-for="item in allFilteredTodos" :key="item.id" @click="toggleSidebar">
               <TodoItem :item="item" @deleteTodoItem="onDeleteTodo" />
             </div>
           </nav>
 
           <AddNewItemForm :isColumn="true" placeholderText="Название списка" @addNewItem="addTodoList" />
         </div>
-      </article>
+      </div>
 
       <!-- tasks -->
       <router-view name="tasks" :key='$route.fullPath' @populateModal="e => $emit('populateModal', e)"></router-view>
@@ -86,7 +86,7 @@ export default {
 
   data() {
     return {
-      isSidebarOpen: false,
+      isSidebarOpen: true,
       filterValue: ''
     }
   },
@@ -120,12 +120,6 @@ export default {
 
     toggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen
-    },
-
-    onRouterClick() {
-      if (this.isSidebarOpen) {
-        this.isSidebarOpen = false
-      }
     },
 
     onDeleteTodo(todoItem) {

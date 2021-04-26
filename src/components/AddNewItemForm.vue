@@ -42,11 +42,12 @@ export default {
 
   methods: {
     submitForm() {
-      if (this.name) {
-        this.$emit('addNewItem', this.name)
-      } else {
-        this.$vToastify.error('', `Введите ${this.placeholderText.toLowerCase()}`)
-      }
+      this.name ? this.$emit('addNewItem', this.name) : this.$vToastify.error('', `Введите ${this.placeholderText.toLowerCase()}`)
+      // if (this.name) {
+      //   this.$emit('addNewItem', this.name)
+      // } else {
+      //   this.$vToastify.error('', `Введите ${this.placeholderText.toLowerCase()}`)
+      // }
       
       this.name = ''
     }
