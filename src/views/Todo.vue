@@ -2,7 +2,7 @@
   <main class="bg-gray-100 overflow-hidden relative h-screen">
     <section class="flex flex-col lg:flex-row items-start justify-between z-50">
 
-      <BurgerButton @toggleSidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" />
+      <BurgerBtn @toggleSidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" />
 
       <!-- sidebar -->
         <div
@@ -44,7 +44,7 @@ import { mapActions, mapGetters } from 'vuex'
 import TodoItem from '../components/TodoItem'
 import AddForm from '../components/AddForm'
 import FilterSelect from '../components/FilterSelect'
-import BurgerButton from '../components/BurgerButton'
+import BurgerBtn from '../components/BurgerBtn'
 
 export default {
   name: 'Todo',
@@ -53,7 +53,7 @@ export default {
     TodoItem,
     AddForm,
     FilterSelect,
-    BurgerButton
+    BurgerBtn
   },
   computed: {
     ...mapGetters([
@@ -78,7 +78,7 @@ export default {
       filterValue: ''
     }
   },
-  
+
   methods: {
     ...mapActions(['addTodo', 'fetchTodos', 'fetchTasks', 'deleteTodo']),
 

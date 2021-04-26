@@ -19,14 +19,10 @@ const getters = {
   doneTasksLength: (state, getters) => getters.doneTasks.length,
   tasksError: state => state.taskError,
   currentTodo: state => state.currentTodo,
-
-
   checkIfTasksCompleted: (state, getters) => {
     if (getters.allCurrentTasksLength === getters.doneTasksLength) {
-      // await axios.put(`${api}/todo/${task.id}`, task)
       return true
     } else {
-      // await axios.put(`${api}/todo/${task.id}`, task)
       return false
     }
   }
@@ -82,9 +78,7 @@ const actions = {
   async toggleTaskCompletion({ commit }, task) {
     try {
       commit('setTaskError', '')
-      // const response = 
       await axios.put(`${api}/tasks/${task.id}`, task)
-      // commit('setTaskComplete', response)
     } catch (e) {
       commit('setTaskError', e.message)
       Vue.$vToastify.error(e.message)
@@ -98,7 +92,6 @@ const mutations = {
   setTasks: (state, tasks) => state.tasks = tasks,
   addNewTask: (state, task) => state.tasks.push(task),
   deleteOneTask: (state, taskId) => state.tasks = state.tasks.filter(task => task.id !== taskId),
-  // setTaskComplete: (state, task) => console.log(state, task),
 }
 
 export default {

@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Todo from '../views/Todo'
-import Tasks from '../views/Tasks'
+// import Tasks from '../views/Tasks'
+const Tasks = () => import('../views/Tasks')
 
 Vue.use(VueRouter)
 

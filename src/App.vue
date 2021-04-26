@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="font-poppins">
     <router-view @populateModal="populateModal"></router-view>
 
     <Modal v-if="isModalOpen" @close="closeModal">
@@ -56,6 +56,8 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 /* scroll */
 ::-webkit-scrollbar {
   width: 10px;

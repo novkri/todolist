@@ -31,7 +31,10 @@
 export default {
   name: 'addForm',
   props: {
-    isColumn: Boolean,
+    isColumn: {
+      type: Boolean,
+      default: true
+    },
     placeholderText: String
   },
   data() {
@@ -45,7 +48,7 @@ export default {
       this.name ? 
         this.$emit('addNewItem', this.name) : 
         this.$vToastify.error('', `Введите ${this.placeholderText.toLowerCase()}`)
-        
+
       this.name = ''
     }
   }

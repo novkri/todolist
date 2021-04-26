@@ -58,14 +58,6 @@
       "is_closed": false,
       "created_at": 1619442707835,
       "id": 10
-    },
-    {
-      "name": "арпр",
-      "count_tasks": 0,
-      "is_completed": false,
-      "is_closed": false,
-      "created_at": 1619442811401,
-      "id": 11
     }
   ],
   "tasks": [
@@ -149,14 +141,6 @@
       "is_completed": false,
       "urgency": false,
       "created_at": 1619443318349
-    },
-    {
-      "id": 1619443329137,
-      "list_id": 10,
-      "name": "с мболиы ылвалыв ыварылвоа рлоыва лоыврад фывдлао",
-      "is_completed": false,
-      "urgency": true,
-      "created_at": 1619443329137
     }
   ]
 }

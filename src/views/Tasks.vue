@@ -173,7 +173,6 @@ export default {
       this.toggleTaskCompletion(task)
 
       this.todoListCompleted({todo: this.currentTodo, setTo: this.checkIfTasksCompleted})
-      console.log( this.checkIfTasksCompleted, this.currentTodo);
     },
   }
 }
