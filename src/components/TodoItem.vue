@@ -6,7 +6,7 @@
       class="w-full text-md flex items-center p-4 justify-start transition ease-in duration-100 hover:bg-purple-400 block"
     >
       <p class="px-4 pr-9 w-full text-md break-words">
-        {{item.name}}
+        {{item.name}} {{item.is_completed}} {{item.count_tasks}}
       </p>
     </router-link>
 

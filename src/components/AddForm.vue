@@ -35,7 +35,8 @@ export default {
       type: Boolean,
       default: true
     },
-    placeholderText: String
+    placeholderText: String,
+    value: String
   },
   data() {
     return {

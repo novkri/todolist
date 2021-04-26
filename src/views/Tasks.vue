@@ -12,12 +12,13 @@
 
           <p
             v-if="allCurrentTodoTasks && allCurrentTodoTasks.length === 0"
-            class="text-center p-6 px-3 py-2 mb-3 font-light text-xl"
+            class="text-center p-3 pb-5 font-light text-xl"
           >
             Список пуст...
           </p>
 
-          <ul class="pb-4">
+<!-- v-else -->
+          <ul v-else class="pb-4">
             <li
               v-for="(task, idx) in allCurrentTodoTasks"
               :key="task.id"
@@ -96,30 +97,33 @@ export default {
     }
   },
 
+  // async mounted,,,, 
+
   beforeRouteEnter (to, from, next) {
-    next(vm => {
-      vm.fetchCurrentTodo(Number(to.params.id))
-      vm.fetchTasks()
+    next(async vm => {
+      await vm.fetchCurrentTodo(Number(to.params.id))
+      await vm.fetchTasks(Number(to.params.id))
     })
   },
 
   beforeRouteUpdate (to, from, next) {
     this.fetchCurrentTodo(Number(to.params.id))
-    this.fetchTasks()
+    this.fetchTasks(Number(to.params.id))
     next()
   },
   
   methods: {
-    ...mapActions(['fetchTasks', 'fetchCurrentTodo', 'addTask', 'deleteTask', 'toggleTaskCompletion', 'todoListCompleted']),
+    ...mapActions(['fetchTasks', 'fetchCurrentTodo', 'addTask', 'deleteTask', 'toggleTaskCompletion', 'todoListCompleted', 
+    'addTaskToList', 'deleteTaskFromList'
+    ]),
 
     addTaskItem(name) {
 
       if (name) {
-
         let newTaskObj = {
           id: Date.now(),
           list_id: Number(this.currentTodo.id),
-          name: name,
+          name: name.trim(),
           // description: , executor_user_id: ,
           is_completed: false,
           urgency: this.isUrgent,
@@ -136,7 +140,8 @@ export default {
               type: 'OK',
               method: async () => {
                 await this.addTask(newTaskObj)
-                this.todoListCompleted({todo: this.currentTodo, setTo: this.checkIfTasksCompleted})
+                // this.fetchCurrentTodo(this.currentTodo.id)
+                await this.addTaskToList({todo: this.currentTodo, countTasks: this.currentTodo.count_tasks + 1, completedSetTo: this.checkIfTasksCompleted})
               }
             }
           ]
@@ -160,7 +165,8 @@ export default {
             type: 'OK',
             method: async () => {
               await this.deleteTask(taskItem.id)
-              this.todoListCompleted({todo: this.currentTodo, setTo: this.checkIfTasksCompleted})
+              // this.fetchCurrentTodo(this.currentTodo.id)
+              await this.deleteTaskFromList({todo: this.currentTodo, countTasks: this.currentTodo.count_tasks - 1, completedSetTo: this.checkIfTasksCompleted})
             }
           }
         ]

@@ -45,7 +45,7 @@
     },
     {
       "name": "яяяяя список",
-      "count_tasks": 0,
+      "count_tasks": 3,
       "is_completed": false,
       "is_closed": false,
       "created_at": 1619100918212,
@@ -141,6 +141,30 @@
       "is_completed": false,
       "urgency": false,
       "created_at": 1619443318349
+    },
+    {
+      "id": 1619468773880,
+      "list_id": 8,
+      "name": "sdf",
+      "is_completed": true,
+      "urgency": false,
+      "created_at": 1619468773880
+    },
+    {
+      "id": 1619471661662,
+      "list_id": 8,
+      "name": "fgdg",
+      "is_completed": false,
+      "urgency": false,
+      "created_at": 1619471661662
+    },
+    {
+      "id": 1619472043784,
+      "list_id": 8,
+      "name": "sdf",
+      "is_completed": false,
+      "urgency": false,
+      "created_at": 1619472043784
     }
   ]
 }

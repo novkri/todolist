@@ -23,6 +23,7 @@
               Список пуст...
             </p>
 
+<!-- v-else ? -->
             <div v-for="item in allFilteredTodos" :key="item.id" @click="toggleSidebar">
               <TodoItem :item="item" @deleteTodoItem="onDeleteTodo" />
             </div>
@@ -55,6 +56,7 @@ export default {
     FilterSelect,
     BurgerBtn
   },
+
   computed: {
     ...mapGetters([
       'allTodos',
@@ -66,6 +68,8 @@ export default {
   // async created () {
   //   await this.fetchTodos()
   // },
+
+  // async mounted,,,,
 
   beforeRouteEnter (to, from, next) {
     next(async vm => await vm.fetchTodos())
@@ -84,7 +88,7 @@ export default {
 
     addTodoList(name) {
       let newTodoObj = {
-        name: name,
+        name: name.trim(),
         count_tasks: 0,
         is_completed: false,
         is_closed: false,
