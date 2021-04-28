@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Modal from './components/common/Modal'
+import Modal from './components/Modal'
 
 export default {
   name: 'App',

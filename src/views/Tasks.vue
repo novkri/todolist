@@ -1,5 +1,5 @@
 <template>
-  <article class="flex flex-col w-full px-4 lg:py-6 lg:px-8 lg:w-4/5">
+  <article class="flex flex-col w-full px-4 md:py-6 md:px-8 md:w-4/5">
     <section class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
       <main class="w-full mb-8 max-h-full overflow-auto">
         <div class="shadow-md rounded-2xl bg-white w-full  mb-4 mx-0">
@@ -22,7 +22,7 @@
             <li
               v-for="(task, idx) in allCurrentTodoTasks"
               :key="task.id"
-              class="py-3 border-t-2 border-gray-100 first:border-0"
+              class="py-3 border-t-4 md:border-t-2 border-gray-100 first:border-0"
             >
               <TaskItem :task="task" :index="idx + 1" @deleteTaskItem="onDeleteTask" @toggleTaskItem="toggleTaskItem" />
             </li>
@@ -34,7 +34,7 @@
 
       <section class="lg:py-2 lg:px-4">
         <AddForm
-          :isColumn="false"
+          :propsClasses="'lg:flex-row'"
           placeholderText="Краткое описание задачи"
           @addNewItem="addTaskItem"
         >
@@ -70,7 +70,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TaskItem from '../components/TaskItem'
-import AddForm from '../components/common/AddForm'
+import AddForm from '../components/widgets/AddForm'
 
 export default {
   name: "Tasks",

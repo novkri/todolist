@@ -1,7 +1,7 @@
 <template>
   <form
     class="flex flex-col w-full items-center justify-center self-center py-2 px-4 lg:p-4"
-    :class="[isColumn ? 'md:flex-col max-w-sm md:max-w-md' : 'md:flex-row']"
+    :class="propsClasses"
   >
 
     <input
@@ -31,10 +31,7 @@
 export default {
   name: 'addForm',
   props: {
-    isColumn: {
-      type: Boolean,
-      default: true
-    },
+    propsClasses: String,
     placeholderText: String,
     value: String
   },

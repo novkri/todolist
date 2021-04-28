@@ -1,5 +1,5 @@
 <template>
-  <nav class="relative fixed block lg:hidden w-full h-14">
+  <nav class="relative fixed block md:hidden w-full h-14">
     <button
       class="absolute z-10 m-4 h-6 w-6 focus:outline-none text-gray-600"
       @click="$emit('toggleSidebar')"

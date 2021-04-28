@@ -17,12 +17,12 @@ const getters = {
   currentTodo: state => state.currentTodo,
   allFilteredTodos: (state, getters) => {    
     switch (state.filterName) {
-      case 'not_completed':
-        return getters.allTodos.filter(todo => !todo.is_completed)
+      case 'all':
+        return getters.allTodos
       case 'completed':
         return getters.allTodos.filter(todo => todo.is_completed)
       default:
-        return getters.allTodos
+        return getters.allTodos.filter(todo => !todo.is_completed)
     }
   },
   todosError: state => state.todoError

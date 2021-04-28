@@ -1,19 +1,19 @@
 <template>
   <main class="bg-gray-100 overflow-hidden relative h-screen">
-    <section class="flex flex-col lg:flex-row items-start justify-between z-50">
+    <section class="flex flex-col md:flex-row items-start justify-between z-50">
 
       <BurgerBtn @toggleSidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" />
 
       <!-- sidebar -->
         <div
-          class="relative lg:static top-0 right-0 pb-14 lg:pb-0 h-screen lg:block lg:ml-4 lg:mt-6 shadow-2xl w-full lg:w-1/5 lg:min-w-18"
+          class="relative lg:static top-0 right-0 pb-14 lg:pb-0 h-screen md:block md:ml-4 md:mt-6 shadow-2xl w-full md:w-1/5 md:min-w-16"
           :class="[isSidebarOpen ? 'block' : 'hidden']"
         >
-        <div class="bg-white h-full lg:rounded-2xl flex flex-col justify-between pb-12 ">
-          <nav class="pt-2 md:pt-12 lg:pt-6 max-h-4/5 h-4/5 overflow-y-auto">
+        <div class="bg-white h-full md:rounded-2xl flex flex-col justify-between pb-6 lg:pb-12">
+          <nav class="pt-2 md:pt-12 md:pt-6 max-h-4/5 h-4/5 overflow-y-auto">
 
-            <div class="px-6 mb-6">
-              <FilterSelect />
+            <div class="px-6 py-3 mb-3">
+              <FilterSelect :filterOptions="filterTodoOptions" :initOption="filterTodoOptions[0]" />
             </div>
 
             <p
@@ -23,13 +23,12 @@
               Список пуст...
             </p>
 
-<!-- v-else ? -->
             <div v-for="item in allFilteredTodos" :key="item.id" @click="toggleSidebar">
               <TodoItem :item="item" @deleteTodoItem="onDeleteTodo" />
             </div>
           </nav>
 
-          <AddForm :isColumn="true" placeholderText="Название списка" @addNewItem="addTodoList" />
+          <AddForm :propsClasses="'max-w-sm md:max-w-md'" placeholderText="Название списка" @addNewItem="addTodoList" />
         </div>
       </div>
 
@@ -43,9 +42,9 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import TodoItem from '../components/TodoItem'
-import AddForm from '../components/common/AddForm'
-import FilterSelect from '../components/common/FilterSelect'
-import BurgerBtn from '../components/common/BurgerBtn'
+import AddForm from '../components/widgets/AddForm'
+import FilterSelect from '../components/widgets/FilterSelect'
+import BurgerBtn from '../components/widgets/BurgerBtn'
 
 export default {
   name: 'Todo',
@@ -70,7 +69,21 @@ export default {
   data() {
     return {
       isSidebarOpen: true,
-      filterValue: ''
+      filterValue: '',
+      filterTodoOptions: [
+        {
+          name: "not_completed",
+          value: 'Неисполненные'
+        },
+        {
+          name: "completed",
+          value: 'Исполненные'
+        }, 
+        {
+          name: "all",
+          value: 'Все'
+        }
+      ]
     }
   },
 

@@ -10,12 +10,12 @@
       </p>
     </router-link>
 
-    <DeleteBtn @handleDeleteBtnClick="deleteTodo(item)" :propsClasses="'absolute inset-y-0 right-0 pr-4 text-gray-700'" />
+    <DeleteBtn @handleDeleteBtnClick="deleteTodo(item)" :propsClasses="'absolute inset-y-0 right-0 pr-4 text-gray-600 hover:text-purple-700'" />
   </div>
 </template>
 
 <script>
-import DeleteBtn from '../components/common/DeleteBtn'
+import DeleteBtn from '../components/widgets/DeleteBtn'
 
 export default {
   name: "todoitem",
