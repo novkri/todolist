@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'poppins': ['Poppins', 'ui-sans-serif', 'system-ui'],
+        'Rubik': ['Rubik', 'ui-sans-serif', 'system-ui'],
        },
       backgroundColor: theme => ({
         ...theme('colors'),

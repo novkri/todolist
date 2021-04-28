@@ -10,7 +10,7 @@
           :class="[isSidebarOpen ? 'block' : 'hidden']"
         >
         <div class="bg-white h-full md:rounded-2xl flex flex-col justify-between pb-6 lg:pb-12">
-          <nav class="pt-2 md:pt-12 md:pt-6 max-h-4/5 h-4/5 overflow-y-auto">
+          <nav class="pt-2 md:pt-6 max-h-4/5 h-4/5 overflow-y-auto">
 
             <div class="px-6 py-3 mb-3">
               <FilterSelect :filterOptions="filterTodoOptions" :initOption="filterTodoOptions[0]" />

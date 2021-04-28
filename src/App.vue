@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="font-poppins">
+  <div id="app" class="font-Rubik">
     <router-view @populateModal="populateModal"></router-view>
 
     <Modal v-if="isModalOpen" @close="closeModal">
