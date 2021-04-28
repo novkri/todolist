@@ -2,7 +2,7 @@
   <article class="flex flex-col w-full px-4 md:py-6 lg:px-8 md:w-4/5">
     <section class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
       <main class="w-full mb-8 max-h-full overflow-auto">
-        <div class="shadow-md rounded-2xl bg-white w-full  mb-4 mx-0">
+        <div class="shadow-md rounded-2xl bg-white w-full mb-4 mx-0">
           <header class="font-bold text-lg p-4 text-black">
             My Tasks
             <span class="text-sm text-gray-500 ml-2">
@@ -10,6 +10,12 @@
             </span>
           </header>
 
+
+
+          <!-- <div v-if="loading" class="flex item-center justify-center w-full pb-5">
+            <Loader :loaderClasses="'bg-purple-600'"  />
+            {{loading}}
+          </div> -->
           <p
             v-if="allCurrentTodoTasks && allCurrentTodoTasks.length === 0"
             class="text-center p-3 pb-5 font-light text-xl"
@@ -70,12 +76,14 @@
 import { mapGetters, mapActions } from 'vuex'
 import TaskItem from '../components/TaskItem'
 import AddForm from '../components/widgets/AddForm'
+// import Loader from '../components/widgets/Loader'
 
 export default {
   name: "Tasks",
   components: {
     TaskItem,
     AddForm,
+    // Loader,
   },
 
   computed: {
@@ -88,27 +96,34 @@ export default {
       'checkIfTasksCompleted'
     ]),
   },
-    
 
   data() {
     return {
       isUrgent: false,
+      // loading: false
     }
   },
 
-  // async mounted,,,, 
+  // beforeRouteEnter (to, from, next) {
+  //   next(async vm => {
+  //     await vm.fetchCurrentTodo(Number(to.params.id))
+  //     await vm.fetchTasks(Number(to.params.id))
+  //     vm.loading = false
+  //   })
+  // },
 
-  beforeRouteEnter (to, from, next) {
-    next(async vm => {
-      await vm.fetchCurrentTodo(Number(to.params.id))
-      await vm.fetchTasks(Number(to.params.id))
-    })
-  },
+  // beforeRouteUpdate (to, from, next) {
+  //   this.fetchCurrentTodo(Number(to.params.id))
+  //   this.fetchTasks(Number(to.params.id))
+  //   next()
+  //   this.loading = false
+  // },
 
-  beforeRouteUpdate (to, from, next) {
-    this.fetchCurrentTodo(Number(to.params.id))
-    this.fetchTasks(Number(to.params.id))
-    next()
+  async created() {
+    // this.loading = true
+    await this.fetchCurrentTodo(Number(this.$route.params.id))
+    await this.fetchTasks(Number(this.$route.params.id))
+    // this.loading = false
   },
   
   methods: {
@@ -117,7 +132,6 @@ export default {
     ]),
 
     addTaskItem(name) {
-
       if (name) {
         let newTaskObj = {
           id: Date.now(),

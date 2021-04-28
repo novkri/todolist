@@ -16,14 +16,18 @@
               <FilterSelect :filterOptions="filterTodoOptions" :initOption="filterTodoOptions[0]" />
             </div>
 
+
+            <div v-if="loading" class="flex item-center justify-center w-full">
+              <Loader />
+            </div>
             <p
-              v-if="allTodos.length === 0"
+              v-else-if="allTodos.length === 0"
               class="text-center p-6 font-light text-xl mb-3"
             >
               Список пуст...
             </p>
 
-            <div v-for="item in allFilteredTodos" :key="item.id" @click="toggleSidebar">
+            <div v-else v-for="item in allFilteredTodos" :key="item.id" @click="toggleSidebar">
               <TodoItem :item="item" @deleteTodoItem="onDeleteTodo" />
             </div>
           </nav>
@@ -45,6 +49,7 @@ import TodoItem from '../components/TodoItem'
 import AddForm from '../components/widgets/AddForm'
 import FilterSelect from '../components/widgets/FilterSelect'
 import BurgerBtn from '../components/widgets/BurgerBtn'
+import Loader from '../components/widgets/Loader'
 
 export default {
   name: 'Todo',
@@ -52,7 +57,8 @@ export default {
     TodoItem,
     AddForm,
     FilterSelect,
-    BurgerBtn
+    BurgerBtn,
+    Loader,
   },
   computed: {
     ...mapGetters([
@@ -62,12 +68,9 @@ export default {
     ]),
   },
 
-  beforeRouteEnter (to, from, next) {
-    next(async vm => await vm.fetchTodos())
-  },
-
   data() {
     return {
+      loading: false,
       isSidebarOpen: true,
       filterValue: '',
       filterTodoOptions: [
@@ -87,6 +90,19 @@ export default {
     }
   },
 
+  // beforeRouteEnter (to, from, next) {
+  //   next(async vm => {
+  //     await vm.fetchTodos()
+  //     vm.loading = false
+  //   })
+  // },
+
+  async created() {
+    this.loading = true
+    await this.fetchTodos()
+    this.loading = false
+  },
+  
   methods: {
     ...mapActions(['addTodo', 'fetchTodos', 'fetchTasks', 'deleteTodo']),
 
