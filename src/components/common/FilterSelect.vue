@@ -95,6 +95,7 @@ export default {
         this.currentOption = option.value
         this.filterTodos(option.name)
       }
+      
       this.isFilterSelectOpen = false
     },
   }

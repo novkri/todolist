@@ -6,16 +6,16 @@
       class="w-full text-md flex items-center p-4 justify-start transition ease-in duration-100 hover:bg-purple-400 block"
     >
       <p class="px-4 pr-9 w-full text-md break-words">
-        {{item.name}} {{item.is_completed}} {{item.count_tasks}}
+        {{item.name}}
       </p>
     </router-link>
 
-    <DeleteBtn @handleDeleteBtnClick="deleteTodo(item)" :propsClasses="'absolute inset-y-0 right-0 pr-4'" />
+    <DeleteBtn @handleDeleteBtnClick="deleteTodo(item)" :propsClasses="'absolute inset-y-0 right-0 pr-4 text-gray-700'" />
   </div>
 </template>
 
 <script>
-import DeleteBtn from '../components/DeleteBtn'
+import DeleteBtn from '../components/common/DeleteBtn'
 
 export default {
   name: "todoitem",
@@ -38,15 +38,11 @@ a {
   color: #1F2937;
 }
 
-a:hover, .router-link-exact-active.router-link-active:hover {
-  color: #fff;
+a:hover, a:hover + span, .router-link-exact-active.router-link-active:hover {
+  color: #fff !important;
 }
 
 .router-link-exact-active.router-link-active {
   border-left: 4px solid #8B5CF6;
-}
-
-.link-wrapper:hover span {
-  color: #fff;
 }
 </style>

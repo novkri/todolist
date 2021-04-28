@@ -70,7 +70,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TaskItem from '../components/TaskItem'
-import AddForm from '../components/AddForm'
+import AddForm from '../components/common/AddForm'
 
 export default {
   name: "Tasks",
@@ -124,10 +124,8 @@ export default {
           id: Date.now(),
           list_id: Number(this.currentTodo.id),
           name: name.trim(),
-          // description: , executor_user_id: ,
           is_completed: false,
           urgency: this.isUrgent,
-          // updated_at
           created_at: Date.now()
         }
 
@@ -140,8 +138,11 @@ export default {
               type: 'OK',
               method: async () => {
                 await this.addTask(newTaskObj)
-                // this.fetchCurrentTodo(this.currentTodo.id)
-                await this.addTaskToList({todo: this.currentTodo, countTasks: this.currentTodo.count_tasks + 1, completedSetTo: this.checkIfTasksCompleted})
+                await this.addTaskToList({
+                  todo: this.currentTodo,
+                  countTasks: this.currentTodo.count_tasks + 1, 
+                  completedSetTo: this.checkIfTasksCompleted
+                })
               }
             }
           ]
@@ -165,8 +166,11 @@ export default {
             type: 'OK',
             method: async () => {
               await this.deleteTask(taskItem.id)
-              // this.fetchCurrentTodo(this.currentTodo.id)
-              await this.deleteTaskFromList({todo: this.currentTodo, countTasks: this.currentTodo.count_tasks - 1, completedSetTo: this.checkIfTasksCompleted})
+              await this.deleteTaskFromList({
+                todo: this.currentTodo,
+                countTasks: this.currentTodo.count_tasks - 1,
+                completedSetTo: this.checkIfTasksCompleted
+              })
             }
           }
         ]
@@ -177,7 +181,6 @@ export default {
 
     toggleTaskItem(task) {
       this.toggleTaskCompletion(task)
-
       this.todoListCompleted({todo: this.currentTodo, setTo: this.checkIfTasksCompleted})
     },
   }

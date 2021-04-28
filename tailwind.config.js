@@ -10,11 +10,7 @@ module.exports = {
       backgroundColor: theme => ({
         ...theme('colors'),
         'lightGreen': '#b5ffa3',
-       }),
-      // backgroundImage: (theme) => ({
-      //   // check: "url('/icons/check.svg')",
-      //   check: "A",
-      // }),
+      }),
       boxShadow: {        
         'dropdown': '0px 9px 17px 2px rgba(48, 69, 84, 0.2);',
       },
@@ -28,7 +24,6 @@ module.exports = {
       },
       minHeight: {
         '12': '3rem',
-
       },
       minWidth: {
         '5': '1.25rem',
@@ -46,5 +41,9 @@ module.exports = {
       zIndex: ["hover", "active"],
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")({
+      strategy: 'class',
+    }),
+  ],
 }

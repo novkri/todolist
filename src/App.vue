@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Modal from './components/Modal'
+import Modal from './components/common/Modal'
 
 export default {
   name: 'App',
@@ -56,8 +56,6 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-
 /* scroll */
 ::-webkit-scrollbar {
   width: 10px;
@@ -86,11 +84,6 @@ export default {
   border-radius: 8px;
   border: 2px solid #d9cdf5;
 }
-
-/* ::-webkit-scrollbar-button {
-  background: #f5cdcd url(arrow_top.png) no-repeat;
-  background-size: contain;
-} */
 
 /* buttons */
 

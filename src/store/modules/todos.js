@@ -14,9 +14,7 @@ const getters = {
   allTodos: state => state.todos.sort((a, b) => {
     return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
   }),
-
   currentTodo: state => state.currentTodo,
-
   allFilteredTodos: (state, getters) => {    
     switch (state.filterName) {
       case 'not_completed':
@@ -27,7 +25,6 @@ const getters = {
         return getters.allTodos
     }
   },
-  
   todosError: state => state.todoError
 }
 
@@ -81,19 +78,18 @@ const actions = {
     }
   },
 
-  // async todoListCompleted({ commit }, { todo, setTo }) {
-  //   try {
-  //     commit('setError', '')
-  //     await axios.put(`${api}/todos/${todo.id}`, {...todo, is_completed: setTo})
-  //     commit('setTodoListCompleted', {todoId: todo.id, setTo})
-  //   } catch (e) {
-  //     commit('setError', e.message)
-  //     Vue.$vToastify.error(e.message)
-  //   }
-  // },
+  
 
-
-
+  async todoListCompleted({ commit }, { todo, setTo }) {
+    try {
+      commit('setError', '')
+      await axios.put(`${api}/todos/${todo.id}`, {...todo, is_completed: setTo})
+      commit('setTodoListCompleted', {todoId: todo.id, setTo})
+    } catch (e) {
+      commit('setError', e.message)
+      Vue.$vToastify.error(e.message)
+    }
+  },
   async addTaskToList({ commit }, {todo, countTasks, completedSetTo}) {
     try {
       commit('setError', '')

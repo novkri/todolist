@@ -43,20 +43,18 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import TodoItem from '../components/TodoItem'
-import AddForm from '../components/AddForm'
-import FilterSelect from '../components/FilterSelect'
-import BurgerBtn from '../components/BurgerBtn'
+import AddForm from '../components/common/AddForm'
+import FilterSelect from '../components/common/FilterSelect'
+import BurgerBtn from '../components/common/BurgerBtn'
 
 export default {
   name: 'Todo',
-
   components: {
     TodoItem,
     AddForm,
     FilterSelect,
     BurgerBtn
   },
-
   computed: {
     ...mapGetters([
       'allTodos',
@@ -65,16 +63,9 @@ export default {
     ]),
   },
 
-  // async created () {
-  //   await this.fetchTodos()
-  // },
-
-  // async mounted,,,,
-
   beforeRouteEnter (to, from, next) {
     next(async vm => await vm.fetchTodos())
   },
-
 
   data() {
     return {
@@ -91,9 +82,7 @@ export default {
         name: name.trim(),
         count_tasks: 0,
         is_completed: false,
-        is_closed: false,
         created_at: Date.now(),
-        // updated_at:
       }
 
       if (name) {
@@ -129,7 +118,6 @@ export default {
             type: 'OK',
             method: () => {
               this.deleteTodo(todoItem.id)
-
               if (this.$route.params.id === todoItem.id) {
                 this.$router.push('/')
               }

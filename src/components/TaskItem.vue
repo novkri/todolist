@@ -6,7 +6,7 @@
         name="Urgent"
         v-model="task.is_completed"
         @change="toggleTaskComplete(task)"
-        class="form-tick mr-3 lg:mx-3 cursor-pointer appearance-none bg-white bg-check h-5 w-5 min-w-5 border border-gray-300 rounded-md checked:bg-purple-500 checked:border-transparent focus:outline-none"
+        class="form-checkbox mr-3 lg:mx-3 cursor-pointer appearance-none bg-white bg-check h-5 w-5 min-w-5 border border-gray-300 rounded-md checked:bg-purple-500 checked:border-transparent focus:outline-none focus:ring-transparent"
       />
 
       <p
@@ -35,13 +35,13 @@
         </svg>
       </span>
 
-      <DeleteBtn @handleDeleteBtnClick="deleteTask(task)" :propsClasses="'mx-4 text-gray-800'" />
+      <DeleteBtn @handleDeleteBtnClick="deleteTask(task)" :propsClasses="'mx-4 text-gray-700'" />
     </div>
   </div>
 </template>
 
 <script>
-import DeleteBtn from '../components/DeleteBtn'
+import DeleteBtn from '../components/common/DeleteBtn'
 
 export default {
   name: 'taskitem',
@@ -63,13 +63,13 @@ export default {
 
     getTaskTime() {
       let time = new Date(this.task.created_at)
-      return time.toLocaleTimeString('ru-RU')
+      return time.toLocaleTimeString('ru-RU', {
+        hour: '2-digit',
+        minute: '2-digit',
+      })
     },
   },
   methods: {
-    // updated_at
-    // ????
-
     deleteTask(task) {
       this.$emit('deleteTaskItem', task)
     },
