@@ -1,28 +1,23 @@
 # todolist
 
-## Project setup
+## 1. Project setup
 ```
 npm install
 ```
-## Запустить с json-serverом
+
+# 2. С локальным сервером: 
+## 2.1. Для запуска 2ух скриптов (сборки и json-server) параллельно нужно установить Concurrently
+```
+npm i concurrently
+```
+
+## 2.2. Запустить с json-serverом
 ```
 npm run start
 ```
 
-### Compiles and hot-reloads for development
+# 2. С сервером на бэке
+### 2.1 Compiles and hot-reloads for development
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
