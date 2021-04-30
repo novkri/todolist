@@ -10,7 +10,7 @@
       </p>
     </router-link>
 
-    <DeleteBtn @handleDeleteBtnClick="deleteTodo(item)" :propsClasses="'absolute inset-y-0 right-0 pr-4 text-gray-600 hover:text-purple-700'" />
+    <DeleteBtn @handleDeleteBtnClick="deleteTodo(item)" propsClasses="absolute inset-y-0 right-0 pr-4 text-gray-600 hover:text-purple-700" />
   </div>
 </template>
 

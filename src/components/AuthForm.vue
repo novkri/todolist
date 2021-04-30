@@ -3,12 +3,7 @@
 <div class="flex flex-col h-screen bg-gray-100">
   <div class="grid place-items-center mx-2 my-20 sm:my-auto">
     <!-- Auth Card  max-w-xl rounded -->
-    <!-- w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-4/12 2xl:w-4/12 
-      px-10 py-10 sm:px-10 sm:py-6 
-      bg-white rounded shadow-xl  -->
-    <div class="
-      flex flex-col max-w-md px-4 py-8 bg-white rounded-lg shadow sm:px-6 md:px-8 lg:px-10">
-
+    <div class="flex flex-col max-w-md px-4 py-8 bg-white rounded-lg shadow sm:px-6 md:px-8 lg:px-10">
       <!-- Card Title -->
       <header class="text-3xl text-center font-semibold text-gray-800">
         <slot name="title"></slot>
@@ -43,14 +38,7 @@
         <slot name="additional-fields"></slot>
 
         <!-- //Auth Buttton -->
-        <button type="submit"
-          @click.prevent="onSubmitBtn"
-          class="w-full py-3 px-4 mt-8 rounded-md
-          transition ease-in duration-200 text-center text-base font-medium uppercase
-          bg-purple-600 hover:bg-purple-700 
-          focus:ring-purple-500 focus:ring-offset-purple-200 text-white shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2">
-          Войти
-        </button>
+        <Button btnType="submit" text="Войти" additionalClasses="uppercase mt-8 w-full" @click.prevent="onSubmitBtn" />
 
        <!-- // Another Auth Routes -->
         <!-- <div class="sm:flex sm:flex-wrap mt-8 sm:mb-4  text-md text-center justify-center"> -->
@@ -59,8 +47,6 @@
           <router-link class="flex-2 underline text-gray-700 hover:text-gray-900" :to="{name: 'register'}">Зарегистрироваться</router-link> -->
         <!-- </div> -->
       </form>
-   
-
     </div>
   </div>
 </div>
@@ -68,6 +54,7 @@
 
 <script>
 import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
+import Button from './widgets/Button'
 
 export default {
   name: 'card',
@@ -88,6 +75,9 @@ export default {
       minLength: minLength(5),
       maxLength: maxLength(20)
     }
+  },
+  components: {
+    Button,
   },
   methods: {
     onSubmitBtn() {

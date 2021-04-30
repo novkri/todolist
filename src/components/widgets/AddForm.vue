@@ -3,7 +3,6 @@
     class="flex flex-col w-full items-center justify-center self-center py-2 px-4 lg:p-4"
     :class="propsClasses"
   >
-
     <input
       type="text"
       v-model.trim="name"
@@ -12,14 +11,7 @@
     />
 
     <div class="flex">
-      <button
-        class="flex-shrink-0 my-2.5 md:m-2 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md transition ease-in duration-200 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
-        type="submit"
-        @click.prevent="submitForm"
-      >
-        Добавить
-      </button>
-      
+      <Button btnType="submit" text="Добавить" additionalClasses="flex-shrink-0 my-2.5 md:m-2" :clickHandler="submitForm" />
       <slot></slot>
     </div>
 
@@ -27,6 +19,8 @@
 </template>
 
 <script>
+import Button from './Button'
+
 export default {
   name: 'addForm',
   props: {
@@ -39,9 +33,12 @@ export default {
       name: ''
     }
   },
-
+  components: {
+    Button,
+  },
   methods: {
     submitForm() {
+      console.log(this.name);
       this.name ? 
         this.$emit('addNewItem', this.name) : 
         this.$vToastify.error('', `Введите ${this.placeholderText.toLowerCase()}`)

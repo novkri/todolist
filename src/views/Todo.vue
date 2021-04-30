@@ -32,7 +32,7 @@
             </div>
           </nav>
 
-          <AddForm :propsClasses="'max-w-sm md:max-w-md'" placeholderText="Название списка" @addNewItem="addTodoList" />
+          <AddForm propsClasses="max-w-sm md:max-w-md" placeholderText="Название списка" @addNewItem="addTodoList" />
         </div>
       </div>
 

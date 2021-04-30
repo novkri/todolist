@@ -11,11 +11,10 @@
           </header>
 
 
-
-          <!-- <div v-if="loading" class="flex item-center justify-center w-full pb-5">
-            <Loader :loaderClasses="'bg-purple-600'"  />
+          <div v-if="loading" class="flex item-center justify-center w-full pb-5">
+            <Loader loaderClasses="bg-purple-600" />
             {{loading}}
-          </div> -->
+          </div>
           <p
             v-if="allCurrentTodoTasks && allCurrentTodoTasks.length === 0"
             class="text-center p-3 pb-5 font-light text-xl"
@@ -39,7 +38,7 @@
 
       <section class="lg:py-2 lg:px-4">
         <AddForm
-          :propsClasses="'lg:flex-row'"
+          propsClasses="lg:flex-row"
           placeholderText="Краткое описание задачи"
           @addNewItem="addTaskItem"
         >
@@ -76,14 +75,14 @@
 import { mapGetters, mapActions } from 'vuex'
 import TaskItem from '../components/TaskItem'
 import AddForm from '../components/widgets/AddForm'
-// import Loader from '../components/widgets/Loader'
+import Loader from '../components/widgets/Loader'
 
 export default {
   name: "Tasks",
   components: {
     TaskItem,
     AddForm,
-    // Loader,
+    Loader,
   },
 
   computed: {
@@ -100,7 +99,7 @@ export default {
   data() {
     return {
       isUrgent: false,
-      // loading: false
+      loading: false
     }
   },
 
@@ -120,10 +119,10 @@ export default {
   // },
 
   async created() {
-    // this.loading = true
+    this.loading = true
     await this.fetchCurrentTodo(Number(this.$route.params.id))
     await this.fetchTasks(Number(this.$route.params.id))
-    // this.loading = false
+    this.loading = false
   },
   
   methods: {

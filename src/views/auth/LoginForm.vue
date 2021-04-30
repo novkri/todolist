@@ -1,5 +1,5 @@
 <template>
-    <Card @onSubmitForm="handleFormSubmit">
+    <AuthForm @onSubmitForm="handleFormSubmit">
       <h2 slot="title">Логин</h2>
 
         <div slot="footer-links" class="sm:flex sm:flex-wrap mt-6 sm:mb-4  text-md text-center justify-center">
@@ -36,17 +36,17 @@
           <router-link class="flex-2 underline text-gray-700 hover:text-gray-900" :to="{name: 'register'}">Зарегистрироваться</router-link>
         </div>
       </div> -->
-    </Card>
+    </AuthForm>
 </template>
 
 <script>
-import Card from '../../components/widgets/Card'
+import AuthForm from '../../components/AuthForm'
 
 export default {
   name: 'login',
   props: {},
   components: {
-    Card,
+    AuthForm,
   },
   data() {
     return {
