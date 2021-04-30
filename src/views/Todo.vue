@@ -108,7 +108,7 @@ export default {
 
     addTodoList(name) {
       let newTodoObj = {
-        name: name.trim(),
+        name,
         count_tasks: 0,
         is_completed: false,
         created_at: Date.now(),

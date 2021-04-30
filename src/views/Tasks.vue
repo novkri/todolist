@@ -136,7 +136,7 @@ export default {
         let newTaskObj = {
           id: Date.now(),
           list_id: Number(this.currentTodo.id),
-          name: name.trim(),
+          name,
           is_completed: false,
           urgency: this.isUrgent,
           created_at: Date.now()

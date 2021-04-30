@@ -14,26 +14,31 @@
         <slot name="title"></slot>
       </header>
 
+
       <form class="p-6 mt-8">
-        <!-- <slot name="form-content"></slot> -->
         <!-- //Email Input -->
         <!-- <label for="email" class="block text-sm  text-gray-600 ">E-mail</label> -->
-        <input id="email" v-model="email" type="email" name="email" placeholder="E-mail" autocomplete="email"
+        <input id="email" v-model.trim="$v.email.$model" type="email" name="email" placeholder="E-mail"
+          @click="$v.email.$touch()"
           class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+          :class="[($v.email.$invalid && $v.email.$dirty) ? 'ring-2 ring-red-400 border-transparent' : '']"
           required
         />
-        <!-- <span v-if="this.error && !this.email" class="text-sm text-red-500 ">Поле Email не может быть пустым</span> -->
+        <span v-if="!$v.email.required && $v.email.$dirty" class="text-sm text-red-500 ">Поле Email не может быть пустым</span>
+        <span v-if="!$v.email.email && $v.email.$dirty" class="text-sm text-red-500 ">Введите корректный Email</span>
 
         <!-- //Password Input -->
         <!-- <label for="password" class="block mt-4 text-sm  text-gray-600">Пароль</label> -->
-        <input id="password" v-model="password" type="password" name="password" placeholder="Пароль" autocomplete="current-password"
-          :class="[this.error ? 'ring-2 ring-red-400 border-transparent' : '']"
+        <input id="password" v-model.trim="$v.password.$model" type="password" name="password" placeholder="Пароль"
+          @click="$v.password.$touch()"
           class="mt-4 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+          :class="[($v.password.$invalid && $v.password.$dirty) ? 'ring-2 ring-red-400 border-transparent' : '']"
           required
         />
-        <!-- <span v-if="this.error && !this.password" class="text-sm text-red-500 ">Введите пароль</span>
-        <span v-if="this.password.trim() && this.password.trim().length < 3" class="text-sm text-red-500 ">Пароль должен содержать минимум 3 символа</span>
-        <span v-if="this.password.trim().length > 20" class="text-sm text-red-500 ">Пароль не должен содержать более 20 символов</span> -->
+
+        <span v-if="!$v.password.required && $v.password.$dirty" class="text-sm text-red-500 ">Введите пароль</span>
+        <span v-if="!$v.password.minLength && $v.password.$dirty" class="text-sm text-red-500 ">Пароль должен содержать минимум {{$v.password.$params.minLength.min}} символов </span>
+        <span v-if="!$v.password.maxLength && $v.password.$dirty" class="text-sm text-red-500 ">Пароль не должен содержать более {{$v.password.$params.maxLength.max}} символов</span>
 
         <slot name="additional-fields"></slot>
 
@@ -62,6 +67,8 @@
 </template>
 
 <script>
+import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
+
 export default {
   name: 'card',
   props: {},
@@ -69,22 +76,30 @@ export default {
     return {
       email: '',
       password: '',
-      error: false
+    }
+  },
+  validations: {
+    email: {
+      required,
+      email
+    },
+    password: {
+      required,
+      minLength: minLength(5),
+      maxLength: maxLength(20)
     }
   },
   methods: {
     onSubmitBtn() {
+      this.$v.$touch()
+
+      let formData = {}
       if (this.email && this.password) {
-        this.error = false
-        this.$emit('onSubmitForm', {
-          email: this.email.trim(),
-          password: this.password.trim()
-        })
-      } 
-      else {
-        this.error = true
+        formData.email = this.email
+        formData.password = this.password
       }
-      
+
+      this.$emit('onSubmitForm', formData)
     }
   }
 }

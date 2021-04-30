@@ -5,7 +5,10 @@ import store from './store'
 
 import "tailwindcss/tailwind.css"
 import VueToastify from "vue-toastify"
+import Vuelidate from 'vuelidate'
 
+
+Vue.use(Vuelidate)
 Vue.use(VueToastify);
 Vue.config.productionTip = false
 
