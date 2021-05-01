@@ -1,19 +1,10 @@
 <template>
   <div id="app" class="font-Rubik">
-    <!-- Nav COmponent here   --> <!-- <a href="jacascript:void(0)">logout</a> + -->
-    <!-- <Navbar /> -->
-    <!-- logout: function () {
-        this.$store.dispatch('logout')
-        .then(() => {
-          this.$router.push('/login')
-        })
-      } -->
     <router-view @populateModal="populateModal"></router-view> 
 
     <Modal v-if="isModalOpen" @close="closeModal">
       <p slot="header" class="break-words">{{ modalContent.header }}</p>
       <p slot="body" class="break-words">{{ modalContent.body }}</p>
-
       <button
         slot="footer"
         type="button"
@@ -21,7 +12,10 @@
         :key="button.title"
         @click="handleBtnClick(button.method)"
         :class="[button.type === 'OK' ? 'btn_ok' : 'btn_action']"
-        class="text-white py-2 px-4 focus:ring-indigo-500 focus:ring-offset-indigo-200 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+        class="text-white py-2 px-4 w-full text-center text-base 
+        font-semibold transition ease-in duration-200 shadow-md 
+        focus:ring-indigo-500 focus:ring-offset-indigo-200 focus:outline-none 
+        focus:ring-2 focus:ring-offset-2 rounded-lg"
       >
         {{ button.title }}
       </button>
@@ -31,13 +25,11 @@
 
 <script>
 import Modal from './components/Modal'
-// import Navbar from './components/Navbar'
 
 export default {
   name: 'App',
   components: {
     Modal,
-    // Navbar
   },
   data() { 
     return {

@@ -1,54 +1,43 @@
 <template>
-  <main class="bg-gray-100 overflow-hidden relative h-screen">
+  <div class="bg-gray-100 overflow-hidden relative h-screen">
     <Navbar @toggleSidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" />
 
-
-
-    <!-- closed sidebar -->
-    <div class="flex md:hidden items-center justify-center w-screen bg-white ">
-      <BurgerBtn  @toggleSidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" burgerClasses="bg-purple-600 text-white" />
-      <p v-if="!isSidebarOpen">Показать списки задач</p>
-      <p v-else>Скрыть списки задач</p>
-    </div>
-
-
-    <section class="flex flex-col md:flex-row items-start justify-between z-50">
-      <!-- sidebar -->
-      <div
-        class="relative lg:static top-0 right-0 pb-14 lg:pb-0 h-screen md:block md:ml-4 md:mt-6 shadow-2xl w-full md:w-1/5 md:min-w-16"
+    <main class="flex flex-col md:flex-row items-start justify-between z-50">
+      <!-- todo lists -->
+      <div class="relative top-0 right-0 pb-12 h-screen shadow-2xl w-full 
+        md:block md:ml-4 md:mt-6 md:w-1/5 md:min-w-16 lg:static lg:pb-0"
         :class="[isSidebarOpen ? 'block' : 'hidden']"
       >
-      <div class="bg-white h-full md:rounded-2xl flex flex-col justify-between pb-6 lg:pb-12">
-        <nav class="pt-2 md:pt-6 max-h-4/5 h-4/5 overflow-y-auto">
+        <!-- Card for todo list -->
+        <div class="bg-white h-full md:rounded-2xl flex flex-col justify-between pb-6 md:pb-12">
+          <nav class="pt-2 md:pt-6 max-h-4/5 h-4/5 overflow-y-auto">
 
-          <div class="px-6 py-3 mb-3">
-            <FilterSelect :filterOptions="filterTodoOptions" :initOption="filterTodoOptions[0]" />
-          </div>
+            <div class="px-6 py-3 mb-3">
+              <FilterSelect :filterOptions="filterTodoOptions" :initOption="filterTodoOptions[0]" />
+            </div>
 
+            <!-- Card content -->
+            <div v-if="loading" class="flex item-center justify-center w-full">
+              <Loader />
+            </div>
+            
+            <p v-else-if="allTodos.length === 0" class="text-center p-6 font-light text-xl mb-3">
+              Список пуст...
+            </p>
 
-          <div v-if="loading" class="flex item-center justify-center w-full">
-            <Loader />
-          </div>
-          <p
-            v-else-if="allTodos.length === 0"
-            class="text-center p-6 font-light text-xl mb-3"
-          >
-            Список пуст...
-          </p>
+            <div v-else v-for="item in allFilteredTodos" :key="item.id" @click="toggleSidebar">
+              <TodoItem :item="item" @deleteTodoItem="onDeleteTodo" />
+            </div>
+          </nav>
 
-          <div v-else v-for="item in allFilteredTodos" :key="item.id" @click="toggleSidebar">
-            <TodoItem :item="item" @deleteTodoItem="onDeleteTodo" />
-          </div>
-        </nav>
-
-        <AddForm propsClasses="max-w-sm md:max-w-md" placeholderText="Название списка" @addNewItem="addTodoList" />
-      </div>
+          <AddForm propsClasses="max-w-sm md:max-w-md" placeholderText="Название списка" @addNewItem="addTodoList" />
+        </div>
       </div>
 
       <!-- tasks -->
       <router-view name="tasks" :key='$route.fullPath' @populateModal="e => $emit('populateModal', e)"></router-view>
-    </section>
-  </main>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -57,7 +46,6 @@ import TodoItem from '../components/TodoItem'
 import AddForm from '../components/AddForm'
 import Navbar from '../components/Navbar'
 import FilterSelect from '../components/widgets/FilterSelect'
-import BurgerBtn from '../components/widgets/BurgerBtn'
 import Loader from '../components/widgets/Loader'
 
 export default {
@@ -66,7 +54,6 @@ export default {
     TodoItem,
     AddForm,
     FilterSelect,
-    BurgerBtn,
     Loader,
     Navbar
   },

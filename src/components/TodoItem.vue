@@ -10,12 +10,15 @@
       </p>
     </router-link>
 
-    <DeleteBtn @handleDeleteBtnClick="deleteTodo(item)" propsClasses="absolute inset-y-0 right-0 pr-4 text-gray-600 hover:text-purple-700" />
+    <DeleteButton
+      @handleDeleteButtonClick="deleteTodo(item)"
+      propsClasses="absolute inset-y-0 right-0 pr-4 text-gray-600 hover:text-purple-700"
+    />
   </div>
 </template>
 
 <script>
-import DeleteBtn from '../components/widgets/DeleteBtn'
+import DeleteButton from '../components/widgets/DeleteButton'
 
 export default {
   name: "todoitem",
@@ -23,7 +26,7 @@ export default {
     item: Object,
   },
   components: {
-    DeleteBtn
+    DeleteButton
   },
   methods: {
     deleteTodo(todoItem) {

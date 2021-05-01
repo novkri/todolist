@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'deleteBtn',
+  name: 'delete-btn',
   props: {
     propsClasses: {
       type: String,
