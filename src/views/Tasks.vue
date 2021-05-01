@@ -1,6 +1,6 @@
 <template>
   <article class="flex flex-col w-full px-4 md:py-6 lg:px-8 md:w-4/5">
-    <section class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-4 lg:pt-0 lg:pt-0 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
+    <section class="overflow-auto flex flex-col justify-between h-screen pb-20 lg:pb-10 pt-6 lg:pt-0 lg:pt-0 px-2 md:pt-0 md:pr-0 md:pl-0">
       <main class="w-full mb-8 max-h-full overflow-auto">
         <div class="shadow-md rounded-2xl bg-white w-full mb-4 mx-0">
           <header class="font-bold text-lg p-4 text-black">
@@ -74,7 +74,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TaskItem from '../components/TaskItem'
-import AddForm from '../components/widgets/AddForm'
+import AddForm from '../components/AddForm'
 import Loader from '../components/widgets/Loader'
 
 export default {

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Button from './Button'
+import Button from './widgets/Button'
 
 export default {
   name: 'addForm',

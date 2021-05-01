@@ -34,7 +34,7 @@ const actions = {
       commit('setTasks', currTasks)
     } catch(e) {
       commit('setTaskError', e.message)
-      Vue.$vToastify.error(e.message)
+      Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
   },
 
@@ -45,7 +45,7 @@ const actions = {
       commit('addNewTask', response.data)
     } catch (e) {
       commit('setTaskError', e.message)
-      Vue.$vToastify.error(e.message)
+      Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
     
   },
@@ -57,7 +57,7 @@ const actions = {
       commit('deleteOneTask', taskId)
     } catch (e) {
       commit('setTaskError', e.message)
-      Vue.$vToastify.error(e.message)
+      Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
   },
 
@@ -67,7 +67,7 @@ const actions = {
       await axios.put(`${api}/tasks/${task.id}`, task)
     } catch (e) {
       commit('setTaskError', e.message)
-      Vue.$vToastify.error(e.message)
+      Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
   },
 }

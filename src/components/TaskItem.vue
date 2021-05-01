@@ -17,7 +17,7 @@
       </p>
     </label>
 
-    <div class="flex w-full items-center justify-between px-4 mb-6 mt-2 lg:my-0 lg:px-0 lg:w-3/12">
+    <div class="flex w-full items-center justify-between px-4 mb-4 mt-2 lg:my-0 lg:px-0 lg:w-3/12">
       <!-- urgency  -->
       <span class="mx-2" :class="{'hidden md:block md:invisible': !task.urgency}">
         <svg  class="text-red-500 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

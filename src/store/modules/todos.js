@@ -36,7 +36,7 @@ const actions = {
       commit('setTodos', response.data)
     } catch(e) {
       commit('setError', e.message)
-      Vue.$vToastify.error(e.message);
+      Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
   },
 
@@ -47,7 +47,7 @@ const actions = {
       commit('setCurrentTodo', response.data)
     } catch (e) {
       commit('setError', e.message)
-      Vue.$vToastify.error(e.message)
+      Vue.$vToastify.error(e.message, "Что-то пошло не так")
       commit('setCurrentTodo', '')
     }
   },
@@ -59,7 +59,7 @@ const actions = {
       commit('addNewTodo', response.data)
     } catch(e) {
       commit('setError', e.message)
-      Vue.$vToastify.error(e.message)
+      Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
   },
 
@@ -74,7 +74,7 @@ const actions = {
       commit('deleteOneTodo', todoId)
     } catch (e) {
       commit('setError', e.message)
-      Vue.$vToastify.error(e.message)
+      Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
   },
 
@@ -87,7 +87,7 @@ const actions = {
       commit('setTodoListCompleted', {todoId: todo.id, setTo})
     } catch (e) {
       commit('setError', e.message)
-      Vue.$vToastify.error(e.message)
+      Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
   },
   async addTaskToList({ commit }, {todo, countTasks, completedSetTo}) {
@@ -98,7 +98,7 @@ const actions = {
       commit('setTodoListCompleted', {todoId: todo.id, setTo: completedSetTo})
     } catch (e) {
       commit('setError', e.message)
-      Vue.$vToastify.error(e.message)
+      Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
   },
   async deleteTaskFromList({ commit }, {todo, countTasks, completedSetTo}) {
@@ -109,7 +109,7 @@ const actions = {
       commit('setTodoListCompleted', {todoId: todo.id, setTo: completedSetTo})
     } catch (e) {
       commit('setError', e.message)
-      Vue.$vToastify.error(e.message)
+      Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
   },
 }

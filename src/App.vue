@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="font-Rubik">
     <!-- Nav COmponent here   --> <!-- <a href="jacascript:void(0)">logout</a> + -->
+    <!-- <Navbar /> -->
     <!-- logout: function () {
         this.$store.dispatch('logout')
         .then(() => {
@@ -30,11 +31,13 @@
 
 <script>
 import Modal from './components/Modal'
+// import Navbar from './components/Navbar'
 
 export default {
   name: 'App',
   components: {
     Modal,
+    // Navbar
   },
   data() { 
     return {

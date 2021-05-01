@@ -24,7 +24,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { required } from 'vuelidate/lib/validators'
-import AuthForm from '../../components/AuthForm'
+import AuthForm from '../../components/BasicAuthForm'
 
 export default {
   name: 'register',

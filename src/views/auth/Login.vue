@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import AuthForm from '../../components/AuthForm'
+import AuthForm from '../../components/BasicAuthForm'
 import { mapActions } from 'vuex'
 
 export default {

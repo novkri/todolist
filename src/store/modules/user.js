@@ -42,13 +42,14 @@ const actions = {
 
       localStorage.setItem('token', token)
       // axios.defaults.headers.common['Authorization'] = token
+      // //////localStorage.setItem('user',JSON.stringify(response.data.user)) ?
 
 
       commit('setUser', token, user)
 
     } catch (e) {
       commit('setError', e.message)
-      Vue.$vToastify.error(e.message)
+      Vue.$vToastify.error(e.message, "Что-то пошло не так")
       localStorage.removeItem('token')
     }
   },
@@ -64,7 +65,6 @@ const actions = {
       // temp
       const response = await axios.get(`${api}/users`)
       const result = response.data.filter(u => u.email === userObj.email)[0]
-      
       //temp
 
       console.log(result);
@@ -76,16 +76,16 @@ const actions = {
 
       localStorage.setItem('token', token)
       // axios.defaults.headers.common['Authorization'] = token
+      // //////localStorage.setItem('user',JSON.stringify(response.data.user)) ?
 
 
       commit('setUser', {token, user: result}) //user)
-
 
       // let result = response.data.filter(u => u.email === userObj.email)[0]
       // console.log(result);
     } catch (e) {
       commit('setError', e.message)
-      Vue.$vToastify.error(e.message)
+      Vue.$vToastify.error(e.message, "Что-то пошло не так")
       localStorage.removeItem('token')
     }
   },

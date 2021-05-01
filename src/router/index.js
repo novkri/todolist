@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Todo from '../views/Todo'
 const Tasks = () => import('../views/Tasks')
-import LoginForm from '../views/auth/LoginForm'
-import RegisterForm from '../views/auth/RegisterForm'
+// import LoginForm from '../views/auth/LoginForm'
+// import RegisterForm from '../views/auth/RegisterForm'
 
 // import store from './store.js'
 
@@ -29,12 +29,12 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: LoginForm //() => import('../views/auth/LoginForm')
+    component: () => import('../views/auth/Login') //LoginForm
   },
   {
     path: '/register',
     name: 'register',
-    component: RegisterForm //() => import('../views/auth/RegisterForm')
+    component: () => import('../views/auth/Register') //RegisterForm 
   }
 ]
 
