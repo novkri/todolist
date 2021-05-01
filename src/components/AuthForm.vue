@@ -14,7 +14,6 @@
         <!-- //Email Input -->
         <!-- <label for="email" class="block text-sm  text-gray-600 ">E-mail</label> -->
         <input id="email" v-model.trim="$v.email.$model" type="email" name="email" placeholder="E-mail"
-          @click="$v.email.$touch()"
           class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
           :class="[($v.email.$invalid && $v.email.$dirty) ? 'ring-2 ring-red-400 border-transparent' : '']"
           required
@@ -25,7 +24,6 @@
         <!-- //Password Input -->
         <!-- <label for="password" class="block mt-4 text-sm  text-gray-600">Пароль</label> -->
         <input id="password" v-model.trim="$v.password.$model" type="password" name="password" placeholder="Пароль"
-          @click="$v.password.$touch()"
           class="mt-4 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
           :class="[($v.password.$invalid && $v.password.$dirty) ? 'ring-2 ring-red-400 border-transparent' : '']"
           required
@@ -38,7 +36,7 @@
         <slot name="additional-fields"></slot>
 
         <!-- //Auth Buttton -->
-        <Button btnType="submit" text="Войти" additionalClasses="uppercase mt-8 w-full" @click.prevent="onSubmitBtn" />
+        <Button btnType="submit" text="Войти" additionalClasses="uppercase mt-8 w-full" :clickHandler="onSubmitBtn" />
 
        <!-- // Another Auth Routes -->
         <!-- <div class="sm:flex sm:flex-wrap mt-8 sm:mb-4  text-md text-center justify-center"> -->
@@ -84,12 +82,15 @@ export default {
       this.$v.$touch()
 
       let formData = {}
+
       if (this.email && this.password) {
         formData.email = this.email
         formData.password = this.password
+
+        this.$emit('onSubmitForm', formData)
       }
 
-      this.$emit('onSubmitForm', formData)
+      this.$emit('onSubmitForm')
     }
   }
 }

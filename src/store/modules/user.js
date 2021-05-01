@@ -1,129 +1,116 @@
-// import axios from 'axios'
-// import Vue from "vue"
+import axios from 'axios'
+import Vue from "vue"
 
-// const api = process.env.VUE_APP_BASE_API
+const api = process.env.VUE_APP_BASE_API
 
 const state = () => ({
   // todos: [],
   // currentTodo: {},
-  // todoError: '',
-  // filterName: 'all'
+  userError: '',
+
+
+  // user: null
+  status: '',
+  token: localStorage.getItem('token') || '',
+  user : {}
+
 })
 
-const getters = {  
-  // allTodos: state => state.todos.sort((a, b) => {
-  //   return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
-  // }),
-  // currentTodo: state => state.currentTodo,
-  // allFilteredTodos: (state, getters) => {    
-  //   switch (state.filterName) {
-  //     case 'all':
-  //       return getters.allTodos
-  //     case 'completed':
-  //       return getters.allTodos.filter(todo => todo.is_completed)
-  //     default:
-  //       return getters.allTodos.filter(todo => !todo.is_completed)
-  //   }
-  // },
-  // todosError: state => state.todoError
+const getters = {
+  // user: state => state.user,
+  isLoggedIn: state => !!state.token,
+  authStatus: state => state.status,
+  userError: state => state.userError
 }
 
 const actions = {
-  // async fetchTodos({ commit }) {
-  //   try {
-  //     commit('setError', '')
-  //     const response = await axios.get(`${api}/todos`)
-  //     commit('setTodos', response.data)
-  //   } catch(e) {
-  //     commit('setError', e.message)
-  //     Vue.$vToastify.error(e.message);
-  //   }
-  // },
+  async register({ commit }, userObj) {
+    try {
+      commit('setError', '')
 
-  // async fetchCurrentTodo({ commit }, id) {
-  //   try {
-  //     commit('setError', '')
-  //     const response = await axios.get(`${api}/todos/${id}`)
-  //     commit('setCurrentTodo', response.data)
-  //   } catch (e) {
-  //     commit('setError', e.message)
-  //     Vue.$vToastify.error(e.message)
-  //     commit('setCurrentTodo', '')
-  //   }
-  // },
-
-  // async addTodo({ commit }, newTodoObj) {
-  //   try {
-  //     commit('setError', '')
-  //     const response = await axios.post(`${api}/todos`, { ...newTodoObj })
-  //     commit('addNewTodo', response.data)
-  //   } catch(e) {
-  //     commit('setError', e.message)
-  //     Vue.$vToastify.error(e.message)
-  //   }
-  // },
-
-  // filterTodos({ commit }, optionName) {
-  //   commit('setFilteredTodos', optionName)
-  // },
-
-  // async deleteTodo({ commit }, todoId) {
-  //   try {
-  //     commit('setError', '')
-  //     await axios.delete(`${api}/todos/${todoId}`)
-  //     commit('deleteOneTodo', todoId)
-  //   } catch (e) {
-  //     commit('setError', e.message)
-  //     Vue.$vToastify.error(e.message)
-  //   }
-  // },
+      console.log(userObj);
+      const response = await axios.post(`${api}/users`, { ...userObj })
+      console.log(response);
 
 
-  // async todoListCompleted({ commit }, { todo, setTo }) {
-  //   try {
-  //     commit('setError', '')
-  //     await axios.put(`${api}/todos/${todo.id}`, {...todo, is_completed: setTo})
-  //     commit('setTodoListCompleted', {todoId: todo.id, setTo})
-  //   } catch (e) {
-  //     commit('setError', e.message)
-  //     Vue.$vToastify.error(e.message)
-  //   }
-  // },
-  // async addTaskToList({ commit }, {todo, countTasks, completedSetTo}) {
-  //   try {
-  //     commit('setError', '')
-  //     await axios.put(`${api}/todos/${todo.id}`, {...todo, is_completed: completedSetTo, count_tasks: countTasks})
-  //     commit('changeAmountOfTasksinList', {todoId: todo.id, countTasks})
-  //     commit('setTodoListCompleted', {todoId: todo.id, setTo: completedSetTo})
-  //   } catch (e) {
-  //     commit('setError', e.message)
-  //     Vue.$vToastify.error(e.message)
-  //   }
-  // },
-  // async deleteTaskFromList({ commit }, {todo, countTasks, completedSetTo}) {
-  //   try {
-  //     commit('setError', '')
-  //     await axios.put(`${api}/todos/${todo.id}`, {...todo, is_completed: completedSetTo, count_tasks: countTasks})
-  //     commit('changeAmountOfTasksinList', {todoId: todo.id, countTasks})
-  //     commit('setTodoListCompleted', {todoId: todo.id, setTo: completedSetTo})
-  //   } catch (e) {
-  //     commit('setError', e.message)
-  //     Vue.$vToastify.error(e.message)
-  //   }
-  // },
+
+
+
+
+      const token = response.data.token
+      const user = response.data.user
+
+      localStorage.setItem('token', token)
+      // axios.defaults.headers.common['Authorization'] = token
+
+
+      commit('setUser', token, user)
+
+    } catch (e) {
+      commit('setError', e.message)
+      Vue.$vToastify.error(e.message)
+      localStorage.removeItem('token')
+    }
+  },
+
+  async login({ commit }, userObj) {
+    try {
+      commit('setError', '')
+
+      console.log(userObj);
+      // const response = await axios.post(`${api}/users`)
+
+
+      // temp
+      const response = await axios.get(`${api}/users`)
+      const result = response.data.filter(u => u.email === userObj.email)[0]
+      
+      //temp
+
+      console.log(result);
+
+      const token = 12345 //response.data.token
+      // const user = response.data.user
+
+
+
+      localStorage.setItem('token', token)
+      // axios.defaults.headers.common['Authorization'] = token
+
+
+      commit('setUser', {token, user: result}) //user)
+
+
+      // let result = response.data.filter(u => u.email === userObj.email)[0]
+      // console.log(result);
+    } catch (e) {
+      commit('setError', e.message)
+      Vue.$vToastify.error(e.message)
+      localStorage.removeItem('token')
+    }
+  },
+
+  logout({ commit }) {
+    commit('logout')
+    localStorage.removeItem('token')
+    delete axios.defaults.headers.common['Authorization']
+  }
 }
 
 const mutations = {
-  // setTodos: (state, todos) => state.todos = todos,
-  // setCurrentTodo: (state, todo) => state.currentTodo = todo,
-  // setFilteredTodos: (state, optionName) => state.filterName = optionName,
-  // setError: (state, error) => state.todoError = error,
-  // addNewTodo: (state, todo) => state.todos.push(todo),
-  // deleteOneTodo: (state, todoId) => state.todos = state.todos.filter(todo => todo.id !== todoId),
-  // setTodoListCompleted: (state, { todoId, setTo }) => {
-  //   state.todos.filter(todo => todo.id === todoId)[0].is_completed = setTo
-  // },
-  // changeAmountOfTasksinList: (state, { todoId, countTasks }) => state.todos.filter(item => item.id === todoId)[0].count_tasks = countTasks
+  setUser: (state, { token, user }) => {
+    console.log(user, 'success');
+    state.token = token
+    state.user = user
+  },
+
+  logout: state => {
+    state.status = ''
+    state.token = ''
+  },
+
+  // setUser: (state, user) => state.user = user,
+  setError: (state, error) => state.userError = error,
 }
 
 export default {

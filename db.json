@@ -166,5 +166,19 @@
       "urgency": false,
       "created_at": 1619472043784
     }
+  ],
+  "users": [
+    {
+      "email": "dsfs@zsdf.sf",
+      "password": "dsfsdfsd",
+      "id": 1
+    },
+    {
+      "email": "tryregister@email.com",
+      "password": "123456",
+      "firstName": "tryregiste",
+      "lastName": "tryregisterrr",
+      "id": 2
+    }
   ]
 }

@@ -1,6 +1,13 @@
 <template>
   <div id="app" class="font-Rubik">
-    <router-view @populateModal="populateModal"></router-view>
+    <!-- Nav COmponent here   --> <!-- <a href="jacascript:void(0)">logout</a> + -->
+    <!-- logout: function () {
+        this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push('/login')
+        })
+      } -->
+    <router-view @populateModal="populateModal"></router-view> 
 
     <Modal v-if="isModalOpen" @close="closeModal">
       <p slot="header" class="break-words">{{ modalContent.header }}</p>
@@ -32,10 +39,14 @@ export default {
   data() { 
     return {
       isModalOpen: false,
-      modalContent: {}
+      modalContent: {},
+      user: null
     }
   },
-
+  async created() {
+    // const response = await axios.get('user') //get logged in user
+    // this.user = response.data
+  },
   methods: {
     populateModal(data) {
       this.modalContent = data

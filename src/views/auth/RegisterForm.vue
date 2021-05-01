@@ -1,5 +1,5 @@
 <template>
-  <AuthForm @onSubmitForm="handleFormSubmit">
+  <AuthForm @onSubmitForm="handleRegister">
     <h2 slot="title">Регистрация</h2>
       
     <div slot="additional-fields" class="flex flex-col">
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { required } from 'vuelidate/lib/validators'
 import AuthForm from '../../components/AuthForm'
 
@@ -43,13 +44,21 @@ export default {
     }
   },
   methods: {
-    handleFormSubmit(defaultObj) {
+     ...mapActions(['register']),
+    handleRegister(defaultObj) {
       this.$v.$touch()
 
       if (defaultObj && this.firstName) {
         defaultObj.firstName = this.firstName
         defaultObj.lastName = this.lastName
         console.log(defaultObj);
+
+        this.register(defaultObj)
+          .then(() => {
+              console.log('then')
+              // this.$router.push('/')
+            })
+          // .catch(err => console.log(err))
       }
     }
   }

@@ -86,7 +86,7 @@ export default {
           name: "all",
           value: 'Все'
         }
-      ]
+      ],
     }
   },
 
