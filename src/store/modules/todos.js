@@ -1,7 +1,8 @@
 import axios from 'axios'
 import Vue from "vue"
+import {BASE_API_URL as api} from '../../api'
 
-const api = process.env.VUE_APP_BASE_API
+// const api = process.env.VUE_APP_BASE_API
 
 const state = () => ({
   todos: [],

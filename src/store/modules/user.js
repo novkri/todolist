@@ -1,7 +1,9 @@
 import axios from 'axios'
 import Vue from "vue"
+import {BASE_API_URL as api} from '../../api'
 
-const api = process.env.VUE_APP_BASE_API
+// const api = process.env.VUE_APP_BASE_API
+
 
 const state = () => ({
   userError: '',
@@ -26,8 +28,6 @@ const actions = {
       // console.log(response);
 
 
-
-
       const token = 12345 //response.data.token
       const user = response.data
 
@@ -48,7 +48,6 @@ const actions = {
   async login({ commit }, userObj) {
     try {
       commit('setError', '')
-
       // console.log(userObj);
 
       // later
