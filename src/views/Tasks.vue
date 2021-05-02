@@ -15,7 +15,6 @@
           <!-- Card content -->
           <div v-if="loading" class="flex item-center justify-center w-full pb-5">
             <Loader loaderClasses="bg-purple-600" />
-            {{loading}}
           </div>
 
           <p v-if="allCurrentTodoTasks && allCurrentTodoTasks.length === 0" class="text-center p-3 pb-5 font-light text-xl">
@@ -155,6 +154,7 @@ export default {
         }
 
         this.$emit('populateModal', modalObject)
+        this.isUrgent = false
       }
     },
 

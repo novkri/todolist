@@ -15,6 +15,7 @@
         <div class="flex items-center justify-end md:justify-center">
           <button
             @click="toggleUserMenu"
+            @blur="isUserMenuOpen = false"
             type="button"
             class="flex items-center justify-center rounded-md px-2 py-2 mx-2 
             font-medium text-gray-700 hover:bg-gray-50 
@@ -45,13 +46,13 @@
         <!-- user dropdown menu -->
         <div
           v-if="isUserMenuOpen"
-          class="origin-top-left absolute right-0 md:left-0 mt-2 w-56 rounded-md shadow-lg bg-white z-50 ring-1 ring-black ring-opacity-5"
+          class="origin-top-left absolute right-0  mt-2 w-56 rounded-md shadow-lg bg-white z-50 ring-1 ring-black ring-opacity-5"
         >
           <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            <p class="px-4 py-2 text-md text-gray-700 cursor-default break-words block md:hidden">User Userovich</p>
+            <p class="px-4 py-2 text-md text-gray-700 cursor-default break-words">{{userName}}</p>
 
             <!-- menu links -->
-            <p @click="userLogout" class="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+            <p @mousedown="userLogout" class="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
               <span class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
