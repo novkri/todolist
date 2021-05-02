@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-100 overflow-hidden relative h-full">
+  <div class="bg-gray-100 overflow-hidden relative h-screen lg:h-full">
     <Navbar @toggleSidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" />
 
     <main class="flex flex-col md:flex-row items-start justify-between z-50">
@@ -26,7 +26,8 @@
               Список пуст...
             </p>
 
-            <div v-else v-for="item in allFilteredTodos" :key="item.id" @click="toggleSidebar">
+<!--  @click="toggleSidebar" -->
+            <div v-else v-for="item in allFilteredTodos" :key="item.id">
               <TodoItem :item="item" @deleteTodoItem="onDeleteTodo" />
             </div>
           </nav>

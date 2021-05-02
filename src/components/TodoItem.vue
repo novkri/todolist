@@ -1,19 +1,27 @@
 <template>
-  <div class="flex items-center w-full relative link-wrapper">
+  <div
+    class="flex items-center w-full relative link-wrapper"
+    :class="[this.$route.params.id === item.id ? 'bg-purple-300 border-l-4 border-purple-700 text-gray-900' : item.count_tasks === 0 ? 'bg-white' : item.is_completed ? 'bg-lightGreen' : ' bg-gray-200']"
+    >
     <router-link
       :to="{ name: 'tasks', params: { id: item.id }}"
-      :class="[ item.count_tasks === 0 ? 'bg-white' : item.is_completed ? 'bg-lightGreen' : ' bg-gray-200']"
-      class="w-full text-md flex items-center p-4 justify-start transition ease-in duration-100 hover:bg-purple-400 block"
+      class="w-full text-md flex items-center p-4 justify-start transition ease-in duration-100 block"
     >
-      <p class="px-4 pr-9 w-full text-md break-words">
+    <!-- hover:bg-purple-400  -->
+
+
+      <p class="px-4 pr-10 w-full text-md break-words">
         {{item.name}}
       </p>
     </router-link>
 
-    <DeleteButton
-      @handleDeleteButtonClick="deleteTodo(item)"
-      propsClasses="absolute inset-y-0 right-0 pr-4 text-gray-600 hover:text-purple-700"
-    />
+    <div class="flex items-center absolute inset-y-0 right-0 ">
+      <DeleteButton
+        @handleDeleteBtnClick="deleteTodo(item)"
+        propsClasses="bg-transparent text-gray-600 hover:text-purple-700"
+      />
+    </div>
+   
   </div>
 </template>
 
@@ -28,8 +36,10 @@ export default {
   components: {
     DeleteButton
   },
+
   methods: {
     deleteTodo(todoItem) {
+      console.log('s');
       this.$emit('deleteTodoItem', todoItem)
     }
   }
@@ -37,7 +47,7 @@ export default {
 </script>
 
 <style scoped>
-a {
+/* a {
   color: #1F2937;
 }
 
@@ -45,7 +55,7 @@ a:hover, a:hover + span, .router-link-exact-active.router-link-active:hover {
   color: #fff !important;
 }
 
-.router-link-exact-active.router-link-active {
+.router-link-exact-active.router-link-active ~ .link-wrapper {
   border-left: 4px solid #8B5CF6;
-}
+} */
 </style>

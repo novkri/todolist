@@ -53,11 +53,18 @@
     },
     {
       "name": "с мобилы",
-      "count_tasks": 0,
+      "count_tasks": 1,
       "is_completed": false,
       "is_closed": false,
       "created_at": 1619442707835,
       "id": 10
+    },
+    {
+      "name": "sffsd",
+      "count_tasks": 0,
+      "is_completed": false,
+      "created_at": 1619993589548,
+      "id": 11
     }
   ],
   "tasks": [
@@ -165,6 +172,14 @@
       "is_completed": false,
       "urgency": false,
       "created_at": 1619472043784
+    },
+    {
+      "id": 1619995410105,
+      "list_id": 10,
+      "name": "sfdfdf",
+      "is_completed": false,
+      "urgency": true,
+      "created_at": 1619995410105
     }
   ],
   "users": [

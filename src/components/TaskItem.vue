@@ -37,7 +37,7 @@
         </p>
       </div>
 
-      <DeleteButton @handleDeleteButtonClick="deleteTask(task)" propsClasses="mx-2 text-gray-600 hover:text-purple-700" />
+      <DeleteButton @handleDeleteBtnClick="deleteTask(task)" propsClasses="mx-2 text-gray-600 hover:text-purple-700" />
     </div>
   </div>
 </template>
@@ -73,6 +73,7 @@ export default {
   },
   methods: {
     deleteTask(task) {
+      console.log('d');
       this.$emit('deleteTaskItem', task)
     },
 

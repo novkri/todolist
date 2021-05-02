@@ -1,7 +1,8 @@
 <template>
   <nav class="bg-white shadow">
     <div class="max-w-full mx-3 px-3 flex items-center justify-between h-14">
-      <!-- burger for show/hide todo lists (mobile)-->
+
+      <!-- burger for showing/hiding todo lists (mobile)-->
       <div class="-ml-2 flex items-center md:hidden">
         <BurgerButton @toggleSidebar="$emit('toggleSidebar')" :isSidebarOpen="isSidebarOpen" />
         <p class="text-gray-700 text-sm">{{ isSidebarOpen ? 'Скрыть списки дел' : 'Показать списки дел' }}</p>
