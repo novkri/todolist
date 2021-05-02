@@ -5,7 +5,7 @@ import tasks from './modules/tasks'
 import user from './modules/user'
 
 Vue.use(Vuex)
-// const api = process.env.VUE_APP_BASE_API ?
+// const API_URL = 'http://localhost:3000';
 
 export default new Vuex.Store({
   modules: {

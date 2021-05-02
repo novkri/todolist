@@ -4,15 +4,11 @@ import Vue from "vue"
 const api = process.env.VUE_APP_BASE_API
 
 const state = () => ({
-  // todos: [],
-  // currentTodo: {},
   userError: '',
 
-
-  // user: null
   status: '',
   token: localStorage.getItem('token') || '',
-  user : {}
+  user : null
 
 })
 
@@ -35,14 +31,11 @@ const actions = {
 
 
 
-
-
-      const token = response.data.token
-      const user = response.data.user
+      const token = 12345 //response.data.token
+      const user = response.data
 
       localStorage.setItem('token', token)
-      // axios.defaults.headers.common['Authorization'] = token
-      // //////localStorage.setItem('user',JSON.stringify(response.data.user)) ?
+      localStorage.setItem('user', JSON.stringify(response.data)) // ?
 
 
       commit('setUser', token, user)
@@ -51,6 +44,7 @@ const actions = {
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
       localStorage.removeItem('token')
+      localStorage.removeItem('user')
     }
   },
 
@@ -73,43 +67,40 @@ const actions = {
       // const user = response.data.user
 
 
-
       localStorage.setItem('token', token)
-      // axios.defaults.headers.common['Authorization'] = token
-      // //////localStorage.setItem('user',JSON.stringify(response.data.user)) ?
+      localStorage.setItem('user', JSON.stringify(result)) //temp
+      // localStorage.setItem('user', JSON.stringify(response.data)) // ?
 
 
       commit('setUser', {token, user: result}) //user)
-
-      // let result = response.data.filter(u => u.email === userObj.email)[0]
-      // console.log(result);
     } catch (e) {
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
       localStorage.removeItem('token')
+      localStorage.removeItem('user')
     }
   },
 
   logout({ commit }) {
     commit('logout')
-    localStorage.removeItem('token')
     delete axios.defaults.headers.common['Authorization']
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    console.log(localStorage);
   }
 }
 
 const mutations = {
   setUser: (state, { token, user }) => {
-    console.log(user, 'success');
     state.token = token
     state.user = user
   },
 
   logout: state => {
-    state.status = ''
+    state.user = null
     state.token = ''
   },
 
-  // setUser: (state, user) => state.user = user,
   setError: (state, error) => state.userError = error,
 }
 

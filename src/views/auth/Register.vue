@@ -76,10 +76,9 @@ export default {
 
         this.register(defaultObj)
           .then(() => {
-              console.log('then')
-              // this.$router.push('/')
+              this.$router.push('/')
             })
-          // .catch(err => console.log(err))
+          .catch(err => console.log(err))
       }
     }
   }

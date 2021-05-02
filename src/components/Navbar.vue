@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import BurgerButton from './widgets/BurgerButton'
 
 export default {
@@ -86,15 +87,14 @@ export default {
     BurgerButton
   },
   methods: {
+    ...mapActions(['logout']),
+
     userLogout() {
       console.log('logout')
-      // logout: function () {
-      //   this.$store.dispatch('logout')
-      //   .then(() => {
-      //     this.$router.push('/login')
-      //   })
-      // }
+      this.logout()
+      this.$router.push('/login')
     },
+
     toggleUserMenu() {
       this.isUserMenuOpen = !this.isUserMenuOpen
     }
