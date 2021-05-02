@@ -1,5 +1,5 @@
 <template>
-  <AuthForm @onSubmitForm="handleLogin">
+  <AuthForm @onSubmitForm="handleLogin" submitBtnText="Войти">
     <h2 slot="title">Логин</h2>
 
     <div slot="footer-links" class="sm:flex sm:flex-wrap mt-6 sm:mb-4 text-md text-center justify-center">
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import AuthForm from '../../components/BasicAuthForm'
+import AuthForm from '../../components/AuthForm'
 import { mapActions } from 'vuex'
 
 export default {

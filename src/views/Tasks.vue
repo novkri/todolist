@@ -1,6 +1,6 @@
 <template>
-  <article class="flex flex-col w-full px-0 md:px-4 md:py-6 lg:px-8 md:w-4/5">
-    <section class="overflow-auto flex flex-col justify-between h-screen pb-20 
+  <article class="flex flex-col h-screen w-full px-0 md:px-4 md:py-6 md:w-4/5">
+    <section class="overflow-auto flex flex-col justify-between pb-20 h-full
       md:pb-24 lg:pb-10 pt-6 md:pt-0 px-0 md:px-2 md:px-0">
       <main class="w-full mb-4 md:mb-8 max-h-full overflow-auto">
         <!-- Card for tasks -->

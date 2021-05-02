@@ -1,6 +1,6 @@
 <template>
 <!-- bg -->
-<div class="flex flex-col h-screen bg-gray-100">
+<div class="flex flex-col h-screen bg-gray-200">
   <div class="grid place-items-center mx-2 my-20 sm:my-auto">
     <!-- Auth Card -->
     <div class="flex flex-col max-w-md px-4 py-8 bg-white rounded-lg shadow sm:px-6 md:px-8 lg:px-10">
@@ -60,7 +60,7 @@
         <slot name="additional-fields"></slot>
 
         <!-- Auth Buttton -->
-        <Button btnType="submit" text="Войти" additionalClasses="uppercase mt-8 w-full" :clickHandler="onSubmitBtn" />
+        <Button btnType="submit" :text="submitBtnText" additionalClasses="uppercase mt-8 w-full" :clickHandler="onSubmitBtn" />
 
         <!-- Another Auth Routes -->
         <slot name="footer-links"></slot>
@@ -76,7 +76,9 @@ import Button from './widgets/Button'
 
 export default {
   name: 'card',
-  props: {},
+  props: {
+    submitBtnText: String
+  },
   data() {
     return {
       email: '',

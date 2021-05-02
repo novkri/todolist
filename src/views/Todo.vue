@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-100 overflow-hidden relative h-screen">
+  <div class="bg-gray-100 overflow-hidden relative h-full">
     <Navbar @toggleSidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" />
 
     <main class="flex flex-col md:flex-row items-start justify-between z-50">
@@ -9,9 +9,10 @@
         :class="[isSidebarOpen ? 'block' : 'hidden']"
       >
         <!-- Card for todo list -->
-        <div class="bg-white h-full md:rounded-2xl flex flex-col justify-between pb-6 md:pb-12">
+        <div class="bg-white h-full md:rounded-2xl flex flex-col justify-between pb-6 md:pb-12 lg:pb-24">
           <nav class="pt-2 md:pt-6 max-h-4/5 h-4/5 overflow-y-auto">
 
+            <!-- filter -->
             <div class="px-6 py-3 mb-3">
               <FilterSelect :filterOptions="filterTodoOptions" :initOption="filterTodoOptions[0]" />
             </div>

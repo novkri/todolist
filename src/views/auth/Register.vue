@@ -1,5 +1,5 @@
 <template>
-  <AuthForm @onSubmitForm="handleRegister">
+  <AuthForm @onSubmitForm="handleRegister" submitBtnText="Зарегистрироваться">
     <h2 slot="title">Регистрация</h2>
       
     <div slot="additional-fields" class="flex flex-col">
@@ -45,7 +45,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { required } from 'vuelidate/lib/validators'
-import AuthForm from '../../components/BasicAuthForm'
+import AuthForm from '../../components/AuthForm'
 
 export default {
   name: 'register',
