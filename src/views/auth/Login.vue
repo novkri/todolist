@@ -29,8 +29,6 @@ export default {
 
     handleLogin(defaultObj) {
       if(defaultObj) {
-        console.log(defaultObj);
-        
         this.login(defaultObj)
           .then(() => {
               this.$router.push('/')

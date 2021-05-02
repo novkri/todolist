@@ -9,7 +9,7 @@
 
       <div class="flex items-center"></div>
 
-        <!-- User -->
+      <!-- User -->
       <div class="relative ml-4 md:ml-6 ">
         <div class="flex items-center justify-end md:justify-center">
           <button
@@ -23,7 +23,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
 
-            <p class="hidden md:block truncate ml-2">User Userovich</p>
+            <p class="hidden md:block truncate ml-2">{{user}} {{userName}}</p>
           </button>
 
 
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from 'vuex'
 import BurgerButton from './widgets/BurgerButton'
 
 export default {
@@ -80,7 +80,18 @@ export default {
   },
   data() {
     return {
-      isUserMenuOpen: false
+      isUserMenuOpen: false,
+      user: JSON.parse(localStorage.getItem('user')) || '',
+    }
+  },
+  computed: {
+  //   ...mapGetters([
+  //     'currentUser',
+  //     'userName'
+  //   ]),
+    userName() {
+      console.log(this.user);
+      return this.user.firstName + ' ' + ( this.user.lastName ? this.user.lastName : '')
     }
   },
   components: {
@@ -90,7 +101,6 @@ export default {
     ...mapActions(['logout']),
 
     userLogout() {
-      console.log('logout')
       this.logout()
       this.$router.push('/login')
     },

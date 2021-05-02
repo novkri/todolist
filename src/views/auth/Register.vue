@@ -72,7 +72,6 @@ export default {
       if (defaultObj && this.firstName) {
         defaultObj.firstName = this.firstName
         defaultObj.lastName = this.lastName
-        console.log(defaultObj);
 
         this.register(defaultObj)
           .then(() => {

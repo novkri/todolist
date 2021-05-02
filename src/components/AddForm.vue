@@ -40,7 +40,6 @@ export default {
   },
   methods: {
     submitForm() {
-      console.log(this.name);
       this.name ? 
         this.$emit('addNewItem', this.name) : 
         this.$vToastify.error('', `Введите ${this.placeholderText.toLowerCase()}`)

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+// import { mapGetters } from 'vuex';
 import Modal from './components/Modal'
 
 export default {
@@ -36,24 +36,25 @@ export default {
     return {
       isModalOpen: false,
       modalContent: {},
-      // user: null
+      // user: localStorage.getItem('user') || ''
     }
   },
-  computed: {
-    ...mapGetters([
-      'token',
-      'user',
-    ]),
-  },
-  async created() {
-    // const response = await axios.get('user') //get logged in user
-    // this.user = response.data
+  // computed: {
+  //   ...mapGetters([
+  //     'token',
+  //     'currentUser',
+  //   ]),
+  // },
+  // async created() {
+  //   console.log(this.user);
+  //   // const response = await axios.get('user') //get logged in user
+  //   // this.user = response.data
 
-    // ? && this.user
-    // if (this.token ) {
-    //   this.$router.push('/');
-    // } 
-  },
+  //   // ? && this.user
+  //   // if (this.token ) {
+  //   //   this.$router.push('/');
+  //   // } 
+  // },
   methods: {
     populateModal(data) {
       this.modalContent = data

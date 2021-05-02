@@ -5,17 +5,14 @@ const api = process.env.VUE_APP_BASE_API
 
 const state = () => ({
   userError: '',
-
-  status: '',
   token: localStorage.getItem('token') || '',
   user : null
 
 })
 
 const getters = {
-  // user: state => state.user,
   isLoggedIn: state => !!state.token,
-  authStatus: state => state.status,
+  currentUser: state => state.user,
   userError: state => state.userError
 }
 
@@ -24,9 +21,9 @@ const actions = {
     try {
       commit('setError', '')
 
-      console.log(userObj);
+      // console.log(userObj);
       const response = await axios.post(`${api}/users`, { ...userObj })
-      console.log(response);
+      // console.log(response);
 
 
 
@@ -52,8 +49,10 @@ const actions = {
     try {
       commit('setError', '')
 
-      console.log(userObj);
-      // const response = await axios.post(`${api}/users`)
+      // console.log(userObj);
+
+      // later
+      // const response = await axios.post(`${api}/login`)
 
 
       // temp
@@ -61,7 +60,7 @@ const actions = {
       const result = response.data.filter(u => u.email === userObj.email)[0]
       //temp
 
-      console.log(result);
+      // console.log(result);
 
       const token = 12345 //response.data.token
       // const user = response.data.user
@@ -86,7 +85,6 @@ const actions = {
     delete axios.defaults.headers.common['Authorization']
     localStorage.removeItem('token')
     localStorage.removeItem('user')
-    console.log(localStorage);
   }
 }
 
