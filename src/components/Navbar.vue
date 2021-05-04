@@ -2,7 +2,7 @@
   <nav class="bg-white shadow">
     <div class="max-w-full mx-3 px-3 flex items-center justify-between h-14">
 
-      <!-- burger for showing/hiding todo lists (mobile)-->
+      <!-- burger for showing/hiding todo lists (for mobile)-->
       <div class="-ml-2 flex items-center md:hidden">
         <BurgerButton @toggleSidebar="$emit('toggleSidebar')" :isSidebarOpen="isSidebarOpen" />
         <p class="text-gray-700 text-sm">{{ isSidebarOpen ? 'Скрыть списки дел' : 'Показать списки дел' }}</p>
@@ -10,7 +10,7 @@
 
       <div class="flex items-center"></div>
 
-      <!-- User -->
+      <!-- User icon + name-->
       <div class="relative ml-4 md:ml-6 ">
         <div class="flex items-center justify-end md:justify-center">
           <button
@@ -25,11 +25,11 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
 
-            <p class="hidden md:block truncate ml-2">{{userName}}</p>
+            <p class="hidden md:block truncate ml-2">{{user.firstName}}</p>
           </button>
 
 
-          <!-- logout btn (desktop) -->
+          <!-- logout btn (for desktop) -->
           <button
             @click="userLogout"
             type="button"
@@ -49,7 +49,7 @@
           class="origin-top-left absolute right-0  mt-2 w-56 rounded-md shadow-lg bg-white z-50 ring-1 ring-black ring-opacity-5"
         >
           <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            <p class="px-4 py-2 text-md text-gray-700 cursor-default break-words">{{userName}}</p>
+            <p class="px-4 py-2 text-md text-gray-700 cursor-default break-words">{{user.firstName}}</p>
 
             <!-- menu links -->
             <p @mousedown="userLogout" class="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
@@ -86,11 +86,11 @@ export default {
       user: JSON.parse(localStorage.getItem('user')) || '',
     }
   },
-  computed: {
-    userName() {
-      return this.user.firstName + ' ' + ( this.user.lastName ? this.user.lastName : '')
-    }
-  },
+  // computed: {
+  //   userName() {
+  //     return this.user.firstName + ' ' + ( this.user.lastName ? this.user.lastName : '')
+  //   }
+  // },
   components: {
     BurgerButton
   },

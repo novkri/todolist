@@ -10,7 +10,7 @@
 
       <form class="p-6 mt-8">
         <!-- Email -->
-        <!-- <label for="email" class="block text-sm  text-gray-600 ">E-mail</label> -->
+        <label for="email" class="block text-sm text-gray-600 ">E-mail</label>
         <input
           id="email"
           v-model.trim="$v.email.$model"
@@ -32,14 +32,14 @@
         </span>
 
         <!-- Password -->
-        <!-- <label for="password" class="block mt-4 text-sm  text-gray-600">Пароль</label> -->
+        <label for="password" class="block mt-4 text-sm  text-gray-600">Пароль</label>
         <input
           id="password"
           v-model.trim="$v.password.$model"
           type="password"
           name="password"
           placeholder="Пароль"
-          class="mt-4 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full 
+          class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full 
           py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base 
           focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
           :class="[($v.password.$invalid && $v.password.$dirty) ? 'ring-2 ring-red-400 border-transparent' : '']"
