@@ -24,11 +24,14 @@
           required
         />
 
-        <span v-if="!$v.email.required && $v.email.$dirty" class="text-sm text-red-500">
+        <span v-if="!$v.email.required && $v.email.$dirty" class="text-sm text-red-500 inline-block text-center">
           Поле Email не может быть пустым
         </span>
-        <span v-if="!$v.email.email && $v.email.$dirty" class="text-sm text-red-500">
+        <span v-if="!$v.email.email && $v.email.$dirty" class="text-sm text-red-500 inline-block text-center">
           Введите корректный Email
+        </span>
+        <span v-if="!$v.email.maxLength && $v.email.$dirty" class="text-sm text-red-500 inline-block text-center">
+          Email не должен содержать более {{$v.email.$params.maxLength.max}} символов
         </span>
 
         <!-- Password -->
@@ -46,14 +49,17 @@
           required
         />
 
-        <span v-if="!$v.password.required && $v.password.$dirty" class="text-sm text-red-500">
+        <span v-if="!$v.password.required && $v.password.$dirty" class="text-sm text-red-500 inline-block text-center">
           Введите пароль
         </span>
-        <span v-if="!$v.password.minLength && $v.password.$dirty" class="text-sm text-red-500">
+        <span v-if="!$v.password.minLength && $v.password.$dirty" class="text-sm text-red-500 inline-block text-center">
           Пароль должен содержать минимум {{$v.password.$params.minLength.min}} символов 
         </span>
-        <span v-if="!$v.password.maxLength && $v.password.$dirty" class="text-sm text-red-500">
+        <span v-if="!$v.password.maxLength && $v.password.$dirty" class="text-sm text-red-500 inline-block text-center">
           Пароль не должен содержать более {{$v.password.$params.maxLength.max}} символов
+        </span>
+        <span v-if="!$v.password.passwordReg && $v.password.$dirty" class="text-sm text-red-500 inline-block text-center">
+          Пароль должен состоять из цифр и латинских букв верхнего и нижнего регистра
         </span>
 
 
@@ -71,7 +77,7 @@
 </template>
 
 <script>
-import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
+import { required, minLength, maxLength, email, helpers } from 'vuelidate/lib/validators'
 import Button from './widgets/Button'
 
 export default {
@@ -88,12 +94,14 @@ export default {
   validations: {
     email: {
       required,
-      email
+      email,
+      maxLength: maxLength(255)
     },
     password: {
       required,
-      minLength: minLength(5),
-      maxLength: maxLength(20)
+      minLength: minLength(6),
+      maxLength: maxLength(32),
+      passwordReg: helpers.regex('passwordReg', /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]+)$/)
     }
   },
   components: {

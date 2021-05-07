@@ -3,23 +3,24 @@
     <h2 slot="title">Регистрация</h2>
       
     <!-- First Name -->
-    <label slot="additional-fields" for="firstName" class="block mt-4 text-sm  text-gray-600">Имя</label>
-    <input
-      slot="additional-fields"
+    <label slot="additional-fields" for="name" class="block mt-4 text-sm  text-gray-600">Имя</label>
+    <input slot="additional-fields"
       type="text"
-      v-model.trim="$v.firstName.$model"
-      id="firstName"
+      v-model.trim="$v.name.$model"
+      id="name"
       class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 
       w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base 
       focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
       name="First name"
       placeholder="Имя"
-      :class="[($v.firstName.$invalid && $v.firstName.$dirty) ? 'ring-2 ring-red-400 border-transparent' : '']"
-      @click="$v.firstName.$touch()"
+      :class="[($v.name.$invalid && $v.name.$dirty) ? 'ring-2 ring-red-400 border-transparent' : '']"
+      @click="$v.name.$touch()"
       required />
 
-    <p slot="additional-fields" v-if="!$v.firstName.required && $v.firstName.$dirty" class="text-sm text-red-500 flex-1">Введите имя</p>
-
+    <span slot="additional-fields" v-if="!$v.name.required && $v.name.$dirty" class="text-sm text-red-500 inline-block text-center">Введите имя</span>
+    <span slot="additional-fields" v-if="!$v.name.maxLength && $v.name.$dirty" class="text-sm text-red-500 inline-block text-center">
+      Имя не должно содержать более {{$v.name.$params.maxLength.max}} символов
+    </span>
 
     <div slot="footer-links" class="sm:flex sm:flex-wrap mt-6 sm:mb-4  text-md text-center justify-center">
       <p class="text-gray-500 mx-4 my-1 sm:my-auto">Уже есть аккаунт?</p>
@@ -32,7 +33,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { required } from 'vuelidate/lib/validators'
+import { required, maxLength } from 'vuelidate/lib/validators'
 import AuthForm from '../../components/AuthForm'
 
 export default {
@@ -43,12 +44,13 @@ export default {
   },
   data() {
     return {
-      firstName: '',
+      name: '',
     }
   },
   validations: {
-    firstName: {
-      required
+    name: {
+      required,
+      maxLength: maxLength(255)
     }
   },
   methods: {
@@ -56,12 +58,12 @@ export default {
     handleRegister(defaultObj) {
       this.$v.$touch()
 
-      if (defaultObj && this.firstName) {
-        defaultObj.firstName = this.firstName
+      if (defaultObj && this.name) {
+        defaultObj.name = this.name
 
         this.register(defaultObj)
           .then(() => {
-              this.$router.push('/')
+              this.$router.push('/login')
             })
           .catch(err => console.log(err))
       }

@@ -2,7 +2,6 @@ import axios from 'axios'
 import Vue from "vue"
 import {BASE_API_URL as api} from '../../api'
 
-// const api = process.env.VUE_APP_BASE_API
 
 
 const state = () => ({
@@ -22,55 +21,33 @@ const actions = {
   async register({ commit }, userObj) {
     try {
       commit('setError', '')
-
-      // console.log(userObj);
-      const response = await axios.post(`${api}/users`, { ...userObj })
-      // console.log(response);
-
-
-      const token = 12345 //response.data.token
-      const user = response.data
-
-      localStorage.setItem('token', token)
-      localStorage.setItem('user', JSON.stringify(response.data)) // ?
-
-
-      commit('setUser', token, user)
-
+      // await 
+      axios.post(`${api}/user/register`, {...userObj}).catch(e => console.log(e))
+      Vue.$vToastify.success("", "Вы зарегистрированы!")
     } catch (e) {
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
-      localStorage.removeItem('token')
-      localStorage.removeItem('user')
     }
   },
 
   async login({ commit }, userObj) {
     try {
       commit('setError', '')
-      // console.log(userObj);
 
-      // later
-      // const response = await axios.post(`${api}/login`)
+      const response = await axios.post(`${api}/user/login`, {...userObj})
+
+      Vue.$vToastify.success("", "Добро пожаловать!")
 
 
-      // temp
-      const response = await axios.get(`${api}/users`)
-      const result = response.data.filter(u => u.email === userObj.email)[0]
-      //temp
-
-      // console.log(result);
-
-      const token = 12345 //response.data.token
-      // const user = response.data.user
+      const token = response.data.data.access_token
+      const user =JSON.stringify(userObj.email)
 
 
       localStorage.setItem('token', token)
-      localStorage.setItem('user', JSON.stringify(result)) //temp
-      // localStorage.setItem('user', JSON.stringify(response.data)) // ?
+      localStorage.setItem('user', user) // cant get user name :(
 
 
-      commit('setUser', {token, user: result}) //user)
+      commit('setUser', {token, user: userObj.email})
     } catch (e) {
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
