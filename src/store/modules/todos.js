@@ -32,20 +32,41 @@ const getters = {
 const actions = {
   async fetchTodos({ commit }) {
     try {
+      const token = localStorage.getItem('token')
+
+      if (token) {
+        console.log('here');
+        // axios.defaults.headers.common['Authorization'] = token
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+      }
+
+      // axios.get(`${api}/user/refresh-access-token`).then(r => console.log(r)).catch(e => console.log(e))
+
       commit('setError', '')
-      const response = await axios.get(`${api}/todos`)
-      commit('setTodos', response.data)
+      const response = await axios.get(`${api}/list/get-items`)
+      // .then(r => console.log(r)).catch(e => console.log(e))
+      // console.log(response);
+      // const response2 = await 
+
+      // axios.get(`${api}/user-lists/get-items`).then(r => console.log(r)).catch(e => console.log(e))
+      // console.log(response2);
+
+      // тут массив
+      commit('setTodos', response.data.data.items)
     } catch(e) {
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
   },
 
+  // TODO
   async fetchCurrentTodo({ commit }, id) {
     try {
       commit('setError', '')
-      const response = await axios.get(`${api}/todos/${id}`)
-      commit('setCurrentTodo', response.data)
+      const response = await axios.get(`${api}/list/get-item/${id}`)
+      // .then(r => console.log(r)).catch(e => console.log(e))
+      console.log(response);
+      commit('setCurrentTodo', response.data.data.attributes)
     } catch (e) {
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
@@ -56,8 +77,10 @@ const actions = {
   async addTodo({ commit }, newTodoObj) {
     try {
       commit('setError', '')
-      const response = await axios.post(`${api}/todos`, { ...newTodoObj })
-      commit('addNewTodo', response.data)
+      // const response = await axios.post(`${api}/todos`, { ...newTodoObj })
+      const response = await axios.post(`${api}/list/create`, {attributes: newTodoObj})
+      // .then(r => console.log(r)).catch(e => console.log(e))
+      commit('addNewTodo', response.data.data.attributes)
     } catch(e) {
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
@@ -71,7 +94,7 @@ const actions = {
   async deleteTodo({ commit }, todoId) {
     try {
       commit('setError', '')
-      await axios.delete(`${api}/todos/${todoId}`)
+      await axios.delete(`${api}/list/delete/${todoId}`).then(r => console.log(r)).catch(e => console.log(e))
       commit('deleteOneTodo', todoId)
     } catch (e) {
       commit('setError', e.message)
@@ -80,7 +103,7 @@ const actions = {
   },
 
   
-
+  // TODO
   async todoListCompleted({ commit }, { todo, setTo }) {
     try {
       commit('setError', '')

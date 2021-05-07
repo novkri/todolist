@@ -111,6 +111,7 @@ export default {
         count_tasks: 0,
         is_completed: false,
         created_at: Date.now(),
+        is_closed: false
       }
 
       if (name) {

@@ -130,7 +130,8 @@ export default {
           list_id: Number(this.currentTodo.id),
           name,
           is_completed: false,
-          urgency: this.isUrgent,
+          // urgency: this.isUrgent,
+          urgency: 0,
           created_at: Date.now()
         }
 
@@ -143,11 +144,11 @@ export default {
               type: 'OK',
               method: async () => {
                 await this.addTask(newTaskObj)
-                await this.addTaskToList({
-                  todo: this.currentTodo,
-                  countTasks: this.currentTodo.count_tasks + 1, 
-                  completedSetTo: this.checkIfTasksCompleted
-                })
+                // await this.addTaskToList({
+                //   todo: this.currentTodo,
+                //   countTasks: this.currentTodo.count_tasks + 1, 
+                //   completedSetTo: this.checkIfTasksCompleted
+                // })
               }
             }
           ]
@@ -172,11 +173,11 @@ export default {
             type: 'OK',
             method: async () => {
               await this.deleteTask(taskItem.id)
-              await this.deleteTaskFromList({
-                todo: this.currentTodo,
-                countTasks: this.currentTodo.count_tasks - 1,
-                completedSetTo: this.checkIfTasksCompleted
-              })
+              // await this.deleteTaskFromList({
+              //   todo: this.currentTodo,
+              //   countTasks: this.currentTodo.count_tasks - 1,
+              //   completedSetTo: this.checkIfTasksCompleted
+              // })
             }
           }
         ]
@@ -187,7 +188,7 @@ export default {
 
     toggleTaskItem(task) {
       this.toggleTaskCompletion(task)
-      this.todoListCompleted({todo: this.currentTodo, setTo: this.checkIfTasksCompleted})
+      // this.todoListCompleted({todo: this.currentTodo, setTo: this.checkIfTasksCompleted})
     },
   }
 }

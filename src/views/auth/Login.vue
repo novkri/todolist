@@ -13,7 +13,7 @@
 
 <script>
 import AuthForm from '../../components/AuthForm'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'login',
@@ -24,16 +24,19 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    ...mapGetters(['userError'])
+  },
   methods: {
     ...mapActions(['login']),
 
-    handleLogin(defaultObj) {
+    async handleLogin(defaultObj) {
       if(defaultObj) {
-        this.login(defaultObj)
-          .then(() => {
-              this.$router.push('/')
-            })
-          .catch(err => console.log(err))
+        await this.login(defaultObj)
+          // .then((r) => {
+        if(!this.userError) { this.$router.push('/') }
+          //   })
+          // .catch(err => console.log(err))
       }
     }
   }

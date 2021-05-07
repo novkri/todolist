@@ -16,6 +16,7 @@ Vue.config.productionTip = false
 const token = localStorage.getItem('token')
 
 if (token) {
+  console.log('here');
   // axios.defaults.headers.common['Authorization'] = token
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
 }

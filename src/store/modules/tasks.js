@@ -28,11 +28,15 @@ const getters = {
 }
 
 const actions = {
+  // done?
   async fetchTasks({ commit }, id) {
     try {
       commit('setTaskError', '')
-      const response = await axios.get(`${api}/tasks`)
-      let currTasks = response.data.filter(task => task.list_id === id)
+      const response = await axios.get(`${api}/task/get-items`)
+      // console.log(id);
+      
+      // .then(r => console.log(r)).catch(e => console.log(e))
+      let currTasks = response.data.data.items.filter(task => task.list_id === id)
       commit('setTasks', currTasks)
     } catch(e) {
       commit('setTaskError', e.message)
@@ -40,11 +44,13 @@ const actions = {
     }
   },
 
+  // not working
   async addTask({ commit }, newTask) {
     try {
       commit('setTaskError', '')
-      const response = await axios.post(`${api}/tasks`, newTask)
-      commit('addNewTask', response.data)
+      // const response = await 
+      axios.post(`${api}/task/create`, {attributes: newTask}).then(r => console.log(r)).catch(e => console.log(e))
+      // commit('addNewTask', response.data)
     } catch (e) {
       commit('setTaskError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
@@ -52,6 +58,7 @@ const actions = {
     
   },
 
+  // TODO
   async deleteTask({ commit }, taskId) {
     try {
       commit('setTaskError', '')
@@ -63,6 +70,7 @@ const actions = {
     }
   },
 
+  // TODO
   async toggleTaskCompletion({ commit }, task) {
     try {
       commit('setTaskError', '')

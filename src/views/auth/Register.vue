@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { required, maxLength } from 'vuelidate/lib/validators'
 import AuthForm from '../../components/AuthForm'
 
@@ -53,19 +53,23 @@ export default {
       maxLength: maxLength(255)
     }
   },
+  computed: {
+    ...mapGetters(['userError'])
+  },
   methods: {
      ...mapActions(['register']),
-    handleRegister(defaultObj) {
+
+    async handleRegister(defaultObj) {
       this.$v.$touch()
 
       if (defaultObj && this.name) {
         defaultObj.name = this.name
 
-        this.register(defaultObj)
-          .then(() => {
-              this.$router.push('/login')
-            })
-          .catch(err => console.log(err))
+        await this.register(defaultObj)
+          // .then(() => {
+        if(!this.userError) {this.$router.push('/login')}
+          //   })
+          // .catch(err => console.log(err))
       }
     }
   }

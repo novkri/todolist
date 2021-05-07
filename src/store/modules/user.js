@@ -21,12 +21,12 @@ const actions = {
   async register({ commit }, userObj) {
     try {
       commit('setError', '')
-      // await 
-      axios.post(`${api}/user/register`, {...userObj}).catch(e => console.log(e))
+      await axios.post(`${api}/user/register`, {...userObj})
+      // .catch(e => console.log(e))
       Vue.$vToastify.success("", "Вы зарегистрированы!")
     } catch (e) {
       commit('setError', e.message)
-      Vue.$vToastify.error(e.message, "Что-то пошло не так")
+      Vue.$vToastify.error("", "Что-то пошло не так")
     }
   },
 
@@ -35,20 +35,25 @@ const actions = {
       commit('setError', '')
 
       const response = await axios.post(`${api}/user/login`, {...userObj})
-
+      
       Vue.$vToastify.success("", "Добро пожаловать!")
 
-
+      // console.log(response);
       const token = response.data.data.access_token
-      const user =JSON.stringify(userObj.email)
+      const user = JSON.stringify(userObj.email)
 
-
+      // axios.post(`${api}/user/refresh-access-token`, { "refresh_token": token}).then(r => console.log(r)).catch(e => console.log(e))
       localStorage.setItem('token', token)
       localStorage.setItem('user', user) // cant get user name :(
+        // OR: get запрос на адрес user/me  -  все данные пользователя который выполнил запрос
+        // OR: user/get-item/${userId}
 
+        // no
+        // axios.get(`${api}/user/get-items`).then(r => console.log(r)).catch(e => console.log(e))
 
       commit('setUser', {token, user: userObj.email})
     } catch (e) {
+      console.log(e);
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
       localStorage.removeItem('token')
