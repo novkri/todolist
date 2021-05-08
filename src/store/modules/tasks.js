@@ -45,7 +45,6 @@ const actions = {
     }
   },
 
-  // not working
   async addTask({ commit }, newTask) {
     try {
       commit('setTaskError', '')

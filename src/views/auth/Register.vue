@@ -17,8 +17,8 @@
       @click="$v.name.$touch()"
       required />
 
-    <span slot="additional-fields" v-if="!$v.name.required && $v.name.$dirty" class="text-sm text-red-500 inline-block text-center">Введите имя</span>
-    <span slot="additional-fields" v-if="!$v.name.maxLength && $v.name.$dirty" class="text-sm text-red-500 inline-block text-center">
+    <span slot="additional-fields" v-if="!$v.name.required && $v.name.$dirty" class="text-xs text-red-500 inline-block pb-2">Введите имя</span>
+    <span slot="additional-fields" v-if="!$v.name.maxLength && $v.name.$dirty" class="text-xs text-red-500 inline-block pb-2">
       Имя не должно содержать более {{$v.name.$params.maxLength.max}} символов
     </span>
 

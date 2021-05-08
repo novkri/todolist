@@ -24,18 +24,18 @@
           required
         />
 
-        <span v-if="!$v.email.required && $v.email.$dirty" class="text-sm text-red-500 inline-block text-center">
+        <span v-if="!$v.email.required && $v.email.$dirty" class="text-xs text-red-500 inline-block pb-2">
           Поле Email не может быть пустым
         </span>
-        <span v-if="!$v.email.email && $v.email.$dirty" class="text-sm text-red-500 inline-block text-center">
+        <span v-if="!$v.email.email && $v.email.$dirty" class="text-xs text-red-500 inline-block pb-2">
           Введите корректный Email
         </span>
-        <span v-if="!$v.email.maxLength && $v.email.$dirty" class="text-sm text-red-500 inline-block text-center">
+        <span v-if="!$v.email.maxLength && $v.email.$dirty" class="text-xs text-red-500 inline-block pb-2">
           Email не должен содержать более {{$v.email.$params.maxLength.max}} символов
         </span>
 
         <!-- Password -->
-        <label for="password" class="block mt-4 text-sm  text-gray-600">Пароль</label>
+        <label for="password" class="block mt-4 text-sm text-gray-600">Пароль</label>
         <input
           id="password"
           v-model.trim="$v.password.$model"
@@ -49,16 +49,16 @@
           required
         />
 
-        <span v-if="!$v.password.required && $v.password.$dirty" class="text-sm text-red-500 inline-block text-center">
+        <span v-if="!$v.password.required && $v.password.$dirty" class="text-xs text-red-500 inline-block pb-2">
           Введите пароль
         </span>
-        <span v-if="!$v.password.minLength && $v.password.$dirty" class="text-sm text-red-500 inline-block text-center">
+        <span v-if="!$v.password.minLength && $v.password.$dirty" class="text-xs text-red-500 inline-block pb-2">
           Пароль должен содержать минимум {{$v.password.$params.minLength.min}} символов 
         </span>
-        <span v-if="!$v.password.maxLength && $v.password.$dirty" class="text-sm text-red-500 inline-block text-center">
+        <span v-if="!$v.password.maxLength && $v.password.$dirty" class="text-xs text-red-500 inline-block pb-2">
           Пароль не должен содержать более {{$v.password.$params.maxLength.max}} символов
         </span>
-        <span v-if="!$v.password.passwordReg && $v.password.$dirty" class="text-sm text-red-500 inline-block text-center">
+        <span v-if="!$v.password.passwordReg && $v.password.$dirty" class="text-xs text-red-500 inline-block pb-2">
           Пароль должен состоять из цифр и латинских букв верхнего и нижнего регистра
         </span>
 

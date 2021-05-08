@@ -37,7 +37,7 @@ const actions = {
     try {
       commit('setError', '')
 
-      const response = await axios.post(`${api}/user/logins`, {...userObj})
+      const response = await axios.post(`${api}/user/login`, {...userObj})
       
       Vue.$vToastify.success("", "Добро пожаловать!")
 
