@@ -129,8 +129,7 @@ export default {
           list_id: Number(this.currentTodo.id),
           name,
           is_completed: false,
-          // urgency: this.isUrgent,
-          urgency: 0,
+          urgency: this.isUrgent ? 5 : 0,
         }
 
         let modalObject = {

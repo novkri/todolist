@@ -48,9 +48,9 @@ const actions = {
   async addTask({ commit }, newTask) {
     try {
       commit('setTaskError', '')
-      // const response = await 
-      axios.post(`${api}/task/create`, {attributes: newTask}).then(r => console.log(r)).catch(e => console.log(e))
-      // commit('addNewTask', response.data)
+      const response = await axios.post(`${api}/task/create`, {attributes: newTask})
+      // .then(r => console.log(r)).catch(e => console.log(e))
+      commit('addNewTask', response.data.data.attributes)
     } catch (e) {
       console.log(e.response.data);
       commit('setTaskError', e.message)
@@ -59,11 +59,10 @@ const actions = {
     
   },
 
-  // TODO
   async deleteTask({ commit }, taskId) {
     try {
       commit('setTaskError', '')
-      await axios.delete(`${api}/tasks/${taskId}`)
+      await axios.delete(`${api}/task/delete/${taskId}`)
       commit('deleteOneTask', taskId)
     } catch (e) {
       console.log(e.response.data);
@@ -72,11 +71,14 @@ const actions = {
     }
   },
 
-  // TODO
   async toggleTaskCompletion({ commit }, task) {
     try {
       commit('setTaskError', '')
-      await axios.put(`${api}/tasks/${task.id}`, task)
+      await axios.put(`${api}/task/update/${task.id}`, {"attributes": task})
+      // .then(r => console.log(r)).catch(e => console.log(e))
+      
+      // TODO
+      // todo here somethimg
     } catch (e) {
       console.log(e.response.data);
       commit('setTaskError', e.message)
