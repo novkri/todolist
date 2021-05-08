@@ -126,13 +126,11 @@ export default {
     addTaskItem(name) {
       if (name) {
         let newTaskObj = {
-          id: Date.now(),
           list_id: Number(this.currentTodo.id),
           name,
           is_completed: false,
           // urgency: this.isUrgent,
           urgency: 0,
-          created_at: Date.now()
         }
 
         let modalObject = {

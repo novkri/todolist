@@ -22,11 +22,14 @@ const actions = {
     try {
       commit('setError', '')
       await axios.post(`${api}/user/register`, {...userObj})
-      // .catch(e => console.log(e))
       Vue.$vToastify.success("", "Вы зарегистрированы!")
     } catch (e) {
-      commit('setError', e.message)
-      Vue.$vToastify.error("", "Что-то пошло не так")
+      commit('setError', e.response.data.email)
+      if(e.response.status === 404) {
+        Vue.$vToastify.error('Ошибка 404', "Что-то пошло не так")
+      } else {
+        Vue.$vToastify.error("", "Email уже занят")
+      }
     }
   },
 
@@ -34,28 +37,28 @@ const actions = {
     try {
       commit('setError', '')
 
-      const response = await axios.post(`${api}/user/login`, {...userObj})
+      const response = await axios.post(`${api}/user/logins`, {...userObj})
       
       Vue.$vToastify.success("", "Добро пожаловать!")
 
-      // console.log(response);
       const token = response.data.data.access_token
       const user = JSON.stringify(userObj.email)
 
       // axios.post(`${api}/user/refresh-access-token`, { "refresh_token": token}).then(r => console.log(r)).catch(e => console.log(e))
       localStorage.setItem('token', token)
       localStorage.setItem('user', user) // cant get user name :(
-        // OR: get запрос на адрес user/me  -  все данные пользователя который выполнил запрос
-        // OR: user/get-item/${userId}
-
-        // no
-        // axios.get(`${api}/user/get-items`).then(r => console.log(r)).catch(e => console.log(e))
+      // OR: get запрос на адрес user/me  -  все данные пользователя который выполнил запрос
+      // OR: user/get-item/${userId}
 
       commit('setUser', {token, user: userObj.email})
     } catch (e) {
-      console.log(e);
-      commit('setError', e.message)
-      Vue.$vToastify.error(e.message, "Что-то пошло не так")
+      commit('setError', e.response.data.email)
+      if(e.response.status === 404) {
+        Vue.$vToastify.error('Ошибка 404', "Что-то пошло не так")
+      } else {
+        Vue.$vToastify.error('', "Неправильные Email или пароль")
+      }
+      
       localStorage.removeItem('token')
       localStorage.removeItem('user')
     }

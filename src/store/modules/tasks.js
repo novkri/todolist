@@ -39,6 +39,7 @@ const actions = {
       let currTasks = response.data.data.items.filter(task => task.list_id === id)
       commit('setTasks', currTasks)
     } catch(e) {
+      console.log(e.response.data);
       commit('setTaskError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
@@ -52,6 +53,7 @@ const actions = {
       axios.post(`${api}/task/create`, {attributes: newTask}).then(r => console.log(r)).catch(e => console.log(e))
       // commit('addNewTask', response.data)
     } catch (e) {
+      console.log(e.response.data);
       commit('setTaskError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
@@ -65,6 +67,7 @@ const actions = {
       await axios.delete(`${api}/tasks/${taskId}`)
       commit('deleteOneTask', taskId)
     } catch (e) {
+      console.log(e.response.data);
       commit('setTaskError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
@@ -76,6 +79,7 @@ const actions = {
       commit('setTaskError', '')
       await axios.put(`${api}/tasks/${task.id}`, task)
     } catch (e) {
+      console.log(e.response.data);
       commit('setTaskError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
