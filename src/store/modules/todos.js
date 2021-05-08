@@ -50,7 +50,6 @@ const actions = {
     }
   },
 
-  // TODO
   async fetchCurrentTodo({ commit }, id) {
     try {
       commit('setError', '')
@@ -97,11 +96,11 @@ const actions = {
   },
 
   
-  // TODO
   async todoListCompleted({ commit }, { todo, setTo }) {
     try {
       commit('setError', '')
-      await axios.put(`${api}/todos/${todo.id}`, {...todo, is_completed: setTo})
+      await axios.put(`${api}/list/update/${todo.id}`, {"attributes": {...todo, is_completed: setTo}})
+
       commit('setTodoListCompleted', {todoId: todo.id, setTo})
     } catch (e) {
       console.log(e.response.data);
@@ -112,7 +111,8 @@ const actions = {
   async addTaskToList({ commit }, {todo, countTasks, completedSetTo}) {
     try {
       commit('setError', '')
-      await axios.put(`${api}/todos/${todo.id}`, {...todo, is_completed: completedSetTo, count_tasks: countTasks})
+      await axios.put(`${api}/list/update/${todo.id}`, {"attributes": {...todo, is_completed: completedSetTo, count_tasks: countTasks}})
+
       commit('changeAmountOfTasksinList', {todoId: todo.id, countTasks})
       commit('setTodoListCompleted', {todoId: todo.id, setTo: completedSetTo})
     } catch (e) {
@@ -124,7 +124,10 @@ const actions = {
   async deleteTaskFromList({ commit }, {todo, countTasks, completedSetTo}) {
     try {
       commit('setError', '')
-      await axios.put(`${api}/todos/${todo.id}`, {...todo, is_completed: completedSetTo, count_tasks: countTasks})
+      await axios.put(`${api}/list/update/${todo.id}`, {"attributes": {...todo, is_completed: completedSetTo, count_tasks: countTasks}})
+      .then(r => console.log(r))
+      .catch(e => console.log(e))
+
       commit('changeAmountOfTasksinList', {todoId: todo.id, countTasks})
       commit('setTodoListCompleted', {todoId: todo.id, setTo: completedSetTo})
     } catch (e) {

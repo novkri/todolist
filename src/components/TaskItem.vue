@@ -73,7 +73,6 @@ export default {
   },
   methods: {
     deleteTask(task) {
-      console.log('d');
       this.$emit('deleteTaskItem', task)
     },
 

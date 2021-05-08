@@ -35,13 +35,10 @@ export default {
   },
   computed: {
     routerLinkStyle() {
-      if (this.$route.params.id === this.item.id) {
-        // current todo is purple
-        return 'bg-purple-300 border-l-4 border-purple-700 text-gray-900'
-      } else {
-        // white, green or gray background
-        return this.item.count_tasks === 0 ? 'bg-white' : this.item.is_completed ? 'bg-lightGreen' : ' bg-gray-200'
-      }
+      // if (this.$route.params.id === this.item.id) {
+      //   return 'bg-purple-300 border-l-4 border-purple-700 text-gray-900'
+      // } 
+      return this.item.count_tasks === 0 ? 'bg-white' : this.item.is_completed ? 'bg-lightGreen' : ' bg-gray-200'
     }
   },
   methods: {
@@ -53,4 +50,7 @@ export default {
 </script>
 
 <style>
+.router-link-exact-active.router-link-active {
+  border-left: 4px solid #6D28D9;
+}
 </style>
