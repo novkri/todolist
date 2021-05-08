@@ -66,10 +66,7 @@ export default {
         defaultObj.name = this.name
 
         await this.register(defaultObj)
-          // .then(() => {
         if(!this.userError) {this.$router.push('/login')}
-          //   })
-          // .catch(err => console.log(err))
       }
     }
   }

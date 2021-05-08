@@ -33,10 +33,7 @@ export default {
     async handleLogin(defaultObj) {
       if(defaultObj) {
         await this.login(defaultObj)
-          // .then((r) => {
         if(!this.userError) { this.$router.push('/') }
-          //   })
-          // .catch(err => console.log(err))
       }
     }
   }

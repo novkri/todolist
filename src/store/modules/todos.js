@@ -44,7 +44,6 @@ const actions = {
       // тут массив
       commit('setTodos', response.data.data.items)
     } catch(e) {
-      console.log(e.response.data);
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
@@ -54,11 +53,8 @@ const actions = {
     try {
       commit('setError', '')
       const response = await axios.get(`${api}/list/get-item/${id}`)
-      // .then(r => console.log(r)).catch(e => console.log(e))
-      console.log(response);
       commit('setCurrentTodo', response.data.data.attributes)
     } catch (e) {
-      console.log(e.response.data);
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
       commit('setCurrentTodo', '')
@@ -68,12 +64,9 @@ const actions = {
   async addTodo({ commit }, newTodoObj) {
     try {
       commit('setError', '')
-      // const response = await axios.post(`${api}/todos`, { ...newTodoObj })
       const response = await axios.post(`${api}/list/create`, {attributes: newTodoObj})
-      // .then(r => console.log(r)).catch(e => console.log(e))
       commit('addNewTodo', response.data.data.attributes)
     } catch(e) {
-      console.log(e.response.data);
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
@@ -86,10 +79,9 @@ const actions = {
   async deleteTodo({ commit }, todoId) {
     try {
       commit('setError', '')
-      await axios.delete(`${api}/list/delete/${todoId}`).then(r => console.log(r)).catch(e => console.log(e))
+      await axios.delete(`${api}/list/delete/${todoId}`)
       commit('deleteOneTodo', todoId)
     } catch (e) {
-      console.log(e.response.data);
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
@@ -103,7 +95,6 @@ const actions = {
 
       commit('setTodoListCompleted', {todoId: todo.id, setTo})
     } catch (e) {
-      console.log(e.response.data);
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
@@ -116,7 +107,6 @@ const actions = {
       commit('changeAmountOfTasksinList', {todoId: todo.id, countTasks})
       commit('setTodoListCompleted', {todoId: todo.id, setTo: completedSetTo})
     } catch (e) {
-      console.log(e.response.data);
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
@@ -125,13 +115,10 @@ const actions = {
     try {
       commit('setError', '')
       await axios.put(`${api}/list/update/${todo.id}`, {"attributes": {...todo, is_completed: completedSetTo, count_tasks: countTasks}})
-      .then(r => console.log(r))
-      .catch(e => console.log(e))
 
       commit('changeAmountOfTasksinList', {todoId: todo.id, countTasks})
       commit('setTodoListCompleted', {todoId: todo.id, setTo: completedSetTo})
     } catch (e) {
-      console.log(e.response.data);
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
