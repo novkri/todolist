@@ -1,5 +1,4 @@
 <template>
-<!--  -->
   <button
     @click="$emit('handleDeleteBtnClick')"
     :class="propsClasses"

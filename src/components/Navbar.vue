@@ -1,11 +1,11 @@
 <template>
-  <nav class="bg-white shadow">
+  <nav class="bg-purple-500 shadow">
     <div class="max-w-full mx-3 px-3 flex items-center justify-between h-14">
 
       <!-- burger for showing/hiding todo lists (for mobile)-->
       <div class="-ml-2 flex items-center md:hidden">
-        <BurgerButton @toggleSidebar="$emit('toggleSidebar')" :isSidebarOpen="isSidebarOpen" />
-        <p class="text-gray-700 text-sm">{{ isSidebarOpen ? 'Скрыть списки дел' : 'Показать списки дел' }}</p>
+        <BurgerButton @toggleSidebar="$emit('toggleSidebar')" :isSidebarOpen="isSidebarOpen" burgerClasses="text-white hover:text-gray-700" />
+        <p class="text-white hover:text-gray-700 text-sm">{{ isSidebarOpen ? 'Скрыть списки дел' : 'Показать списки дел' }}</p>
       </div>
 
       <div class="flex items-center"></div>
@@ -18,7 +18,7 @@
             @blur="isUserMenuOpen = false"
             type="button"
             class="flex items-center justify-center rounded-md px-2 py-2 mx-2 
-            font-medium text-gray-700 hover:bg-gray-50 
+            font-medium text-white hover:text-gray-700 hover:bg-gray-50 
             focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -34,7 +34,7 @@
             @click="userLogout"
             type="button"
             class="flex items-center justify-center rounded-md px-2 py-2 mx-2 hidden md:block
-            font-medium text-gray-700 hover:bg-gray-50 
+            font-medium text-white hover:text-gray-700 hover:bg-gray-50 
             focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -86,11 +86,7 @@ export default {
       user: JSON.parse(localStorage.getItem('user')) || '',
     }
   },
-  // computed: {
-  //   userName() {
-  //     return this.user.firstName + ' ' + ( this.user.lastName ? this.user.lastName : '')
-  //   }
-  // },
+
   components: {
     BurgerButton
   },

@@ -2,8 +2,6 @@ import axios from 'axios'
 import Vue from "vue"
 import {BASE_API_URL as api} from '../../api'
 
-// const api = process.env.VUE_APP_BASE_API
-
 
 const state = () => ({
   tasks: [],
@@ -68,7 +66,7 @@ const actions = {
   async toggleTaskCompletion({ commit }, task) {
     try {
       commit('setTaskError', '')
-      await axios.put(`${api}/task/update/${task.id}`, {"attributes": task})
+      await axios.put(`${api}/task/update/${task.id}`, {attributes: task})
     } catch (e) {
       commit('setTaskError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")

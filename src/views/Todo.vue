@@ -26,9 +26,8 @@
               Список пуст...
             </p>
 
-<!--  @click="toggleSidebar" -->
             <div v-else v-for="item in allFilteredTodos" :key="item.id">
-              <TodoItem :item="item" @deleteTodoItem="onDeleteTodo" />
+              <TodoItem :item="item" @populateModal="e => $emit('populateModal', e)" />
             </div>
           </nav>
 
@@ -89,13 +88,6 @@ export default {
     }
   },
 
-  // beforeRouteEnter (to, from, next) {
-  //   next(async vm => {
-  //     await vm.fetchTodos()
-  //     vm.loading = false
-  //   })
-  // },
-
   async created() {
     this.loading = true
     await this.fetchTodos()
@@ -132,31 +124,6 @@ export default {
     toggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen
     },
-
-    onDeleteTodo(todoItem) {
-      let modalObject = {
-        header: 'Удалить список дел',
-        body: `Удалить список дел '${todoItem.name}'?`,
-        footerButtons: [
-          {
-            title: 'Отмена',
-            type: 'Cancel'
-          },
-          {
-            title: 'Удалить',
-            type: 'OK',
-            method: () => {
-              this.deleteTodo(todoItem.id)
-              if (this.$route.params.id === todoItem.id) {
-                this.$router.push('/')
-              }
-            }
-          }
-        ],
-      }
-
-      this.$emit('populateModal', modalObject)
-    }
   }
 }
 </script>

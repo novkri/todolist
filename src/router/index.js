@@ -25,16 +25,15 @@ const routes = [
       requiresAuth: true
     }
   },
-
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/auth/Login') //LoginForm
+    component: () => import('../views/auth/Login') 
   },
   {
     path: '/register',
     name: 'register',
-    component: () => import('../views/auth/Register') //RegisterForm 
+    component: () => import('../views/auth/Register')
   }
 ]
 

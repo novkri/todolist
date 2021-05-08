@@ -2,7 +2,6 @@ import axios from 'axios'
 import Vue from "vue"
 import {BASE_API_URL as api} from '../../api'
 
-// const api = process.env.VUE_APP_BASE_API
 
 const state = () => ({
   todos: [],
@@ -41,7 +40,6 @@ const actions = {
       commit('setError', '')
       const response = await axios.get(`${api}/list/get-items`)
 
-      // тут массив
       commit('setTodos', response.data.data.items)
     } catch(e) {
       commit('setError', e.message)
@@ -79,7 +77,7 @@ const actions = {
   async deleteTodo({ commit }, todoId) {
     try {
       commit('setError', '')
-      await axios.delete(`${api}/list/delete/${todoId}`)
+      await axios.delete(`${api}/list/deleыte/${todoId}`)
       commit('deleteOneTodo', todoId)
     } catch (e) {
       commit('setError', e.message)
@@ -87,11 +85,11 @@ const actions = {
     }
   },
 
-  
+
   async todoListCompleted({ commit }, { todo, setTo }) {
     try {
       commit('setError', '')
-      await axios.put(`${api}/list/update/${todo.id}`, {"attributes": {...todo, is_completed: setTo}})
+      await axios.put(`${api}/list/update/${todo.id}`, {attributes: {...todo, is_completed: setTo}})
 
       commit('setTodoListCompleted', {todoId: todo.id, setTo})
     } catch (e) {
@@ -99,30 +97,21 @@ const actions = {
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
   },
-  async addTaskToList({ commit }, {todo, countTasks, completedSetTo}) {
+
+  // изменить список когда задача добавлена/удалена
+  async changeTodoData({ commit }, {todo, countTasks, completedSetTo}) {
     try {
       commit('setError', '')
-      await axios.put(`${api}/list/update/${todo.id}`, {"attributes": {...todo, is_completed: completedSetTo, count_tasks: countTasks}})
 
+      await axios.put(`${api}/list/update/${todo.id}`, {attributes: {...todo, is_completed: completedSetTo, count_tasks: countTasks}})
+      
       commit('changeAmountOfTasksinList', {todoId: todo.id, countTasks})
       commit('setTodoListCompleted', {todoId: todo.id, setTo: completedSetTo})
     } catch (e) {
       commit('setError', e.message)
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
-  },
-  async deleteTaskFromList({ commit }, {todo, countTasks, completedSetTo}) {
-    try {
-      commit('setError', '')
-      await axios.put(`${api}/list/update/${todo.id}`, {"attributes": {...todo, is_completed: completedSetTo, count_tasks: countTasks}})
-
-      commit('changeAmountOfTasksinList', {todoId: todo.id, countTasks})
-      commit('setTodoListCompleted', {todoId: todo.id, setTo: completedSetTo})
-    } catch (e) {
-      commit('setError', e.message)
-      Vue.$vToastify.error(e.message, "Что-то пошло не так")
-    }
-  },
+  }
 }
 
 const mutations = {
@@ -135,9 +124,9 @@ const mutations = {
   setTodoListCompleted: (state, { todoId, setTo }) => {
     state.todos.filter(todo => todo.id === todoId)[0].is_completed = setTo
   },
-
-
-  changeAmountOfTasksinList: (state, { todoId, countTasks }) => state.todos.filter(item => item.id === todoId)[0].count_tasks = countTasks
+  changeAmountOfTasksinList: (state, { todoId, countTasks }) => {
+    state.todos.filter(item => item.id === todoId)[0].count_tasks = countTasks
+  }
 }
 
 export default {

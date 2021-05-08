@@ -28,21 +28,22 @@
         </svg>
       </span>
 
-      <div class="flex flex-col md:flex-row items-center justify-center text-center mx-2 cursor-default">
-        <p class="text-sm lg:text-base text-gray-500 mb-2 md:mb-0 md:mx-1 w-min">
+      <div class="flex flex-col md:flex-row items-center justify-center text-center mx-2 cursor-default w-36 min-w-36">
+        <p class="text-sm lg:text-base text-gray-500 mb-2 md:mb-0 md:mx-1">
           {{ getTaskDate }}
         </p>
-        <p class="text-sm lg:text-base text-gray-500 mb-2 md:mb-0 md:mx-1 w-min">
+        <p class="text-sm lg:text-base text-gray-500 mb-2 md:mb-0 md:mx-1">
           {{ getTaskTime }}
         </p>
       </div>
 
-      <DeleteButton @handleDeleteBtnClick="deleteTask(task)" propsClasses="mx-2 text-gray-600 hover:text-purple-700" />
+      <DeleteButton @handleDeleteBtnClick="handleDeleteTask(task)" propsClasses="mx-2 text-gray-600 hover:text-purple-700" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import DeleteButton from '../components/widgets/DeleteButton'
 
 export default {
@@ -58,6 +59,11 @@ export default {
   },
 
   computed: {
+    ...mapGetters([
+      'currentTodo',
+      'checkIfTasksCompleted'
+    ]),
+
     getTaskDate() {
       let date = new Date(this.task.created_at)
       return date.toLocaleDateString('ru-RU')
@@ -72,12 +78,42 @@ export default {
     },
   },
   methods: {
-    deleteTask(task) {
-      this.$emit('deleteTaskItem', task)
+    ...mapActions(['deleteTask', 
+    'toggleTaskCompletion', 'todoListCompleted', 
+    'changeTodoData'
+    ]),
+
+    handleDeleteTask(taskItem) {
+       let modalObject = {
+        header: 'Удалить дело',
+        body: `Удалить дело '${taskItem.name}' из списка '${this.currentTodo.name}'?`,
+        footerButtons: [
+          {
+            title: 'Отмена',
+            type: 'Cancel'
+          },
+          {
+            title: 'OK',
+            type: 'OK',
+            method: async () => {
+              await this.deleteTask(taskItem.id)
+
+              await this.changeTodoData({
+                todo: this.currentTodo,
+                countTasks: this.currentTodo.count_tasks - 1,
+                completedSetTo: this.checkIfTasksCompleted
+              })
+            }
+          }
+        ]
+      }
+
+      this.$emit('populateModal', modalObject)
     },
 
     toggleTaskComplete(task) {
-      this.$emit('toggleTaskItem', task)
+      this.toggleTaskCompletion(task)
+      this.todoListCompleted({todo: this.currentTodo, setTo: this.checkIfTasksCompleted})
     }
   }
 }

@@ -25,7 +25,6 @@ export default {
     height: 80px;
   }
   .lds-ripple div {
-    /* background-color: green; */
     position: absolute;
     border: 4px solid #fff;
     opacity: 1;

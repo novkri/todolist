@@ -14,7 +14,7 @@
 
     <div class="flex items-center absolute inset-y-0 right-0 ">
       <DeleteButton
-        @handleDeleteBtnClick="deleteTodo(item)"
+        @handleDeleteBtnClick="handleDeleteTodo(item)"
         propsClasses="bg-transparent text-gray-600 hover:text-purple-700"
       />
     </div>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import DeleteButton from '../components/widgets/DeleteButton'
 
 export default {
@@ -42,8 +43,31 @@ export default {
     }
   },
   methods: {
-    deleteTodo(todoItem) {
-      this.$emit('deleteTodoItem', todoItem)
+    ...mapActions(['deleteTodo']),
+
+    handleDeleteTodo(todoItem) {
+      let modalObject = {
+        header: 'Удалить список дел',
+        body: `Удалить список дел '${todoItem.name}'?`,
+        footerButtons: [
+          {
+            title: 'Отмена',
+            type: 'Cancel'
+          },
+          {
+            title: 'Удалить',
+            type: 'OK',
+            method: () => {
+              this.deleteTodo(todoItem.id)
+              if (this.$route.params.id === todoItem.id) {
+                this.$router.push('/')
+              }
+            }
+          }
+        ],
+      }
+
+      this.$emit('populateModal', modalObject)
     }
   }
 }

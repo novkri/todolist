@@ -3,12 +3,10 @@ import Vue from "vue"
 import {BASE_API_URL as api} from '../../api'
 
 
-
 const state = () => ({
   userError: '',
   token: localStorage.getItem('token') || '',
-  user : null
-
+  user: localStorage.getItem('user') || null
 })
 
 const getters = {
@@ -36,19 +34,15 @@ const actions = {
   async login({ commit }, userObj) {
     try {
       commit('setError', '')
-
       const response = await axios.post(`${api}/user/login`, {...userObj})
-      
       Vue.$vToastify.success("", "Добро пожаловать!")
 
       const token = response.data.data.access_token
       const user = JSON.stringify(userObj.email)
 
-      // axios.post(`${api}/user/refresh-access-token`, { "refresh_token": token}).then(r => console.log(r)).catch(e => console.log(e))
+      
       localStorage.setItem('token', token)
-      localStorage.setItem('user', user) // cant get user name :(
-      // OR: get запрос на адрес user/me  -  все данные пользователя который выполнил запрос
-      // OR: user/get-item/${userId}
+      localStorage.setItem('user', user)
 
       commit('setUser', {token, user: userObj.email})
     } catch (e) {

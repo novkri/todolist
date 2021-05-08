@@ -19,9 +19,6 @@ if (token) {
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
 }
 
-// axios.defaults.baseURL = 'https://api.example.com';
-
-
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 
 new Vue({

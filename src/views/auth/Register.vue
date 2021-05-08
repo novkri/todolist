@@ -2,7 +2,7 @@
   <AuthForm @onSubmitForm="handleRegister" submitBtnText="Зарегистрироваться">
     <h2 slot="title">Регистрация</h2>
       
-    <!-- First Name -->
+    <!-- Name -->
     <label slot="additional-fields" for="name" class="block mt-4 text-sm  text-gray-600">Имя</label>
     <input slot="additional-fields"
       type="text"
@@ -57,14 +57,13 @@ export default {
     ...mapGetters(['userError'])
   },
   methods: {
-     ...mapActions(['register']),
+    ...mapActions(['register']),
 
     async handleRegister(defaultObj) {
       this.$v.$touch()
 
       if (defaultObj && this.name) {
         defaultObj.name = this.name
-
         await this.register(defaultObj)
         if(!this.userError) {this.$router.push('/login')}
       }

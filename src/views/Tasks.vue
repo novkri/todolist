@@ -27,7 +27,7 @@
               :key="task.id"
               class="py-3 border-t-4 md:border-t-2 border-gray-100 first:border-0"
             >
-              <TaskItem :task="task" :index="idx + 1" @deleteTaskItem="onDeleteTask" @toggleTaskItem="toggleTaskItem" />
+              <TaskItem :task="task" :index="idx + 1" @populateModal="e => $emit('populateModal', e)" />
             </li>
           </ul>
         </div>
@@ -96,20 +96,6 @@ export default {
     }
   },
 
-  // beforeRouteEnter (to, from, next) {
-  //   next(async vm => {
-  //     await vm.fetchCurrentTodo(Number(to.params.id))
-  //     await vm.fetchTasks(Number(to.params.id))
-  //     vm.loading = false
-  //   })
-  // },
-
-  // beforeRouteUpdate (to, from, next) {
-  //   this.fetchCurrentTodo(Number(to.params.id))
-  //   this.fetchTasks(Number(to.params.id))
-  //   next()
-  //   this.loading = false
-  // },
 
   async created() {
     this.loading = true
@@ -120,8 +106,8 @@ export default {
   
   methods: {
     ...mapActions(['fetchTasks', 'fetchCurrentTodo', 'addTask', 'deleteTask', 'toggleTaskCompletion', 'todoListCompleted', 
-    'addTaskToList', 'deleteTaskFromList'
-    ]),
+    'changeTodoData'
+    ]), 
 
     addTaskItem(name) {
       if (name) {
@@ -141,7 +127,8 @@ export default {
               type: 'OK',
               method: async () => {
                 await this.addTask(newTaskObj)
-                await this.addTaskToList({
+
+                await this.changeTodoData({
                   todo: this.currentTodo,
                   countTasks: this.currentTodo.count_tasks + 1, 
                   completedSetTo: this.checkIfTasksCompleted
@@ -154,38 +141,6 @@ export default {
         this.$emit('populateModal', modalObject)
         this.isUrgent = false
       }
-    },
-
-    onDeleteTask(taskItem) {
-      let modalObject = {
-        header: 'Удалить дело',
-        body: `Удалить дело '${taskItem.name}' из списка '${this.currentTodo.name}'?`,
-        footerButtons: [
-          {
-            title: 'Отмена',
-            type: 'Cancel'
-          },
-          {
-            title: 'OK',
-            type: 'OK',
-            method: async () => {
-              await this.deleteTask(taskItem.id)
-              await this.deleteTaskFromList({
-                todo: this.currentTodo,
-                countTasks: this.currentTodo.count_tasks - 1,
-                completedSetTo: this.checkIfTasksCompleted
-              })
-            }
-          }
-        ]
-      }
-
-      this.$emit('populateModal', modalObject)
-    },
-
-    toggleTaskItem(task) {
-      this.toggleTaskCompletion(task)
-      this.todoListCompleted({todo: this.currentTodo, setTo: this.checkIfTasksCompleted})
     },
   }
 }
