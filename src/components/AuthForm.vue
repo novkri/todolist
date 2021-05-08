@@ -1,7 +1,7 @@
 <template>
 <!-- bg -->
 <div class="flex flex-col h-screen bg-gray-200">
-  <div class="grid place-items-center mx-2 my-20 sm:my-auto">
+  <div class="grid place-items-center my-auto md:mx-2 md:my-20">
     <!-- Auth Card -->
     <div class="flex flex-col max-w-md px-4 py-8 bg-white rounded-lg shadow sm:px-6 md:px-8 lg:px-10">
       <header class="text-3xl text-center font-semibold text-gray-800">
@@ -28,7 +28,7 @@
           Поле Email не может быть пустым
         </span>
         <span v-if="!$v.email.email && $v.email.$dirty" class="text-xs text-red-500 inline-block pb-2">
-          Введите корректный Email
+          Некорректный формат Email
         </span>
         <span v-if="!$v.email.maxLength && $v.email.$dirty" class="text-xs text-red-500 inline-block pb-2">
           Email не должен содержать более {{$v.email.$params.maxLength.max}} символов

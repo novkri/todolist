@@ -57,7 +57,7 @@ export default {
     ...mapGetters(['userError'])
   },
   methods: {
-    ...mapActions(['register']),
+    ...mapActions(['register', 'login']),
 
     async handleRegister(defaultObj) {
       this.$v.$touch()
@@ -65,7 +65,10 @@ export default {
       if (defaultObj && this.name) {
         defaultObj.name = this.name
         await this.register(defaultObj)
-        if(!this.userError) {this.$router.push('/login')}
+        if(!this.userError) {
+          // await this.login({email: defaultObj.email, password: defaultObj.password})
+          this.$router.push('/')}
+          // this.$router.push('/login')}
       }
     }
   }

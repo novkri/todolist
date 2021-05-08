@@ -61,7 +61,8 @@ export default {
   computed: {
     ...mapGetters([
       'currentTodo',
-      'checkIfTasksCompleted'
+      'checkIfTasksCompleted',
+      'tasksError'
     ]),
 
     getTaskDate() {
@@ -98,11 +99,14 @@ export default {
             method: async () => {
               await this.deleteTask(taskItem.id)
 
-              await this.changeTodoData({
-                todo: this.currentTodo,
-                countTasks: this.currentTodo.count_tasks - 1,
-                completedSetTo: this.checkIfTasksCompleted
-              })
+              if(!this.tasksError) {
+                  await this.changeTodoData({
+                  todo: this.currentTodo,
+                  countTasks: this.currentTodo.count_tasks - 1,
+                  completedSetTo: this.checkIfTasksCompleted
+                })
+              }
+              
             }
           }
         ]

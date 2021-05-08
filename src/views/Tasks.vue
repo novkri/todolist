@@ -85,7 +85,8 @@ export default {
       'doneTasks',
       'doneTasksLength',
       'currentTodo',
-      'checkIfTasksCompleted'
+      'checkIfTasksCompleted',
+      'tasksError'
     ]),
   },
 
@@ -95,7 +96,6 @@ export default {
       loading: false
     }
   },
-
 
   async created() {
     this.loading = true
@@ -112,8 +112,8 @@ export default {
     addTaskItem(name) {
       if (name) {
         let newTaskObj = {
-          list_id: Number(this.currentTodo.id),
           name,
+          list_id: Number(this.currentTodo.id),
           is_completed: false,
           urgency: this.isUrgent ? 5 : 0,
         }
@@ -128,11 +128,13 @@ export default {
               method: async () => {
                 await this.addTask(newTaskObj)
 
-                await this.changeTodoData({
-                  todo: this.currentTodo,
-                  countTasks: this.currentTodo.count_tasks + 1, 
-                  completedSetTo: this.checkIfTasksCompleted
-                })
+                if (!this.tasksError) {
+                  await this.changeTodoData({
+                    todo: this.currentTodo,
+                    countTasks: this.currentTodo.count_tasks + 1, 
+                    completedSetTo: this.checkIfTasksCompleted
+                  })
+                }
               }
             }
           ]

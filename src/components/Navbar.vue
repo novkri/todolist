@@ -4,8 +4,8 @@
 
       <!-- burger for showing/hiding todo lists (for mobile)-->
       <div class="-ml-2 flex items-center md:hidden">
-        <BurgerButton @toggleSidebar="$emit('toggleSidebar')" :isSidebarOpen="isSidebarOpen" burgerClasses="text-white hover:text-gray-700" />
-        <p class="text-white hover:text-gray-700 text-sm">{{ isSidebarOpen ? 'Скрыть списки дел' : 'Показать списки дел' }}</p>
+        <BurgerButton @toggleSidebar="$emit('toggleSidebar')" :isSidebarOpen="isSidebarOpen" burgerClasses="text-white" />
+        <p class="text-white text-sm">{{ isSidebarOpen ? 'Скрыть списки дел' : 'Показать списки дел' }}</p>
       </div>
 
       <div class="flex items-center"></div>

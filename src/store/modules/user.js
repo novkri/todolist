@@ -16,13 +16,15 @@ const getters = {
 }
 
 const actions = {
-  async register({ commit }, userObj) {
+  async register({ commit, dispatch }, userObj) {
     try {
       commit('setError', '')
       await axios.post(`${api}/user/register`, {...userObj})
-      Vue.$vToastify.success("", "Вы зарегистрированы!")
+      // Vue.$vToastify.success("", "Вы успешно зарегистрированы!")
+      await dispatch('login', {email: userObj.email, password: userObj.password })
+      
     } catch (e) {
-      commit('setError', e.response.data.email)
+      commit('setError', e.response.data)
       if(e.response.status === 404) {
         Vue.$vToastify.error('Ошибка 404', "Что-то пошло не так")
       } else {

@@ -33,7 +33,7 @@ export default {
     },
     burgerClasses: {
       type: String,
-      default: "text-gray-700 bg-transparent"
+      default: ""
     }
   }
 }

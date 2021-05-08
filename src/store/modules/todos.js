@@ -40,6 +40,12 @@ const actions = {
       commit('setError', '')
       const response = await axios.get(`${api}/list/get-items`)
 
+      // all users
+      axios.get(`${api}/user/`).then(r=> console.log(r)).catch(e => console.log(e))
+      
+// axios.get(`${api}/list/`).then(r=> console.log(r)).catch(e => console.log(e))
+      // axios.get(`${api}/list/get-item/10`).then(r=> console.log(r)).catch(e => console.log(e))
+
       commit('setTodos', response.data.data.items)
     } catch(e) {
       commit('setError', e.message)
@@ -51,6 +57,7 @@ const actions = {
     try {
       commit('setError', '')
       const response = await axios.get(`${api}/list/get-item/${id}`)
+
       commit('setCurrentTodo', response.data.data.attributes)
     } catch (e) {
       commit('setError', e.message)
@@ -77,7 +84,7 @@ const actions = {
   async deleteTodo({ commit }, todoId) {
     try {
       commit('setError', '')
-      await axios.delete(`${api}/list/deleыte/${todoId}`)
+      await axios.delete(`${api}/list/delete/${todoId}`)
       commit('deleteOneTodo', todoId)
     } catch (e) {
       commit('setError', e.message)

@@ -40,6 +40,7 @@ const actions = {
   },
 
   async addTask({ commit }, newTask) {
+
     try {
       commit('setTaskError', '')
       const response = await axios.post(`${api}/task/create`, {attributes: newTask})
@@ -47,6 +48,7 @@ const actions = {
       commit('addNewTask', response.data.data.attributes)
     } catch (e) {
       commit('setTaskError', e.message)
+      console.log(e.response);
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
     
