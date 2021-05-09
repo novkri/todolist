@@ -48,7 +48,7 @@ const actions = {
       commit('addNewTask', response.data.data.attributes)
     } catch (e) {
       commit('setTaskError', e.message)
-      console.log(e.response);
+      // console.log(e.response);
       Vue.$vToastify.error(e.message, "Что-то пошло не так")
     }
     

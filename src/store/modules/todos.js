@@ -41,7 +41,7 @@ const actions = {
       const response = await axios.get(`${api}/list/get-items`)
 
       // all users
-      axios.get(`${api}/user/`).then(r=> console.log(r)).catch(e => console.log(e))
+      // axios.get(`${api}/user/`).then(r=> console.log(r)).catch(e => console.log(e))
       
 // axios.get(`${api}/list/`).then(r=> console.log(r)).catch(e => console.log(e))
       // axios.get(`${api}/list/get-item/10`).then(r=> console.log(r)).catch(e => console.log(e))
