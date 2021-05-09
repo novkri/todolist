@@ -1,7 +1,7 @@
 <template>
   <article class="flex flex-col h-screen w-full px-0 md:px-4 md:py-6 md:w-4/5">
     <section class="overflow-auto flex flex-col justify-between pb-20 h-full
-      md:pb-20 lg:pb-10 pt-6 md:pt-0 px-0 md:px-2 md:px-0">
+      md:pb-12 lg:pb-10 pt-6 md:pt-0 px-0 md:px-2 md:px-0">
       <main class="w-full mb-4 md:mb-8 max-h-full overflow-auto">
         <!-- Card for tasks -->
         <div class="shadow-md rounded-2xl bg-white w-full mb-4 mx-0">
@@ -17,7 +17,7 @@
             <Loader loaderClasses="bg-purple-600" />
           </div>
 
-          <p v-if="allCurrentTodoTasks && allCurrentTodoTasks.length === 0" class="text-center p-3 pb-5 font-light text-xl">
+          <p v-else-if="allCurrentTodoTasks && allCurrentTodoTasks.length === 0" class="text-center p-3 pb-5 font-light text-xl">
             Список пуст...
           </p>
 

@@ -17,15 +17,15 @@
             @click="toggleUserMenu"
             @blur="isUserMenuOpen = false"
             type="button"
-            class="flex items-center justify-center rounded-md px-2 py-2 mx-2 
-            font-medium text-white hover:text-gray-700 hover:bg-gray-50 
+            class="flex items-center justify-start rounded-md px-2 py-2 mx-2 
+            font-medium text-white hover:text-gray-700 hover:bg-gray-50 md:min-w-36
             focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
 
-            <p class="hidden md:block truncate ml-2">{{user}}</p>
+            <p class="hidden md:block truncate ml-2">{{user.name}}</p>
           </button>
 
 
@@ -46,10 +46,10 @@
         <!-- user dropdown menu -->
         <div
           v-if="isUserMenuOpen"
-          class="origin-top-left absolute md:hidden right-0 md:left-0 mt-2 w-56 rounded-md shadow-lg bg-white z-50 ring-1 ring-black ring-opacity-5"
+          class="origin-top-left absolute right-0 md:left-0 mt-2 w-52 rounded-md shadow-lg bg-white z-50 ring-1 ring-black ring-opacity-5"
         >
           <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            <p class="px-4 py-2 text-md text-gray-700 cursor-default break-words">{{user}}</p>
+            <p class="px-4 py-2 text-md text-gray-700 cursor-default break-words">{{user.email}}</p>
 
             <!-- menu links -->
             <p @mousedown="userLogout" class="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">

@@ -37,16 +37,25 @@ const actions = {
     try {
       commit('setError', '')
       const response = await axios.post(`${api}/user/login`, {...userObj})
+      
       Vue.$vToastify.success("", "Добро пожаловать!")
 
       const token = response.data.data.access_token
-      const user = JSON.stringify(userObj.email)
-
+      // const user = JSON.stringify(userObj.email)
+     
+      // all users
+      const allUsers = await axios.get(`${api}/user/`)
+      let currentUser = allUsers.data.data.items.filter(u => u.email === userObj.email)[0]
+      let currentUserStrinfidied = JSON.stringify({
+        id: currentUser.id,
+        email: currentUser.email,
+        name: currentUser.name
+      })
       
       localStorage.setItem('token', token)
-      localStorage.setItem('user', user)
+      localStorage.setItem('user', currentUserStrinfidied)
 
-      commit('setUser', {token, user: userObj.email})
+      commit('setUser', {token, user: currentUser})
     } catch (e) {
       commit('setError', e.response.data.email)
       if(e.response.status === 404) {

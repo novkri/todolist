@@ -10,6 +10,7 @@
       border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base 
       focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
       :placeholder="placeholderText"
+      ref="nameInput"
     />
 
     <div class="flex">
@@ -40,6 +41,7 @@ export default {
   },
   methods: {
     submitForm() {
+      this.$refs.nameInput.blur()
       this.name ? 
         this.$emit('addNewItem', this.name) : 
         this.$vToastify.error('', `Введите ${this.placeholderText.toLowerCase()}`)
