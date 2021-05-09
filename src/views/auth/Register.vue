@@ -3,12 +3,12 @@
     <h2 slot="title">Регистрация</h2>
       
     <!-- Name -->
-    <label slot="additional-fields" for="name" class="block mt-4 text-sm  text-gray-600">Имя</label>
+    <label slot="additional-fields" for="name" class="block mt-2 text-sm text-gray-600">Имя</label>
     <input slot="additional-fields"
       type="text"
       v-model.trim="$v.name.$model"
       id="name"
-      class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 
+      class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 my-2
       w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base 
       focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
       name="First name"

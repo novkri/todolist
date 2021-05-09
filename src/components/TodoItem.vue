@@ -6,8 +6,9 @@
     <router-link
       :to="{ name: 'tasks', params: { id: item.id }}"
       class="w-full text-md flex items-center p-4 justify-start transition ease-in duration-100 block"
+      
     >
-      <p class="px-4 pr-10 w-full text-md break-words">
+      <p @click="$emit('onToggleSidebar')" class="px-4 pr-10 w-full text-md break-words">
         {{item.name}}
       </p>
     </router-link>
@@ -68,7 +69,7 @@ export default {
       }
 
       this.$emit('populateModal', modalObject)
-    }
+    },
   }
 }
 </script>

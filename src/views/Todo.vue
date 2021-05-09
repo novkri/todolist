@@ -27,7 +27,7 @@
             </p>
 
             <div v-else v-for="item in allFilteredTodos" :key="item.id">
-              <TodoItem :item="item" @populateModal="e => $emit('populateModal', e)" />
+              <TodoItem :item="item" @onToggleSidebar="toggleSidebar" @populateModal="e => $emit('populateModal', e)" />
             </div>
           </nav>
 
